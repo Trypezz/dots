@@ -1,0 +1,50 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["clock", "pulseaudio", "hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": ["tray", "network", "custom/rofi"],
+
+  "tray": {
+      "icon-size": 21,
+      "spacing": 16,
+      "orientation": "horizontal",
+      "tooltip": true
+  },
+
+
+  "pulseaudio": {
+    "interval": 1,
+    "format": "  {volume} %",
+    "on-click": "pavucontrol",
+    "tooltip": "Playback Volume"
+  },
+
+  "network": {
+    "format-wifi": "  {essid} ",
+    "format-ethernet": "  Freshes Internet",
+    "format-disconnected": "⚠ disconnected",
+  },
+
+  "clock": {
+   	"format": "{:%I:%M %p}",
+   	"rotate": 0,
+   	"format-alt": "{  %d·%m·%y}",
+   	"tooltip-format": "<span>{calendar}</span>",
+   	"calendar": {
+       		"mode": "month",
+       		"format": {
+           	    "months": "<span color='#ff6699'><b>{}</b></span>",
+                   "days": "<span color='#cdd6f4'><b>{}</b></span>",
+           	    "weekdays": "<span color='#7CD37C'><b>{}</b></span>",
+           	    "today": "<span color='#ffcc66'><b>{}</b></span>"
+       	}
+    }
+  },
+
+  "custom/rofi": {
+      "format": "  Apps ",
+      "tooltip": "App Launcher",
+      "on-click": "wofi --show drun"
+  }
+}

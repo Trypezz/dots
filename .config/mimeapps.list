@@ -1,0 +1,9 @@
+[Added Associations]
+audio/vnd.wave=/home/trypezz/.local/share/applications/tauon.desktop;
+image/png=gthumb-3.desktop;gthumb-2.desktop;gthumb.desktop;org.gnome.gThumb.desktop;
+video/mp4=celluloid.desktop;
+
+[Default Applications]
+audio/vnd.wave=/home/trypezz/.local/share/applications/tauon.desktop;
+image/png=gthumb-3.desktop;
+video/mp4=celluloid.desktop;
