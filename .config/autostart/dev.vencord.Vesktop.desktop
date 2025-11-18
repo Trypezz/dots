@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=dev.vencord.Vesktop
-X-XDP-Autostart=dev.vencord.Vesktop
-Exec=flatpak run --command=/app/bin/vesktop/vesktop.bin dev.vencord.Vesktop --enable-speech-dispatcher
-X-Flatpak=dev.vencord.Vesktop
