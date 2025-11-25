@@ -1,0 +1,9 @@
+prompt=Search...
+allow_images=true
+insensitive=true
+no_actions=true
+location=center
+term=kitty
+hide_scroll=true
+mode=drun
+filter_rate=100

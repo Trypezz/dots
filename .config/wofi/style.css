@@ -26,6 +26,7 @@ window {
 
 #entry {
     padding: 8px;
+    margin: 2px;
     border-radius: 12px;
     background-color: transparent;
 }
@@ -35,4 +36,9 @@ window {
     border: 1px solid #89b4fa;
     border-radius: 12px
     color: #FFFFFF;
+}
+
+#img {
+  background-color: transparent;
+  padding: 5px;
 }

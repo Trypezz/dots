@@ -1,0 +1,50 @@
+
+### This shows every custom command ###
+
+
+editAliases
+
+### Hyprland ###
+
+editHyprland
+editHyprlandBase
+editHyprMonitors
+editHyprWorkspaces
+editHyprRules
+editHyprLook
+editHyprAnimations
+editHyprAutostart
+editHyprInput
+
+editHyprApps
+editHyprKeyBinds
+
+### Ricing ###
+
+editHyprLock
+editWaybar
+editWaybarCSS
+editLauncher
+editWallpaper
+editNotification
+editOsFetch
+editTerminal
+editShell
+
+reloadShell
+reloadWaybar
+reloadHyprland
+
+### Quality of Life ###
+home (go back to home directory)
+
+showAliases
+showBinds
+showCommands
+
+startVideo (path/to/video)
+openPicture (path/to/picture)
+
+checkupdates (checks if and what updates are available)
+systemUpdate (installs the updates)
+
