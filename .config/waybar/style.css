@@ -30,7 +30,17 @@ window#waybar {
   color: #1e1e2e;
 }
 
-#pulseaudio, #network, #clock, #custom-power, #custom-rofi {
+#custom-arch {
+	margin-right: 15px;
+}
+
+#tray {
+  border: 2px solid;
+  border-color: #89b4fa;
+  border-radius: 6px;
+}
+
+#pulseaudio, #network, #clock, #custom-rofi {
   background: #89b4fa;
   color: #1e1e2e;
   padding: 2px 2px;
