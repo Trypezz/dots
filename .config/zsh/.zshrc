@@ -75,4 +75,4 @@ ARROW="▶"   # oder ➜, ➤, ▶, ❯
 PROMPT="%F{black}%F{white}%n%F{cyan}@archlinux %F{blue}${ARCH_ICON}%k %F{yellow}( %~ ) %f%F{green}${ARROW}%f "
 
 
-source ~/.config/zsh/aliases.zsh
+source $HOME/.config/zsh/aliases.zsh
