@@ -3,7 +3,7 @@
   "position": "top",
   "modules-left": ["custom/arch", "clock", "pulseaudio", "hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["tray", "network", "custom/rofi"],
+  "modules-right": ["tray", "network", "battery"],
 
   "tray": {
       "icon-size": 21,
@@ -16,14 +16,12 @@
   "pulseaudio": {
       "format": " {icon}  {volume}% ",
       "format-bluetooth": " {icon} {volume}%  {format_source} ",
-      "format-bluetooth-muted": "  {icon} {format_source} ",
-      "format-muted": "  {format_source} ",
+      "format-bluetooth-muted": " {icon} {format_source} ",
+      "format-muted": " {icon} {format_source} ",
       "format-source": "  {volume}% ",
       "format-source-muted": "  ",
       "format-icons": {
         "headphone": "",
-        "hands-free": "",
-        "headset": "",
         "phone": "",
         "portable": "",
         "car": "",
@@ -40,8 +38,8 @@
       "format-wifi": "   {essid} ({signalStrength}%) ",
       "format-ethernet": "   Freshes Internet ",
       "tooltip-format": "{ifname} via {gwaddr} ",
-      "format-linked": "{ifname} (No IP) ",
-      "format-disconnected": "Disconnected ⚠"
+      "format-linked": " {ifname} (No IP)  ",
+      "format-disconnected": " Disconnected ⚠ "
     },
 
   "clock": {
@@ -57,10 +55,22 @@
       "tooltip-format": "btw",
       "on-click": "wlogout"
     },
-
-  "custom/rofi": {
-      "format": "   Apps ",
-      "tooltip": "App Launcher",
-      "on-click": "wofi"
-  }
+    "battery": {
+        "states": {
+          "warning": 30,
+          "critical": 15
+        },
+        "format": " {icon}  {capacity}% ",
+        "format-full": " {icon}  {capacity}% ",
+        "format-charging": "   {capacity}% ",
+        "format-plugged": "   {capacity}% ",
+        "format-alt": " {time}  {icon} ",
+        "format-icons": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
 }

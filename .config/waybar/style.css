@@ -13,36 +13,37 @@ min-height: 0;
 }
 
 window#waybar {
-  background: rgba(30, 30, 46, 0.8);
+  background: rgba(0, 0, 0, 0.6);
   border-bottom: 3px solid  #89b4fa
 }
 
-#workspaces button {
+#workspaces button, #window {
   background: transparent;
   color: #89b4fa;
-  border: 2px solid;
+  border-bottom: 2px solid;
   border-color: #89b4fa;
-  border-radius: 6px;
+  border-radius: 0;
+}
+
+#window {
+	padding: 0;
+	margin: 10px;
 }
 
 #workspaces button.active {
-  background: #89b4fa;
+  background: transparent;
   color: #1e1e2e;
+  border: 2px solid;
+  border-color: #89b4fa;
+  border-radius: 6px;
 }
 
 #custom-arch {
 	margin-right: 15px;
 }
 
-#tray {
+#tray, #pulseaudio, #network, #clock, #battery {
   border: 2px solid;
   border-color: #89b4fa;
-  border-radius: 6px;
-}
-
-#pulseaudio, #network, #clock, #custom-rofi {
-  background: #89b4fa;
-  color: #1e1e2e;
-  padding: 2px 2px;
   border-radius: 6px;
 }
