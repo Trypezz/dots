@@ -1,5 +1,5 @@
 #!/bin/bash
-# $HOME/.config/hypr/configs/scripts/songcover.sh
+# $HOME/.config/hypr/configs/scripts/cover.sh
 
 COVER_TMP="/tmp/hyprlock_cover.jpg"
 DEFAULT_COVER="♪" # optional Fallback
