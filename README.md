@@ -9,6 +9,3 @@
 
 ### Wofi Runner  
 ![Wofi](screenshots/wofiRunner.png)
-
-### Arch-Update Script
-![Arch-Update](screenshots/arch-update.png)
