@@ -1,41 +1,34 @@
 #!/bin/bash
 # $HOME/.config/hypr/configs/scripts/songmeta.sh
 # Usage:
-#   songmeta.sh title
-#   songmeta.sh artist
-#   songmeta.sh album
+#   songmeta.sh title | artist | album
 
 mode="$1"
 
-title=""
-artist=""
-album=""
-
-# Try getting meta data
-if command -v playerctl &>/dev/null && playerctl status &>/dev/null; then
-    title=$(playerctl metadata title 2>/dev/null)
-    artist=$(playerctl metadata artist 2>/dev/null)
-    album=$(playerctl metadata album 2>/dev/null)
+# If no player -> Nothing to show
+if ! command -v playerctl &>/dev/null || ! playerctl status &>/dev/null; then
+    exit 0
 fi
 
-# Global fallback
+title=$(playerctl metadata title 2>/dev/null)
+artist=$(playerctl metadata artist 2>/dev/null)
+album=$(playerctl metadata album 2>/dev/null)
+
+# If no info then don't show anything
 if [[ -z "$title" && -z "$artist" && -z "$album" ]]; then
-    title="Music Playing"
-    artist="Unknown Source"
-    album=""
+    exit 0
 fi
 
 case "$mode" in
     title)
-        # Title or Fallback
         if [[ -n "$title" ]]; then
             echo "$title"
         else
-            echo "Music Playing"
+            # Fallback if player detected something
+            echo "Unknown Title"
         fi
         ;;
     artist)
-        # Artist or Fallback
         if [[ -n "$artist" ]]; then
             echo "$artist"
         else
@@ -43,13 +36,13 @@ case "$mode" in
         fi
         ;;
     album)
-        # Only show Album if available
+        # Show album if available
         if [[ -n "$album" ]]; then
             echo "$album"
         fi
         ;;
     *)
         # Default: Title
-        echo "${title:-Music Playing}"
+        [[ -n "$title" ]] && echo "$title"
         ;;
 esac

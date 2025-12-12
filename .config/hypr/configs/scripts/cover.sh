@@ -2,34 +2,49 @@
 # $HOME/.config/hypr/configs/scripts/cover.sh
 
 COVER_TMP="/tmp/hyprlock_cover.jpg"
-DEFAULT_COVER="♪" # optional Fallback
 
-# Check if playerctl & a Player is running
-if command -v playerctl &>/dev/null && playerctl status &>/dev/null; then
-    artUrl=$(playerctl metadata mpris:artUrl 2>/dev/null)
+# If no player -> Delete Cover
+if ! command -v playerctl &>/dev/null || ! playerctl status &>/dev/null; then
+    rm -f "$COVER_TMP"
+    exit 0
+fi
 
-    if [[ -n "$artUrl" ]]; then
-        # Local File
-        if [[ "$artUrl" == file://* ]]; then
-            src="${artUrl#file://}"
-            [[ -f "$src" ]] && cp "$src" "$COVER_TMP" 2>/dev/null
-        # HTTP/HTTPS (ex. Spotify)
-        elif [[ "$artUrl" == http://* || "$artUrl" == https://* ]]; then
-            if command -v curl &>/dev/null; then
-                curl -L -s "$artUrl" -o "$COVER_TMP" >/dev/null 2>&1
-            elif command -v wget &>/dev/null; then
-                wget -q "$artUrl" -O "$COVER_TMP"
-            fi
+artUrl=$(playerctl metadata mpris:artUrl 2>/dev/null)
+
+# If no Art-URL -> Delete Cover
+if [[ -z "$artUrl" ]]; then
+    rm -f "$COVER_TMP"
+    exit 0
+fi
+
+# Local file
+if [[ "$artUrl" == file://* ]]; then
+    src="${artUrl#file://}"
+    if [[ -f "$src" ]]; then
+        cp "$src" "$COVER_TMP"
+        echo "$COVER_TMP"
+        exit 0
+    else
+        rm -f "$COVER_TMP"
+        exit 0
+    fi
+fi
+
+# HTTP/HTTPS (ex. Spotify)
+if [[ "$artUrl" == http://* || "$artUrl" == https://* ]]; then
+    if command -v curl &>/dev/null; then
+        if curl -L -s "$artUrl" -o "$COVER_TMP"; then
+            echo "$COVER_TMP"
+            exit 0
+        fi
+    elif command -v wget &>/dev/null; then
+        if wget -q "$artUrl" -O "$COVER_TMP"; then
+            echo "$COVER_TMP"
+            exit 0
         fi
     fi
 fi
 
-# Fallback-Pic
-if [[ ! -f "$COVER_TMP" && -f "$DEFAULT_COVER" ]]; then
-    cp "$DEFAULT_COVER" "$COVER_TMP"
-fi
-
-# Hyprlock needs real path
-if [[ -f "$COVER_TMP" ]]; then
-    realpath "$COVER_TMP"
-fi
+# If something fails -> Do not show Cover
+rm -f "$COVER_TMP"
+exit 0
