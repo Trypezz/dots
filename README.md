@@ -6,6 +6,3 @@
 
 ### Desktop  
 ![Desktop](screenshots/Desktop.png)
-
-### Wofi Runner  
-![Wofi](screenshots/wofiRunner.png)
