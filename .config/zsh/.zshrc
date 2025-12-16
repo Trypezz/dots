@@ -83,6 +83,7 @@ PROMPT="%F{black}%F{white}%n%F{cyan}@archlinux %F{blue}${ARCH_ICON}%k %F{yellow}
 
 
 source $HOME/.config/zsh/aliases.zsh
+source $HOME/.config/bin/setwallpaper.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
