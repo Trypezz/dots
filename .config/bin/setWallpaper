@@ -1,0 +1,78 @@
+
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Usage:
+#   wallpaper [--sound|--mute] <file>
+# Examples:
+#   wallpaper ~/Pictures/wall.png
+#   wallpaper --mute ~/Videos/live.webm
+#   wallpaper --sound ~/Videos/live.mp4
+
+sound="mute"
+file=""
+
+# ---- args ----
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --sound) sound="sound"; shift ;;
+    --mute)  sound="mute"; shift ;;
+    -h|--help)
+      echo "Usage: setWallpaper [--sound|--mute] <file>"
+      exit 0
+      ;;
+    *) file="$1"; shift ;;
+  esac
+done
+
+[[ -n "${file:-}" ]] || { echo "Missing <file>. Try: setWallpaper --help"; exit 1; }
+[[ -f "$file" ]] || { echo "File not found: $file"; exit 1; }
+
+# ---- helpers ----
+is_video() {
+  local f="${1,,}"
+  case "$f" in
+    *.mp4|*.mkv|*.webm|*.mov|*.avi|*.m4v|*.gif) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+is_image() {
+  local f="${1,,}"
+  case "$f" in
+    *.png|*.jpg|*.jpeg|*.webp|*.bmp|*.tiff) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+# stop old live wallpaper if running
+pkill -x mpvpaper 2>/dev/null || true
+
+if is_video "$file"; then
+  # get all monitor names (Hyprland)
+  mapfile -t outputs < <(hyprctl monitors -j | jq -r '.[].name')
+
+  if [[ "${#outputs[@]}" -eq 0 ]]; then
+    echo "No monitors found via hyprctl."
+    exit 2
+  fi
+
+  for out in "${outputs[@]}"; do
+    if [[ "$sound" == "sound" ]]; then
+      mpvpaper -o "loop-file=inf" "$out" "$file" >/dev/null 2>&1 &
+    else
+      mpvpaper -o "loop-file=inf --no-audio" "$out" "$file" >/dev/null 2>&1 &
+    fi
+  done
+
+  notify-send "Live wallpaper changed" "$file (${sound})"
+  exit 0
+fi
+
+if is_image "$file"; then
+  swww img "$file" --transition-type top
+  notify-send "Wallpaper changed" "$file"
+  exit 0
+fi
+
+echo "Unknown file type: $file"
+exit 3
