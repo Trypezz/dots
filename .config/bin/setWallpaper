@@ -3,30 +3,38 @@
 set -euo pipefail
 
 # Usage:
-#   wallpaper [--sound|--mute] <file>
+#   setWallpaper [--sound|--mute] <file>
+#   setWallpaper --stop
+#
 # Examples:
-#   wallpaper ~/Pictures/wall.png
-#   wallpaper --mute ~/Videos/live.webm
-#   wallpaper --sound ~/Videos/live.mp4
+#   setWallpaper ~/Pictures/wall.png
+#   setWallpaper --mute ~/Videos/live.webm
+#   setWallpaper --sound ~/Videos/live.mp4
+#   setWallpaper --stop
 
 sound="mute"
 file=""
+stop=false
+
+# where to remember the last static wallpaper
+STATE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_last_image"
+
+# fallback if no last image is known (optional)
+DEFAULT_WALLPAPER="$HOME/Pictures/wall.png"
 
 # ---- args ----
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --sound) sound="sound"; shift ;;
     --mute)  sound="mute"; shift ;;
+    --stop)  stop=true; shift ;;
     -h|--help)
-      echo "Usage: setWallpaper [--sound|--mute] <file>"
+      echo "Usage: setWallpaper [--sound|--mute|--stop] <file>"
       exit 0
       ;;
     *) file="$1"; shift ;;
   esac
 done
-
-[[ -n "${file:-}" ]] || { echo "Missing <file>. Try: setWallpaper --help"; exit 1; }
-[[ -f "$file" ]] || { echo "File not found: $file"; exit 1; }
 
 # ---- helpers ----
 is_video() {
@@ -44,7 +52,43 @@ is_image() {
   esac
 }
 
-# stop old live wallpaper if running
+restore_last_image() {
+  local img=""
+
+  if [[ -f "$STATE_FILE" ]]; then
+    img="$(<"$STATE_FILE")"
+  fi
+
+  # If cache empty or file missing -> fallback to default
+  if [[ -z "${img:-}" || ! -f "$img" ]]; then
+    if [[ -f "$DEFAULT_WALLPAPER" ]]; then
+      img="$DEFAULT_WALLPAPER"
+    else
+      return 1
+    fi
+  fi
+
+  swww img "$img" --transition-type top
+  notify-send "Live Wallpaper stopped" "Restored: $img"
+  return 0
+}
+
+# ---- stop mode ----
+if $stop; then
+  # stop old live wallpaper if running
+  pkill -x mpvpaper 2>/dev/null || true
+
+  if ! restore_last_image; then
+    notify-send "Live Wallpaper stopped" "No static wallpaper found to restore"
+  fi
+  exit 0
+fi
+
+# ---- validate file for normal mode ----
+[[ -n "${file:-}" ]] || { echo "Missing <file>. Try: setWallpaper --help"; exit 1; }
+[[ -f "$file" ]] || { echo "File not found: $file"; exit 1; }
+
+# stop old live wallpaper if running (switching modes)
 pkill -x mpvpaper 2>/dev/null || true
 
 if is_video "$file"; then
@@ -64,15 +108,21 @@ if is_video "$file"; then
     fi
   done
 
-  notify-send "Live wallpaper changed" "$file (${sound})"
+  notify-send "Live Wallpaper changed" "$file (${sound})"
   exit 0
 fi
 
 if is_image "$file"; then
   swww img "$file" --transition-type top
+
+  # remember last static image
+  mkdir -p "$(dirname "$STATE_FILE")"
+  printf '%s' "$file" > "$STATE_FILE"
+
   notify-send "Wallpaper changed" "$file"
   exit 0
 fi
 
 echo "Unknown file type: $file"
 exit 3
+
