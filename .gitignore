@@ -7,3 +7,7 @@
 .config/zsh/.zcompdump-archlinux-5.9.zwc
 .config/zsh/.zcompdump-CachyOS-5.9
 .config/zsh/.zcompdump-ChachyOS-5.9.zwc
+.config/nvim/.neoconf.json
+.config/nvim/lazy.lock
+.config/nvim/lazyvim.json
+.config/nvim/stylua.toml

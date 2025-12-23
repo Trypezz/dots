@@ -16,23 +16,22 @@
             "type": "custom"
         },
         {
-            "key": "│ {#31} User    {#keys}   │",
+            "key": "│ {#34} User    {#keys}   │",
             "type": "title",
-            "format": "{user-name}"
+            "format": "{#31}{user-name}"
         },
         {
-            "key": "│ {#32}󰇅 Hostname   {#keys}│",
+            "key": "│ {#34}󰇅 Hostname   {#keys}│",
             "type": "title",
-            "format": "{host-name}"
         },
         {
-            "key": "│ {#33}󰅐 Uptime  {#keys}   │",
+            "key": "│ {#34}󰅐 Uptime  {#keys}   │",
             "type": "uptime"
         },
         {
         	"type": "command",
         	"keyIcon": "",
-        	"key": "│ {#33}{icon} OS Age  {#keys}   │",
+        	"key": "│ {#34}{icon} OS Age  {#keys}   │",
         	"text": "birth=$(stat -c %W /); [ \"$birth\" -le 0 ] && birth=$(stat -c %Y /); now=$(date +%s); days=$(( (now - birth) / 86400 )); echo \"$(date -d @\"$birth\" +\"%d.%m.%Y\") [$days Days]\""
         },
         {
@@ -40,7 +39,7 @@
             "type": "os"
         },
         {
-            "key": "│ {#35} Kernel  {#keys}   │",
+            "key": "│ {#34} Kernel  {#keys}   │",
             "type": "kernel"
         },
         {
@@ -48,11 +47,7 @@
             "type": "custom"
         },
         {
-            "key": "│ {#36}󰇄 Desktop {#keys}   │",
-            "type": "de"
-        },
-        {
-            "key": "│ {#31} Terminal   {#keys}│",
+            "key": "│ {#32} Terminal   {#keys}│",
             "type": "terminal"
         },
         {
@@ -68,26 +63,26 @@
             "type": "custom"
         },
         {
-	        "key": "│ {#32} Display  {#keys}  │",
+	        "key": "│ {#35} Display  {#keys}  │",
             "type": "display",
             "compactType": "original-with-refresh-rate"	
         },
         {
-            "key": "│ {#33}󰍛 CPU     {#keys}   │",
+            "key": "│ {#35}󰍛 CPU     {#keys}   │",
             "type": "cpu",
             "showPeCoreCount": true
         },
         {
-        	"key": "│ {#33}󰍛 GPU     {#keys}   │",
+        	"key": "│ {#35}󰍛 GPU     {#keys}   │",
             "type": "gpu"
         },
         {
-        	"key": "│ {#33}󰍛 G-Driver   {#keys}│",
+        	"key": "│ {#35}󰍛 G-Driver   {#keys}│",
             "type": "gpu",
             "format": "{driver}"
         },
         {
-            "key": "│ {#34}󰉉 Disk    {#keys}   │",
+            "key": "│ {#35}󰉉 Disk    {#keys}   │",
             "type": "disk",
             "folders": "/"
         },
