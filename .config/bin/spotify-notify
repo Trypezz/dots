@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
+# $HOME/.config/hypr/configs/scripts/spotify-notify
 
-# Pfade zu DEINEN bestehenden Skripten
 SONGMETA="$HOME/.config/hypr/configs/scripts/songmeta.sh"
 COVER="$HOME/.config/hypr/configs/scripts/cover.sh"
 
+PLAYER="spotify"
 last_track=""
 
-playerctl --follow metadata --format '{{artist}}|||{{title}}' | while IFS='|||' read -r artist title; do
+# Only follow Spotify metadata updates
+playerctl -p "$PLAYER" --follow metadata --format '{{artist}}|||{{title}}' 2>/dev/null \
+| while IFS='|||' read -r artist title; do
     [[ -z "$artist" && -z "$title" ]] && continue
 
     track="$artist - $title"
     [[ "$track" == "$last_track" ]] && continue
     last_track="$track"
 
-    artist="$("$SONGMETA" artist)"
-    title="$("$SONGMETA" title)"
-    album="$("$SONGMETA" album)"
-    cover_path="$("$COVER")"
+    artist="$("$SONGMETA" artist "$PLAYER")"
+    title="$("$SONGMETA" title "$PLAYER")"
+    album="$("$SONGMETA" album "$PLAYER")"
+    cover_path="$("$COVER" "$PLAYER")"
 
     body="$artist"
     [[ -n "$album" ]] && body="$body"$'\n'"$album"
@@ -24,6 +27,6 @@ playerctl --follow metadata --format '{{artist}}|||{{title}}' | while IFS='|||' 
     if [[ -n "$cover_path" && -f "$cover_path" ]]; then
         notify-send -a "Spotify" -i "$cover_path" "$title" "$body"
     else
-        notify-send -a "Spotify" "🎵 Jetzt läuft" "$body"
+        notify-send -a "Spotify" "$title" "$body"
     fi
 done

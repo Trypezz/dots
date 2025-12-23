@@ -2,16 +2,17 @@
 # $HOME/.config/hypr/configs/scripts/cover.sh
 
 COVER_TMP="/tmp/hyprlock_cover.jpg"
+PLAYER="${1:-spotify}"
 
-# If no player -> Delete Cover
-if ! command -v playerctl &>/dev/null || ! playerctl status &>/dev/null; then
+# If playerctl is missing or Spotify is not available -> remove cover and exit
+if ! command -v playerctl &>/dev/null || ! playerctl -p "$PLAYER" status &>/dev/null; then
     rm -f "$COVER_TMP"
     exit 0
 fi
 
-artUrl=$(playerctl metadata mpris:artUrl 2>/dev/null)
+artUrl=$(playerctl -p "$PLAYER" metadata mpris:artUrl 2>/dev/null)
 
-# If no Art-URL -> Delete Cover
+# If no art URL -> remove cover and exit
 if [[ -z "$artUrl" ]]; then
     rm -f "$COVER_TMP"
     exit 0
@@ -30,7 +31,7 @@ if [[ "$artUrl" == file://* ]]; then
     fi
 fi
 
-# HTTP/HTTPS (ex. Spotify)
+# HTTP/HTTPS (e.g. Spotify)
 if [[ "$artUrl" == http://* || "$artUrl" == https://* ]]; then
     if command -v curl &>/dev/null; then
         if curl -L -s "$artUrl" -o "$COVER_TMP"; then
@@ -45,6 +46,6 @@ if [[ "$artUrl" == http://* || "$artUrl" == https://* ]]; then
     fi
 fi
 
-# If something fails -> Do not show Cover
+# If something fails -> do not show cover
 rm -f "$COVER_TMP"
 exit 0
