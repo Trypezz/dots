@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Pfade zu DEINEN bestehenden Skripten
+SONGMETA="$HOME/.config/hypr/configs/scripts/songmeta.sh"
+COVER="$HOME/.config/hypr/configs/scripts/cover.sh"
+
+last_track=""
+
+playerctl --follow metadata --format '{{artist}}|||{{title}}' | while IFS='|||' read -r artist title; do
+    [[ -z "$artist" && -z "$title" ]] && continue
+
+    track="$artist - $title"
+    [[ "$track" == "$last_track" ]] && continue
+    last_track="$track"
+
+    artist="$("$SONGMETA" artist)"
+    title="$("$SONGMETA" title)"
+    album="$("$SONGMETA" album)"
+    cover_path="$("$COVER")"
+
+    body="$artist"
+    [[ -n "$album" ]] && body="$body"$'\n'"$album"
+
+    if [[ -n "$cover_path" && -f "$cover_path" ]]; then
+        notify-send -a "Spotify" -i "$cover_path" "$title" "$body"
+    else
+        notify-send -a "Spotify" "🎵 Jetzt läuft" "$body"
+    fi
+done
