@@ -1,7 +1,6 @@
 #!/bin/bash
-# $HOME/.config/hypr/configs/scripts/cover.sh
 
-COVER_TMP="/tmp/hyprlock_cover.jpg"
+COVER_TMP="/tmp/songcover.jpg"
 PLAYER="${1:-spotify}"
 
 # If playerctl is missing or Spotify is not available -> remove cover and exit

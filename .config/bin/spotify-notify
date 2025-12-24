@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-# $HOME/.config/hypr/configs/scripts/spotify-notify
 
-SONGMETA="$HOME/.config/hypr/configs/scripts/songmeta.sh"
-COVER="$HOME/.config/hypr/configs/scripts/cover.sh"
+SONGMETA="$HOME/.config/bin/songmeta"
+COVER="$HOME/.config/bin/songcover"
 
 PLAYER="spotify"
 last_track=""

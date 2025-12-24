@@ -1,5 +1,4 @@
 #!/bin/bash
-# $HOME/.config/hypr/configs/scripts/songmeta.sh
 # Usage:
 #   songmeta.sh title|artist|album [player]
 #
