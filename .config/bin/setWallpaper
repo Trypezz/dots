@@ -22,6 +22,10 @@ STATE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_last_image"
 # fallback if no last image is known (optional)
 DEFAULT_WALLPAPER="$HOME/Pictures/wall.png"
 
+# For Video-Thumbnail
+THUMB_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_thumbs"
+mkdir -p "$THUMB_DIR"
+
 # ---- args ----
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -44,6 +48,29 @@ is_video() {
     *) return 1 ;;
   esac
 }
+
+video_thumb() {
+  local vid="$1"
+  # stabiler Name pro Datei (auch wenn gleiche Dateinamen in anderen Ordnern)
+  local key
+  key="$(printf '%s' "$vid" | sha256sum | awk '{print $1}')"
+  local out="$THUMB_DIR/$key.jpg"
+
+  # nur neu erzeugen wenn fehlt oder Video neuer ist
+  if [[ ! -f "$out" || "$vid" -nt "$out" ]]; then
+    if command -v ffmpegthumbnailer >/dev/null 2>&1; then
+      ffmpegthumbnailer -i "$vid" -o "$out" -s 512 -q 8 >/dev/null 2>&1 || return 1
+    elif command -v ffmpeg >/dev/null 2>&1; then
+      # Frame bei 1s ziehen
+      ffmpeg -hide_banner -loglevel error -y -ss 1 -i "$vid" -frames:v 1 -vf "scale=512:-1" "$out" || return 1
+    else
+      return 1
+    fi
+  fi
+
+  printf '%s' "$out"
+}
+
 is_image() {
   local f="${1,,}"
   case "$f" in
@@ -51,6 +78,14 @@ is_image() {
     *) return 1 ;;
   esac
 }
+
+pretty_name() {
+  local p="$1"
+  local n
+  n="$(basename -- "$p")"
+  printf '%s' "$n"
+}
+
 
 restore_last_image() {
   local img=""
@@ -68,8 +103,10 @@ restore_last_image() {
     fi
   fi
 
-  swww img "$img" --transition-type top
-  notify-send "Live Wallpaper stopped" "Restored: $img"
+  name="$(pretty_name "$img")"
+
+  swww img "$img" --transition-fps 60 --transition-type top
+  notify-send -i "$img" "Live Wallpaper stopped" "Restored: "$name""
   return 0
 }
 
@@ -92,34 +129,50 @@ fi
 pkill -x mpvpaper 2>/dev/null || true
 
 if is_video "$file"; then
-  # get all monitor names (Hyprland)
-  mapfile -t outputs < <(hyprctl monitors -j | jq -r '.[].name')
+	thumb=""
+	# get all monitor names (Hyprland)
+	mapfile -t outputs < <(hyprctl monitors -j | jq -r '.[].name')
 
-  if [[ "${#outputs[@]}" -eq 0 ]]; then
-    echo "No monitors found via hyprctl."
-    exit 2
-  fi
+	if [[ "${#outputs[@]}" -eq 0 ]]; then
+	  echo "No monitors found via hyprctl."
+	  exit 2
+	fi
 
-  for out in "${outputs[@]}"; do
-    if [[ "$sound" == "sound" ]]; then
-      mpvpaper -o "loop-file=inf" "$out" "$file" >/dev/null 2>&1 &
-    else
-      mpvpaper -o "loop-file=inf --no-audio" "$out" "$file" >/dev/null 2>&1 &
-    fi
-  done
+	for out in "${outputs[@]}"; do
+	  if [[ "$sound" == "sound" ]]; then
+	    mpvpaper -o "loop-file=inf" "$out" "$file" >/dev/null 2>&1 &
+	  else
+	    mpvpaper -o "loop-file=inf --no-audio" "$out" "$file" >/dev/null 2>&1 &
+	  fi
+	done
 
-  notify-send "Live Wallpaper changed" "$file (${sound})"
-  exit 0
+	name="$(pretty_name "$file")"
+
+	thumb="$(video_thumb "$file" 2>/dev/null || true)"
+	
+	if [[ -n "$thumb" && -f "$thumb" ]]; then
+	  notify-send -i "$thumb" "Live Wallpaper changed" "$name (${sound})"
+	else
+	  notify-send "Live Wallpaper changed" "$name (${sound})"
+	fi
+	
+	exit 0
 fi
 
 if is_image "$file"; then
-  swww img "$file" --transition-type top
+  name="$(pretty_name "$file")"
+  last=""
+  [[ -f "$STATE_FILE" ]] && last="$(<"$STATE_FILE")"
 
-  # remember last static image
+  if [[ "$file" == "$last" ]]; then
+    notify-send -i "$file" "No Change" "Same Wallpaper: $name"
+    exit 0
+  fi
+
+  swww img "$file" --transition-fps 60 --transition-type top
   mkdir -p "$(dirname "$STATE_FILE")"
   printf '%s' "$file" > "$STATE_FILE"
-
-  notify-send "Wallpaper changed" "$file"
+  notify-send -i "$file" "Wallpaper changed" "$name"
   exit 0
 fi
 
