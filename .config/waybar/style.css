@@ -72,7 +72,7 @@ tooltip label {
 	transition: all 0.3s ease-in-out;
 }
 
-#battery, #pulseaudio, #network, #clock, #custom-notification, #tray, #custom-arch, #window {
+#battery, #pulseaudio, #network, #clock, #custom-notification, #tray, #custom-arch, #window, #custom-nowplaying {
 	background-color: @bg0;
 	padding: 0 15px 0 15px;
 	margin: 0 0 0 12px;
@@ -86,6 +86,10 @@ tooltip label {
 
 #clock {
 	color: @blue;
+}
+
+#custom-nowplaying {
+	font-size: 16;
 }
 
 #custom-notification {
