@@ -23,10 +23,7 @@ alias editShell='micro $HOME/.config/zsh/.zshrc'
 
 alias reloadHyprland='hyprctl reload'
 
-alias editWallpaper='micro .local/bin/walset'
-
 # Quality of Life
-alias changeDefaultApps='selectdefaultapplication'
 alias clr='clear'
 alias osFetch='fastfetch'
 alias ls='exa -l'
@@ -42,5 +39,7 @@ alias openPicture='imv '
 
 alias systemUpdate='arch-update'
 
-alias toolbox='$HOME/jetbrains/jetbrains-toolbox'
-alias zen='flatpak run app.zen_browser.zen'
+# DEV Stuff
+alias devC='cd DEV/C'
+alias devCS='cd DEV/C#'
+alias devJava='cd DEV/Java'

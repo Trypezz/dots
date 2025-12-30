@@ -82,9 +82,14 @@
             "format": "{driver}"
         },
         {
-            "key": "│ {#35}󰉉 Disk    {#keys}   │",
+            "key": "│ {#35}󰉉 Main-Disk  {#keys}│",
             "type": "disk",
             "folders": "/"
+        },
+        {
+            "key": "│ {#35}󰉉 Games-Disk {#keys}│",
+            "type": "disk",
+            "folders": "/mnt/games"
         },
         {
             "key": "│ {#35} Memory  {#keys}   │",
@@ -95,7 +100,7 @@
             "type": "custom"
         },
         {
-            "key": "│ {#39} colors  {#keys}   │",
+            "key": "│ {#39} Colors  {#keys}   │",
             "type": "colors",
             "symbol": "circle"
         },

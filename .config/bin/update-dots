@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+DOTS_DIR="$PWD/dots"
+HOME_DIR="$HOME/"
+
+ITEMS=(
+  ".zshenv"
+  ".config/bin"
+  ".config/cava/config"
+  ".config/cava/themes"
+  ".config/fastfetch"
+  ".config/hypr"
+  ".config/kitty"
+  ".config/micro/settings.json"
+  ".config/micro/systax/hyprlang.yaml"
+  ".config/nvim/lua"
+  ".config/nvim/init.lua"
+  ".config/rofi"
+  ".config/swaync"
+  ".config/waybar"
+  ".config/wlogout"
+  ".config/yazi"
+  ".config/zsh/.p10k.zsh"
+  ".config/zsh/.zshrc"
+  ".config/zsh/aliases.zsh"
+)
+
+mkdir -p "$DOTS_DIR"
+
+for ITEM in "${ITEMS[@]}"; do
+  SRC="$HOME_DIR/$ITEM"
+  DST="$DOTS_DIR/$ITEM"
+
+  if [ -d "$SRC" ]; then
+    mkdir -p "$DST"
+    cp -r "$SRC/." "$DST/"
+    echo "$ITEM copied!"
+  elif [ -f "$SRC" ]; then
+    mkdir -p "$(dirname "$DST")"
+    cp "$SRC" "$DST"
+    echo "$ITEM copied!"
+  fi
+done
+
+echo "Files are updated!"
+notify-send "Updated Dotfiles!" "Your configuration has been updated!"
