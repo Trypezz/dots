@@ -27,6 +27,10 @@ ITEMS=(
 
 mkdir -p "$DOTS_DIR"
 
+echo ""
+echo "Copying files from '$HOME_DIR' to '$DOTS_DIR'..."
+echo ""
+
 for ITEM in "${ITEMS[@]}"; do
   SRC="$HOME_DIR/$ITEM"
   DST="$DOTS_DIR/$ITEM"
@@ -42,5 +46,7 @@ for ITEM in "${ITEMS[@]}"; do
   fi
 done
 
+echo ""
 echo "Files are updated!"
+echo "Run 'git status' inside your repo to see changes."
 notify-send "Updated Dotfiles!" "Your configuration has been updated!"
