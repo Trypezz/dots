@@ -24,7 +24,7 @@ window {
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      0px solid;
+    border:                      1px solid;
     border-radius:               12px;
     border-color:                @selected;
     background-color:            @background;
@@ -50,10 +50,10 @@ inputbar {
     spacing:                     12px;
     margin:                      0px;
     padding:                     15px;
-    border:                      0px solid;
+    border:                      1px solid;
     border-radius:               12px;
     border-color:                @selected;
-    background-color:            @background-alt;
+    background-color:            @background;
     text-color:                  @foreground;
     children:                    [ "prompt", "entry" ];
 }
@@ -72,7 +72,7 @@ textbox-prompt-colon {
 }
 entry {
     enabled:                     true;
-    background-color:            inherit;
+    background-color:            @background;
     text-color:                  inherit;
     cursor:                      text;
     placeholder:                 "Search...";
@@ -106,14 +106,14 @@ scrollbar {
     handle-width:                5px ;
     handle-color:                @selected;
     border-radius:               0px;
-    background-color:            @background-alt;
+    background-color:            @background;
 }
 
 /*****----- Elements -----*****/
 element {
     enabled:                     true;
     spacing:                     10px;
-    margin:                      0px;
+    margin:                      5px;
     padding:                     5px;
     border:                      0px solid;
     border-radius:               12px;
@@ -123,7 +123,10 @@ element {
     cursor:                      pointer;
 }
 element normal.normal {
-    background-color:            @background;
+    background-color:            transparent;
+    border:                      0px solid;
+    border-radius:               12px;
+    border-color:                @selected;
     text-color:                  @foreground;
 }
 element selected.normal {

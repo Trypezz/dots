@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 DOTS_DIR="$PWD/dots"
 HOME_DIR="$HOME/"
@@ -19,6 +19,7 @@ ITEMS=(
   ".config/swaync"
   ".config/waybar"
   ".config/wlogout"
+  ".config/xsettingsd"
   ".config/yazi"
   ".config/zsh/.p10k.zsh"
   ".config/zsh/.zshrc"

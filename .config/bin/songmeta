@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Usage:
 #   songmeta.sh title|artist|album [player]
 #
