@@ -46,7 +46,8 @@ compinit
 
 eval "$($HOME/.config/bin/editScript --completion-zsh)"
 
-# Import aliases
+
+
 source $HOME/.config/zsh/aliases.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.

@@ -16,15 +16,16 @@ alias editInput='micro $CONFIG/hypr/configs/input.conf'
 alias editApps='micro $CONFIG/hypr/configs/apps.conf'
 alias editBinds='micro $CONFIG/hypr/configs/binds.conf'
 alias editLockscreen='micro $CONFIG/hypr/hyprlock.conf'
-alias editPermissions='micro $CONFIG/hypr/configs/'
+alias editPermissions='micro $CONFIG/hypr/configs/permissions.conf'
 
 # Other Ricing Stuff
-alias editTerminal='micro $CONFIGkitty/kitty.conf'
+alias editTerminal='micro $CONFIG/kitty/kitty.conf'
 alias editShell='micro $CONFIG/zsh/.zshrc'
 alias editOsFetch='micro $CONFIG/fastfetch/config.jsonc'
 
 alias editWaybarCSS='micro $CONFIG/waybar/style.css'
-alias editWaybar='micro $CONFIG/waybar/config.json'
+alias editWaybar='micro $CONFIG/waybar/config.jsonc'
+alias editWaybarModules='micro $CONFIG/waybar/modules.json'
 
 alias editSwayNC='micro $CONFIG/swaync/config.json'
 alias editSwayControlCenter='micro $CONFIG/swaync/themes/default/control-center.css'

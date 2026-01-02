@@ -20,7 +20,7 @@ if [[ -z "$artist" && -z "$title" ]]; then
     exit 0
 fi
 
-track="$title ─ $artist │ "
+track="$title ─ $artist ─ "
 
 # Reset scroll if new track
 last_track=$(cat "$MEDIA_FILE" 2>/dev/null)

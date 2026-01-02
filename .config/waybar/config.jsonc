@@ -1,103 +1,31 @@
+// -*- mode: jsonc -*-
+
 {
   "position": "top",
   "margin-top": 15,
   
-  "modules-left": ["custom/arch", "clock", "custom/nowplaying", "hyprland/workspaces"],
-  "modules-center": ["hyprland/window"],
-  "modules-right": ["pulseaudio", "tray", "network", "custom/notification", "battery"],
+  "modules-left": [
+  	"custom/arch",
+  	"clock",
+  	"custom/nowplaying",
+  	"hyprland/workspaces"
+  ],
+  
+  "modules-center": [
+  	"hyprland/window"
+  ],
+  
+  "modules-right": [
+  	"pulseaudio", 
+  	"tray", 
+  	"network", 
+  	"custom/notification", 
+  	"battery"
+  ],
 
-  "custom/arch": {
-        "format": "",
-        "tooltip": true,
-        "tooltip-format": "btw",
-        "on-click": "wlogout"
-   },
+  //Include Modules
 
-  "clock": {
-        "interval": 1,
-        "format": " {:%H:%M | %A, %e %B} ",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%H:%M:%S}"
-      },
-  "custom/nowplaying": {
-    "exec": "~/.config/waybar/scripts/now_playing.sh",
-    "format": " {text}",
-    "return-type": "json",
-    "interval": 1,
-    "escape": true,
-    "hide-empty-text": false,
-    "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl next",
-    "on-click-middle": "playerctl previous",
-    "tooltip-format": "Left: Play/Pause\nRight: Next\nMiddle: Previous"
-  },
-
-  "tray": {
-      "icon-size": 21,
-      "spacing": 16,
-      "orientation": "horizontal",
-      "tooltip": true
-  },
-
-
-  "pulseaudio": {
-      "format": " {icon}  {volume}% ",
-      "format-bluetooth": " {icon} {volume}%  {format_source} ",
-      "format-bluetooth-muted": " {icon} {format_source} ",
-      "format-muted": " {icon} {format_source} ",
-      "format-source": "  {volume}% ",
-      "format-source-muted": "  ",
-      "format-icons": {
-        "headphone": "",
-        "phone": "",
-        "portable": "",
-        "car": "",
-        "default": [
-          "",
-          "",
-          ""
-        ]
-      },
-      "on-click": "pavucontrol"
-    },
-
-  "network": {
-      "format-wifi": "   {essid} ({signalStrength}%) ",
-      "format-ethernet": "   Freshes Internet ",
-      "tooltip-format": "{ifname} via {gwaddr} ",
-      "format-linked": " {ifname} (No IP)  ",
-      "format-disconnected": " Disconnected ⚠ "
-    },
-
-    "battery": {
-    	"interval": 60,
-    	"states": {
-    		"warning": 30,
-    		"critical": 15
-    	},
-    	"format": "{capacity}% {icon}",
-    	"format-icons": ["", "", "", "", ""],
-   	    "max-length": 25
-    },
-
-    "custom/notification": {
-      "tooltip": true,
-      "format": "<span size='16pt'>{icon}</span>",
-      "format-icons": {
-        "notification": "󱅫",
-        "none": "󰂜",
-        "dnd-notification": "󰂠",
-        "dnd-none": "󰪓",
-        "inhibited-notification": "󰂛",
-        "inhibited-none": "󰪑",
-        "dnd-inhibited-notification": "󰂛",
-        "dnd-inhibited-none": "󰪑"
-      },
-      "return-type": "json",
-      "exec-if": "which swaync-client",
-      "exec": "swaync-client -swb",
-      "on-click": "swaync-client -t -sw",
-      "on-click-right": "swaync-client -d -sw",
-      "escape": true
-    }
+  "include": [
+  	"$HOME/.config/waybar/modules.json"
+  ]
 }
