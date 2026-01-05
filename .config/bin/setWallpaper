@@ -51,17 +51,17 @@ is_video() {
 
 video_thumb() {
   local vid="$1"
-  # stabiler Name pro Datei (auch wenn gleiche Dateinamen in anderen Ordnern)
+  # stable name for each file (even if same filename in different directories)
   local key
   key="$(printf '%s' "$vid" | sha256sum | awk '{print $1}')"
   local out="$THUMB_DIR/$key.jpg"
 
-  # nur neu erzeugen wenn fehlt oder Video neuer ist
+  # only create if not exists or video is new
   if [[ ! -f "$out" || "$vid" -nt "$out" ]]; then
     if command -v ffmpegthumbnailer >/dev/null 2>&1; then
       ffmpegthumbnailer -i "$vid" -o "$out" -s 512 -q 8 >/dev/null 2>&1 || return 1
     elif command -v ffmpeg >/dev/null 2>&1; then
-      # Frame bei 1s ziehen
+      # Get frame in first second
       ffmpeg -hide_banner -loglevel error -y -ss 1 -i "$vid" -frames:v 1 -vf "scale=512:-1" "$out" || return 1
     else
       return 1

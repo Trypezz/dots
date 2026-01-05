@@ -1,66 +1,86 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -u
 
+PLAYER="${1:-spotify}"
 VISIBLE_MIN=10
+TICK="${TICK}" # Update (Needs to be set in Waybar Modules)
+STEP="${STEP}" # Speed (Needs to be set in Waybar Modules)
+
 SCROLL_FILE="$HOME/.cache/nowplaying_scroll_pos"
 MEDIA_FILE="$HOME/.cache/nowplaying_last_track"
-PLAYER="${2:-spotify}"
+PAUSE_UNTIL_FILE="$HOME/.cache/nowplaying_pause_until"
 
-# Fetch info
-player_status=$(playerctl -p "$PLAYER" status 2>/dev/null)
-if [[ $? -ne 0 || -z "$player_status" ]]; then
-    # No media player or not playing anything
-    rm -f "$SCROLL_FILE" "$MEDIA_FILE"
-    exit 0
-fi
+mkdir -p "$HOME/.cache"
+[[ -f "$SCROLL_FILE" ]] || echo "0" > "$SCROLL_FILE"
+[[ -f "$PAUSE_UNTIL_FILE" ]] || echo "0" > "$PAUSE_UNTIL_FILE"
 
-artist=$(playerctl -p "$PLAYER" metadata xesam:artist 2>/dev/null)
-title=$(playerctl -p "$PLAYER" metadata xesam:title 2>/dev/null)
+now_ms() { date +%s%3N; }
 
-if [[ -z "$artist" && -z "$title" ]]; then
-    exit 0
-fi
+emit_json() {
+  local text="$1" status="$2"
+  # minimal JSON escaping
+  text="${text//\\/\\\\}"
+  text="${text//\"/\\\"}"
+  echo "{\"text\":\"$text\",\"class\":\"${status,,}\"}"
+}
 
-track="$title ─ $artist ─ "
+while true; do
+  # If player is not found
+  if ! playerctl -p "$PLAYER" status >/dev/null 2>&1; then
+    rm -f "$SCROLL_FILE" "$MEDIA_FILE" "$PAUSE_UNTIL_FILE"
+    # Tail mode, better sleep
+    sleep 0.5
+    continue
+  fi
 
-# Reset scroll if new track
-last_track=$(cat "$MEDIA_FILE" 2>/dev/null)
-if [[ "$track" != "$last_track" ]]; then
+  player_status="$(playerctl -p "$PLAYER" status 2>/dev/null || true)"
+  artist="$(playerctl -p "$PLAYER" metadata xesam:artist 2>/dev/null || true)"
+  title="$(playerctl -p "$PLAYER" metadata xesam:title 2>/dev/null || true)"
+
+  # If nothing there, return valid JSON
+  if [[ -z "${artist}${title}" ]]; then
+    emit_json "" "$player_status"
+    sleep 0.3
+    continue
+  fi
+
+  track="${title} ─ ${artist} ─ "
+
+  last_track="$(cat "$MEDIA_FILE" 2>/dev/null || true)"
+  if [[ "$track" != "$last_track" ]]; then
     echo "$track" > "$MEDIA_FILE"
     echo "0" > "$SCROLL_FILE"
-    scroll_pos=0
-else
-    scroll_pos=$(cat "$SCROLL_FILE" 2>/dev/null)
-    [[ -z "$scroll_pos" ]] && scroll_pos=0
-fi
+    echo "0" > "$PAUSE_UNTIL_FILE"
+  fi
 
-# Dynamic visible length
-visible_chars=$(( ${#track} * 1 / 2 ))
-[[ $visible_chars -lt $VISIBLE_MIN ]] && visible_chars=$VISIBLE_MIN
+  scroll_pos="$(cat "$SCROLL_FILE" 2>/dev/null || echo 0)"
+  pause_until="$(cat "$PAUSE_UNTIL_FILE" 2>/dev/null || echo 0)"
 
-# Handle play/pause behavior
-if [[ "$player_status" == "Paused" ]]; then
-    # Do not advance scroll position
-    :
-else
-    # Scroll speed control
-    scroll_pos=$((scroll_pos + 1))
+  visible_chars=$(( ${#track} / 2 ))
+  (( visible_chars < VISIBLE_MIN )) && visible_chars=$VISIBLE_MIN
+  (( visible_chars > ${#track} )) && visible_chars=${#track}
 
-    # Loop handling with 2s pause
-    if (( scroll_pos > ${#track} )); then
-        sleep 2
+  if [[ "$player_status" != "Paused" ]]; then
+    now="$(now_ms)"
+    if (( now >= pause_until )); then
+      scroll_pos=$((scroll_pos + STEP))
+
+      if (( scroll_pos > ${#track} )); then
         scroll_pos=0
+        echo $((now + 1200)) > "$PAUSE_UNTIL_FILE"
+      fi
+
+      echo "$scroll_pos" > "$SCROLL_FILE"
     fi
+  fi
 
-    echo "$scroll_pos" > "$SCROLL_FILE"
-fi
-
-# Create scrolling text
-if (( scroll_pos + visible_chars <= ${#track} )); then
+  if (( scroll_pos + visible_chars <= ${#track} )); then
     display_text="${track:scroll_pos:visible_chars}"
-else
+  else
     wrap_len=$(( scroll_pos + visible_chars - ${#track} ))
     display_text="${track:scroll_pos}${track:0:wrap_len}"
-fi
+  fi
 
-# Output JSON for Waybar
-echo "{\"text\": \"$display_text\", \"class\": \"${player_status,,}\"}"
+  emit_json "$display_text" "$player_status"
+  sleep "$TICK"
+done

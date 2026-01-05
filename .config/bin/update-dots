@@ -1,8 +1,11 @@
 #!/bin/bash
 
-DOTS_DIR="$PWD/dots"
+# configs and dotfile repo should have the same layout!
+
+DOTS_DIR="$PWD/dots" # Set to current dotfiles repo
 HOME_DIR="$HOME/"
 
+# Items to move to repo
 ITEMS=(
   ".zshenv"
   ".config/bin"

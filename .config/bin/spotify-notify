@@ -15,9 +15,12 @@ playerctl -p "$PLAYER" --follow metadata --format '{{artist}}|||{{title}}' 2>/de
     [[ "$track" == "$last_track" ]] && continue
     last_track="$track"
 
+	# Fetch infos from songmeta script
     artist="$("$SONGMETA" artist "$PLAYER")"
     title="$("$SONGMETA" title "$PLAYER")"
     album="$("$SONGMETA" album "$PLAYER")"
+
+    # Fetch coverart from songcover script
     cover_path="$("$COVER" "$PLAYER")"
 
     body="$artist"
