@@ -107,4 +107,5 @@ tooltip label {
 
 #battery {
 	color: @green;
+	min-width: 75px
 }

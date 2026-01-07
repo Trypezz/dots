@@ -19,8 +19,8 @@
   	"pulseaudio", 
   	"tray", 
   	"network", 
-  	"custom/notification", 
-  	"battery"
+  	"battery",
+  	"custom/notification"
   ],
 
   //Include Modules
