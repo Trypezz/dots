@@ -42,6 +42,8 @@ alias grub-update='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 alias home='cd $HOME'
 
+alias getPID='pgrep -af '
+
 alias startVideo='mpv '
 alias openPicture='imv '
 

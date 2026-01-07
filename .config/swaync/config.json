@@ -34,10 +34,9 @@
     }
   },
   "notification-visibility": {
-    "example-name": {
-      "state": "muted",
-      "urgency": "Low",
-      "app-name": "Spotify"
+    "nohist-notify-send": {
+      "state": "transient",
+      "app-name": "^transient$"
     }
   },
   "widgets": [

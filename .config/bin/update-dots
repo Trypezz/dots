@@ -53,4 +53,4 @@ done
 echo ""
 echo "Files are updated!"
 echo "Run 'git status' inside your repo to see changes."
-notify-send "Updated Dotfiles!" "Your configuration has been updated!"
+notify-send -a transient "Updated Dotfiles!" "Your configuration has been updated!"

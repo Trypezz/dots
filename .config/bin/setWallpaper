@@ -106,7 +106,7 @@ restore_last_image() {
   name="$(pretty_name "$img")"
 
   swww img "$img" --transition-fps 60 --transition-type top
-  notify-send -i "$img" "Live Wallpaper stopped" "Restored: "$name""
+  notify-send -a transient -i "$img" "Live Wallpaper stopped" "Restored: "$name""
   return 0
 }
 
@@ -116,7 +116,7 @@ if $stop; then
   pkill -x mpvpaper 2>/dev/null || true
 
   if ! restore_last_image; then
-    notify-send "Live Wallpaper stopped" "No static wallpaper found to restore"
+    notify-send -a transient "Live Wallpaper stopped" "No static wallpaper found to restore"
   fi
   exit 0
 fi
@@ -151,9 +151,9 @@ if is_video "$file"; then
 	thumb="$(video_thumb "$file" 2>/dev/null || true)"
 	
 	if [[ -n "$thumb" && -f "$thumb" ]]; then
-	  notify-send -i "$thumb" "Live Wallpaper changed" "$name (${sound})"
+	  notify-send -a transient -i "$thumb" "Live Wallpaper changed" "$name (${sound})"
 	else
-	  notify-send "Live Wallpaper changed" "$name (${sound})"
+	  notify-send -a transient "Live Wallpaper changed" "$name (${sound})"
 	fi
 	
 	exit 0
@@ -165,14 +165,14 @@ if is_image "$file"; then
   [[ -f "$STATE_FILE" ]] && last="$(<"$STATE_FILE")"
 
   if [[ "$file" == "$last" ]]; then
-    notify-send -i "$file" "No Change" "Same Wallpaper: $name"
+    notify-send -a transient -i "$file" "No Change" "Same Wallpaper: $name"
     exit 0
   fi
 
   swww img "$file" --transition-fps 60 --transition-type top
   mkdir -p "$(dirname "$STATE_FILE")"
   printf '%s' "$file" > "$STATE_FILE"
-  notify-send -i "$file" "Wallpaper changed" "$name"
+  notify-send -a transient -i "$file" "Wallpaper changed" "$name"
   exit 0
 fi
 

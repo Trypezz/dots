@@ -13,7 +13,7 @@
 	        "format-alt": "{:%H:%M:%S}"
 	      },
 	  "custom/nowplaying": {
-	    "exec": "TICK=0.09 STEP=1 ~/.config/waybar/scripts/now_playing.sh",
+	    "exec": "TICK=0.1 STEP=1 ~/.config/waybar/scripts/now_playing.sh",
 	    "exec-if": "playerctl -p spotify status >/dev/null 2>&1",
 	    "format": " {text}",
 	    "return-type": "json",

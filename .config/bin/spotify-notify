@@ -27,8 +27,8 @@ playerctl -p "$PLAYER" --follow metadata --format '{{artist}}|||{{title}}' 2>/de
     [[ -n "$album" ]] && body="$body"$'\n'"$album"
 
     if [[ -n "$cover_path" && -f "$cover_path" ]]; then
-        notify-send -a "Spotify" -i "$cover_path" "$title" "$body"
+        notify-send -a transient -i "$cover_path" "$title" "$body"
     else
-        notify-send -a "Spotify" "$title" "$body"
+        notify-send -a transient "$title" "$body"
     fi
 done
