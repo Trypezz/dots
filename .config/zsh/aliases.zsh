@@ -33,7 +33,6 @@ alias editSwayNotifications='micro $CONFIG/swaync/themes/default/notifications.c
 
 # Quality of Life
 alias clr='clear'
-alias osFetch='fastfetch'
 alias ls='exa -l'
 alias tree='tree -a'
 alias reloadShell='clr && source $CONFIG/zsh/.zshrc'

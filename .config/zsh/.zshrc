@@ -1,5 +1,15 @@
 # --- Login/Start Info ---
-pyfiglet -s -f small_slant $(fastfetch -s os --format json | jq -r '.[0].result.name') | lolcat && echo && fastfetch -l none
+# Fastfetch Fancy Header
+# Only on new Kitty Windows
+if [[ -o interactive \
+   && -n "$KITTY_WINDOW_ID" \
+   && -z "$__KITTY_FASTFETCH_SHOWN" \
+   && -x "$HOME/.config/bin/osFetch" ]]; then
+
+  export __KITTY_FASTFETCH_SHOWN=1
+  "$HOME/.config/bin/osFetch"
+
+fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -9,7 +19,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$HOME/.config/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$HOME/.config/bin:$HOME/.cargo/bin:$PATH
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -39,6 +49,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 source "$HOME/.sdkman/bin/sdkman-init.sh"
+source "/usr/share/nvm/init-nvm.sh"
 
 # Special completion treatment for own scripts
 autoload -Uz compinit
