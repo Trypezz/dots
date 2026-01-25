@@ -1,0 +1,184 @@
+#!/usr/bin/env zsh
+set -u
+
+# ---- Configuration ----
+LOGO_W=25
+LOGO_GAP=1
+FIGLET_FONT="small_slant"
+
+# Defaults (can be overridden by CLI)
+USE_LOLCAT=1          # default: on
+LOLCAT_SEED=""        # empty = default/random
+TITLE_COLOR="cyan"        # empty = no fixed color
+TITLE_OVERRIDE=""     # empty = use fastfetch OS name
+FORCE_LOLCAT=0        # if 1, lolcat wins even if --color is set
+
+# ---- Helpers ----
+die() { print -u2 -- "$*"; exit 1; }
+need() { command -v "$1" >/dev/null 2>&1 || die "Missing: $1"; }
+
+usage() {
+  cat <<'EOF'
+Usage: titlefetch [options]
+
+Options:
+  --title <text>        Override title text (instead of fastfetch OS name)
+  --font <figlet_font>  pyfiglet font (default: small_slant)
+
+  --lolcat              Enable lolcat (default)
+  --no-lolcat           Disable lolcat
+  --seed <n>            lolcat seed (constant gradient instead of random)
+
+  --color <c>           Fixed color for title (PRIORITY over lolcat)
+                        <c> can be: black, red, green, yellow, blue, magenta, cyan, white
+                        or a number 0-255 (256-color terminals)
+
+  --force-lolcat         Force lolcat even if --color is set (optional)
+  --help                Show this help
+
+Examples:
+  titlefetch
+  titlefetch --title "CustomOS" --color cyan
+  titlefetch --seed 42
+  titlefetch --no-lolcat
+  titlefetch --color 196
+EOF
+}
+
+is_int() { [[ "$1" == <-> ]]; }  # zsh: unsigned integer match
+
+color_name_to_ansi8() {
+  local c="${1:l}"
+  case "$c" in
+    black)   echo 0 ;;
+    red)     echo 1 ;;
+    green)   echo 2 ;;
+    yellow)  echo 3 ;;
+    blue)    echo 4 ;;
+    magenta) echo 5 ;;
+    cyan)    echo 6 ;;
+    white)   echo 7 ;;
+    *)       echo "" ;;
+  esac
+}
+
+# ---- Parse args ----
+while (( $# > 0 )); do
+  case "$1" in
+    --help|-h) usage; exit 0 ;;
+
+    --title)
+      shift; (( $# > 0 )) || die "--title needs a value"
+      TITLE_OVERRIDE="$1"
+      ;;
+
+    --font)
+      shift; (( $# > 0 )) || die "--font needs a value"
+      FIGLET_FONT="$1"
+      ;;
+
+    --lolcat) USE_LOLCAT=1 ;;
+    --no-lolcat) USE_LOLCAT=0 ;;
+
+    --seed)
+      shift; (( $# > 0 )) || die "--seed needs a value"
+      LOLCAT_SEED="$1"
+      ;;
+
+    --color)
+      shift; (( $# > 0 )) || die "--color needs a value"
+      TITLE_COLOR="$1"
+      ;;
+
+    --force-lolcat) FORCE_LOLCAT=1 ;;
+
+    *) die "Unknown option: $1 (use --help)" ;;
+  esac
+  shift
+done
+
+# ---- Check dependencies ----
+need fastfetch
+need jq
+need pyfiglet
+need tput
+need awk
+need sed
+need sort
+need head
+
+# lolcat only needed if we end up using it
+# (we decide later; but quick check here if user explicitly wants lolcat)
+if (( USE_LOLCAT || FORCE_LOLCAT )); then
+  need lolcat
+fi
+
+# ---- Determine Title ----
+if [[ -n "${TITLE_OVERRIDE}" ]]; then
+  TITLE="${TITLE_OVERRIDE}"
+else
+  TITLE="$(fastfetch -s os --format json | jq -r '.[0].result.name')"
+fi
+
+# ---- Render Figlet ----
+FIGLET="$(pyfiglet -s -f "${FIGLET_FONT}" "${TITLE}")"
+
+LOGO_AREA=$((LOGO_W + LOGO_GAP))
+FIGLET_W="$(printf '%s\n' "${FIGLET}" | awk '{print length}' | sort -nr | head -n1)"
+
+CENTER_IN_INFO=$(( (LOGO_AREA - FIGLET_W) / 2 ))
+(( CENTER_IN_INFO < 0 )) && CENTER_IN_INFO=0
+
+PAD=$((LOGO_AREA + CENTER_IN_INFO))
+
+# ---- Print modes ----
+print_title_plain() {
+  local prefix="$(printf '%*s' "${PAD}")"
+  printf '%s\n' "${FIGLET}" | sed "s/^/${prefix}/"
+}
+
+print_title_lolcat() {
+  local prefix="$(printf '%*s' "${PAD}")"
+  if [[ -n "${LOLCAT_SEED}" ]]; then
+    printf '%s\n' "${FIGLET}" | sed "s/^/${prefix}/" | lolcat -S "${LOLCAT_SEED}"
+  else
+    printf '%s\n' "${FIGLET}" | sed "s/^/${prefix}/" | lolcat
+  fi
+}
+
+print_title_fixed_color() {
+  local c="$1"
+  local reset="$(tput sgr0)"
+  local prefix="$(printf '%*s' "${PAD}")"
+
+  # 256-color number
+  if is_int "$c" && (( c >= 0 && c <= 255 )); then
+    local esc=$'\033'
+    local color="${esc}[38;5;${c}m"
+    printf '%s\n' "${FIGLET}" \
+      | sed "s/^/${prefix}/" \
+      | sed "s/^/${color}/; s/\$/${reset}/"
+    return
+  fi
+
+  # named 8-color
+  local idx="$(color_name_to_ansi8 "$c")"
+  [[ -n "$idx" ]] || die "Unknown --color '${c}'. Use a name (red/cyan/...) or 0-255."
+
+  local color="$(tput setaf "$idx")"
+  printf '%s\n' "${FIGLET}" \
+    | sed "s/^/${prefix}/" \
+    | sed "s/^/${color}/; s/\$/${reset}/"
+}
+
+# ---- Decide output (COLOR HAS PRIORITY) ----
+if [[ -n "${TITLE_COLOR}" && FORCE_LOLCAT -eq 0 ]]; then
+  print_title_fixed_color "${TITLE_COLOR}"
+elif (( USE_LOLCAT || FORCE_LOLCAT )); then
+  print_title_lolcat
+else
+  print_title_plain
+fi
+
+echo
+fastfetch

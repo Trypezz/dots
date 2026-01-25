@@ -43,6 +43,9 @@ alias home='cd $HOME'
 
 alias getPID='pgrep -af '
 
+alias install='yay -S --noconfirm'
+alias uninstall='yay -Rns --noconfirm'
+
 alias startVideo='mpv '
 alias openPicture='imv '
 

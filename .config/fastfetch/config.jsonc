@@ -4,11 +4,11 @@
     "logo": {
         "type": "kitty-direct",
         "source": "$HOME/.config/fastfetch/images/ArchLogo.png",
-        "width": 40,
-        "height": 16,
+        "width": 50,
+        "height": 20,
         "padding": {
-          "top": 2,
-          "right": 0,
+          "top": 1,
+          "right": 5,
           "left": 0
         }
       },

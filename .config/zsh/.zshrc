@@ -4,10 +4,10 @@
 if [[ -o interactive \
    && -n "$KITTY_WINDOW_ID" \
    && -z "$__KITTY_FASTFETCH_SHOWN" \
-   && -x "$HOME/.config/bin/osFetch" ]]; then
+   && -x "$HOME/.config/bin/titlefetch" ]]; then
 
   export __KITTY_FASTFETCH_SHOWN=1
-  "$HOME/.config/bin/osFetch"
+  "$HOME/.config/bin/titlefetch"
 
 fi
 
