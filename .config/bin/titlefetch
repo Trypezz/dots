@@ -10,7 +10,7 @@ FIGLET_FONT="small_slant"
 USE_LOLCAT=1          # default: on
 LOLCAT_SEED=""        # empty = default/random
 TITLE_COLOR="cyan"        # empty = no fixed color
-TITLE_OVERRIDE=""     # empty = use fastfetch OS name
+TITLE_OVERRIDE="Arch Linux"     # empty = use fastfetch OS name
 FORCE_LOLCAT=0        # if 1, lolcat wins even if --color is set
 
 # ---- Helpers ----

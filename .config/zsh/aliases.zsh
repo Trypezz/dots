@@ -31,6 +31,8 @@ alias editSwayNC='micro $CONFIG/swaync/config.json'
 alias editSwayControlCenter='micro $CONFIG/swaync/themes/default/control-center.css'
 alias editSwayNotifications='micro $CONFIG/swaync/themes/default/notifications.css'
 
+alias editRofi='micro $CONFIG/rofi/theme.rasi'
+
 # Quality of Life
 alias clr='clear'
 alias ls='exa -l'
@@ -40,6 +42,7 @@ alias reloadShell='clr && source $CONFIG/zsh/.zshrc'
 alias grub-update='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 alias home='cd $HOME'
+alias dots='cd dots/.config'
 
 alias getPID='pgrep -af '
 

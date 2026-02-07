@@ -48,8 +48,10 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-source "$HOME/.sdkman/bin/sdkman-init.sh"
 source "/usr/share/nvm/init-nvm.sh"
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 # Special completion treatment for own scripts
 autoload -Uz compinit
@@ -57,12 +59,15 @@ compinit
 
 eval "$($HOME/.config/bin/editScript --completion-zsh)"
 
+source "$HOME/.config/zsh/aliases.zsh"
 
-
-source $HOME/.config/zsh/aliases.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+if [[ -f "$HOME/.config/env" ]]; then
+    source "$HOME/.config/env"
+fi
+switchTheme() {
+	command changeTheme "$@"
+	source "$HOME/.config/env"
+}
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

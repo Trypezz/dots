@@ -1,0 +1,146 @@
+#!/bin/bash
+
+get_current_theme() {
+  local env_file="$HOME/.config/env"
+  [[ -f "$env_file" ]] || return 1
+
+  # liest export SYSTEM_THEME=xyz oder SYSTEM_THEME=xyz
+  sed -nE 's/^(export[[:space:]]+)?SYSTEM_THEME=//p' "$env_file" | head -n1
+}
+
+apply_theme() {
+  local requested="$1"
+  local themes_dir="$HOME/.config/colorschemes"
+  local env_file="$HOME/.config/env"
+
+  # ---- basic checks ----
+  if [[ -z "$requested" ]]; then
+    echo "Usage: apply_theme <theme>" >&2
+    return 2
+  fi
+
+  local current
+  current="$(get_current_theme || true)"
+  
+  if [[ -n "$current" && "$current" == "$requested" ]]; then
+    echo "Theme '$requested' is already active. Nothing to do."
+    notify-send -a transient "Theme already active." "Theme: $requested"
+    return 0
+  fi
+
+  if [[ ! -d "$themes_dir" ]]; then
+    echo "Error: themes directory not found: $themes_dir" >&2
+    return 1
+  fi
+
+  if [[ ! -d "$themes_dir/$requested" ]]; then
+    echo "Error: theme '$requested' does not exist in $themes_dir" >&2
+    return 1
+  fi
+
+  # ---- mapping: source -> destination ----
+  # Adjust dest paths to your actual setup (I inferred from your tree screenshots).
+  # These are the "selector" files that contain @import/source custom/<theme>...
+  local -a MAP=(
+    "$themes_dir/$requested/hypr/colors.conf::$HOME/.config/hypr/colors/colors.conf"
+    "$themes_dir/$requested/rofi/colors.rasi::$HOME/.config/rofi/colors/colors.rasi"
+    "$themes_dir/$requested/waybar/colors.css::$HOME/.config/waybar/colors/colors.css"
+    "$themes_dir/$requested/swaync/colors.css::$HOME/.config/swaync/colors/colors.css"
+  )
+
+  # ---- preflight integrity ----
+  local missing=0
+  local src dest
+
+  for pair in "${MAP[@]}"; do
+    src="${pair%%::*}"
+    dest="${pair##*::}"
+
+    if [[ ! -f "$src" ]]; then
+      echo "Preflight FAIL: missing source: $src" >&2
+      missing=1
+      continue
+    fi
+
+    # Ensure destination directory exists
+    if [[ ! -d "$(dirname "$dest")" ]]; then
+      echo "Preflight FAIL: dest dir missing: $(dirname "$dest")" >&2
+      missing=1
+      continue
+    fi
+
+    # Check writability of dest dir (we replace via mv)
+    if [[ ! -w "$(dirname "$dest")" ]]; then
+      echo "Preflight FAIL: dest dir not writable: $(dirname "$dest")" >&2
+      missing=1
+      continue
+    fi
+  done
+
+  if (( missing )); then
+    echo "Aborting: preflight integrity failed." >&2
+    return 1
+  fi
+
+  # ---- copy atomically + post-verify per file ----
+  local tmp
+  for pair in "${MAP[@]}"; do
+    src="${pair%%::*}"
+    dest="${pair##*::}"
+
+    tmp="$(mktemp --tmpdir="$(dirname "$dest")" ".theme_apply.XXXXXX")" || {
+      echo "Error: could not create temp file in $(dirname "$dest")" >&2
+      return 1
+    }
+
+    # copy -> tmp
+    if ! cp -f -- "$src" "$tmp"; then
+      echo "Copy FAIL: $src -> $tmp" >&2
+      rm -f -- "$tmp"
+      return 1
+    fi
+
+    # move tmp -> dest (atomic on same filesystem)
+    if ! mv -f -- "$tmp" "$dest"; then
+      echo "Move FAIL: $tmp -> $dest" >&2
+      rm -f -- "$tmp"
+      return 1
+    fi
+
+    # verify bit-identical
+    if ! cmp -s -- "$src" "$dest"; then
+      echo "Verify FAIL: destination differs: $dest" >&2
+      return 1
+    fi
+  done
+
+  # ---- update env file (only SYSTEM_THEME line, keep rest, put on top) ----
+  mkdir -p "$(dirname "$env_file")"
+  touch "$env_file"
+
+  local key="SYSTEM_THEME"
+  local val="$requested"
+  local tmpenv
+  tmpenv="$(mktemp)" || return 1
+
+  # remove old SYSTEM_THEME lines
+  grep -vE "^(export[[:space:]]+)?${key}=" "$env_file" > "$tmpenv" || true
+
+  {
+    printf 'export %s=%q\n' "$key" "$val"
+    cat "$tmpenv"
+  } > "$env_file"
+  rm -f -- "$tmpenv"
+
+  killall -9 waybar
+  killall -9 swaync
+
+  waybar &
+  swaync &
+  hyprctl reload
+
+  echo "Theme applied successfully: $requested"
+  notify-send -a transient "Theme applied successfully!" "Theme: $requested"
+}
+
+apply_theme "$1"
