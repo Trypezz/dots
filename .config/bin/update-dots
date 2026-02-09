@@ -9,7 +9,7 @@ HOME_DIR="$HOME/"
 ITEMS=(
   ".zshenv"
   ".config/bin"
-  ".config/colorschemes"
+  ".config/themes"
   ".config/cava/config"
   ".config/cava/themes"
   ".config/fastfetch"

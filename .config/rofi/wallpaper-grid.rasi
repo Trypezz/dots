@@ -1,0 +1,134 @@
+/*****----- Configuration -----*****/
+configuration {
+	modi:                       "drun";
+    show-icons:                 true;
+    display-drun:               " ";
+	drun-display-format:        "{name}";
+}
+
+/* ---------- Colors ---------- */
+@import "colors/colors.rasi"
+
+/* ---------- Window ---------- */
+window {
+  location: center;
+  anchor:   center;
+  width:    85%;
+  height:   78%;
+  border:   2px;
+  border-color: @primary;
+  border-radius: 12px;
+  background-color: @background;
+}
+
+/* ---------- Main layout ---------- */
+mainbox {
+  padding: 20px;
+  spacing: 10px;
+  background-color: transparent;
+}
+
+/* ---------- Input bar ---------- */
+inputbar {
+    enabled:                     true;
+    spacing:                     12px;
+    margin:                      0px;
+    padding:                     15px;
+    border:                      1px solid;
+    border-radius:               12px;
+    border-color:                @primary;
+    background-color:            @background;
+    text-color:                  @foreground;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+  enabled: true;
+  bachground-color: inherit;
+  text-color: inherit;
+}
+
+entry {
+    enabled:                     true;
+    background-color:            @background;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search Wallpaper...";
+    placeholder-color:           inherit;
+}
+
+/* ---------- List / Grid ---------- */
+listview {
+  columns: 5;            
+  lines: 3;              
+  fixed-columns: true;
+  fixed-height: true;
+
+  layout: vertical;     
+  spacing: 5px;
+  padding: 6px;
+  background-color: transparent;
+}
+
+scrollbar {
+    handle-width:                5px ;
+    handle-color:                @primary;
+    border-radius:               0px;
+    background-color:            @background;
+}
+
+/* Each tile */
+element {
+  orientation: vertical;             
+  padding: 10px;
+  border-radius: 14px;
+  background-color: transparent;
+  text-color: @foreground;
+}
+
+element normal.normal {
+    background-color:            transparent;
+    border:                      0px solid;
+    border-radius:               12px;
+    border-color:                @primary;
+    text-color:                  @foreground;
+}
+
+element selected.normal {
+    background-color:            @primary;
+    text-color:                  @background;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+/* Big thumbnails */
+element-icon {
+  size: 200px;           
+  border-radius: 12px;
+  background-color: transparent;
+  margin: 4px 4px 0px 4px;
+}
+
+/*****----- Message -----*****/
+error-message {
+    padding:                     15px;
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                @primary;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+textbox {
+    background-color:            @background;
+    text-color:                  @foreground;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    highlight:                   none;
+}

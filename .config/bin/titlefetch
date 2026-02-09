@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
-set -u
+
+# Env laden
+if [[ -f "$HOME/.config/env" ]]; then
+  source "$HOME/.config/env"
+fi
 
 # ---- Configuration ----
 LOGO_W=25
@@ -9,7 +13,7 @@ FIGLET_FONT="small_slant"
 # Defaults (can be overridden by CLI)
 USE_LOLCAT=1          # default: on
 LOLCAT_SEED=""        # empty = default/random
-TITLE_COLOR="cyan"        # empty = no fixed color
+TITLE_COLOR=${SYSTEM_THEME:-}        # empty = no fixed color
 TITLE_OVERRIDE="Arch Linux"     # empty = use fastfetch OS name
 FORCE_LOLCAT=0        # if 1, lolcat wins even if --color is set
 
@@ -58,6 +62,8 @@ color_name_to_ansi8() {
     magenta) echo 5 ;;
     cyan)    echo 6 ;;
     white)   echo 7 ;;
+    basic)   echo 6 ;;
+    pink)   echo 169 ;;
     *)       echo "" ;;
   esac
 }

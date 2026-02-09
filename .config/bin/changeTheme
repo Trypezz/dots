@@ -10,7 +10,7 @@ get_current_theme() {
 
 apply_theme() {
   local requested="$1"
-  local themes_dir="$HOME/.config/colorschemes"
+  local themes_dir="$HOME/.config/themes"
   local env_file="$HOME/.config/env"
 
   # ---- basic checks ----

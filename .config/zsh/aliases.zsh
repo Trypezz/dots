@@ -33,6 +33,9 @@ alias editSwayNotifications='micro $CONFIG/swaync/themes/default/notifications.c
 
 alias editRofi='micro $CONFIG/rofi/theme.rasi'
 
+alias editThemeSwitcher='micro $CONFIG/themes/themeMenu.sh'
+alias editWallpaperSelector='micro $CONFIG/bin/wallpaperSelector.sh'
+
 # Quality of Life
 alias clr='clear'
 alias ls='exa -l'
