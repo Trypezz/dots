@@ -61,12 +61,12 @@ eval "$($HOME/.config/bin/editScript --completion-zsh)"
 
 source "$HOME/.config/zsh/aliases.zsh"
 
-if [[ -f "$HOME/.config/env" ]]; then
-    source "$HOME/.config/env"
+if [[ -f "$HOME/.config/zsh/env.sh" ]]; then
+    source "$HOME/.config/zsh/env.sh"
 fi
 switchTheme() {
 	command changeTheme "$@"
-	source "$HOME/.config/env"
+	source "$HOME/.config/zsh/env.sh"
 }
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!

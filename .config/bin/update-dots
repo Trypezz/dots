@@ -15,8 +15,6 @@ ITEMS=(
   ".config/fastfetch"
   ".config/hypr"
   ".config/kitty"
-  ".config/micro/settings.json"
-  ".config/micro/syntax/hyprlang.yaml"
   ".config/nvim/lua"
   ".config/nvim/init.lua"
   ".config/rofi"
@@ -28,6 +26,7 @@ ITEMS=(
   ".config/zsh/.p10k.zsh"
   ".config/zsh/.zshrc"
   ".config/zsh/aliases.zsh"
+  ".config/zsh/env.sh"
 )
 
 mkdir -p "$DOTS_DIR"

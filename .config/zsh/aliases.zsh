@@ -1,40 +1,40 @@
 CONFIG="$HOME/.config"
 
-alias editAliases='micro $CONFIG/zsh/aliases.zsh'
+alias editAliases='$EDITOR $CONFIG/zsh/aliases.zsh'
 
 # HYPRLAND
-alias editHyprland='micro $CONFIG/hypr/hyprland.conf'
-alias editHyprlandBase='micro $CONFIG/hypr/configs/base.conf'
-alias editmonitors='micro $CONFIG/hypr/configs/monitors.conf'
-alias editvars='micro $CONFIG/hypr/configs/vars.conf'
-alias editworkspaces='micro $CONFIG/hypr/configs/workspaces.conf'
-alias editrules='micro $CONFIG/hypr/configs/rules.conf'
-alias editHyprStyle='micro $CONFIG/hypr/configs/style.conf'
-alias editHyprAnimations='micro $CONFIG/hypr/configs/animations.conf'
-alias editAutostart='micro $CONFIG/hypr/configs/autostart.conf'
-alias editInput='micro $CONFIG/hypr/configs/input.conf'
-alias editApps='micro $CONFIG/hypr/configs/apps.conf'
-alias editBinds='micro $CONFIG/hypr/configs/binds.conf'
-alias editLockscreen='micro $CONFIG/hypr/hyprlock.conf'
-alias editPermissions='micro $CONFIG/hypr/configs/permissions.conf'
+alias editHyprland='$EDITOR $CONFIG/hypr/hyprland.conf'
+alias editHyprlandBase='$EDITOR $CONFIG/hypr/configs/base.conf'
+alias editmonitors='$EDITOR $CONFIG/hypr/configs/monitors.conf'
+alias editvars='$EDITOR $CONFIG/hypr/configs/vars.conf'
+alias editworkspaces='$EDITOR $CONFIG/hypr/configs/workspaces.conf'
+alias editrules='$EDITOR $CONFIG/hypr/configs/rules.conf'
+alias editHyprStyle='$EDITOR $CONFIG/hypr/configs/style.conf'
+alias editHyprAnimations='$EDITOR $CONFIG/hypr/configs/animations.conf'
+alias editAutostart='$EDITOR $CONFIG/hypr/configs/autostart.conf'
+alias editInput='$EDITOR $CONFIG/hypr/configs/input.conf'
+alias editApps='$EDITOR $CONFIG/hypr/configs/apps.conf'
+alias editBinds='$EDITOR $CONFIG/hypr/configs/binds.conf'
+alias editLockscreen='$EDITOR $CONFIG/hypr/hyprlock.conf'
+alias editPermissions='$EDITOR $CONFIG/hypr/configs/permissions.conf'
 
 # Other Ricing Stuff
-alias editTerminal='micro $CONFIG/kitty/kitty.conf'
-alias editShell='micro $CONFIG/zsh/.zshrc'
-alias editOsFetch='micro $CONFIG/fastfetch/config.jsonc'
+alias editTerminal='$EDITOR $CONFIG/kitty/kitty.conf'
+alias editShell='$EDITOR $CONFIG/zsh/.zshrc'
+alias editOsFetch='$EDITOR $CONFIG/fastfetch/config.jsonc'
 
-alias editWaybarCSS='micro $CONFIG/waybar/style.css'
-alias editWaybar='micro $CONFIG/waybar/config.jsonc'
-alias editWaybarModules='micro $CONFIG/waybar/modules.json'
+alias editWaybarCSS='$EDITOR $CONFIG/waybar/style.css'
+alias editWaybar='$EDITOR $CONFIG/waybar/config.jsonc'
+alias editWaybarModules='$EDITOR $CONFIG/waybar/modules.json'
 
-alias editSwayNC='micro $CONFIG/swaync/config.json'
-alias editSwayControlCenter='micro $CONFIG/swaync/themes/default/control-center.css'
-alias editSwayNotifications='micro $CONFIG/swaync/themes/default/notifications.css'
+alias editSwayNC='$EDITOR $CONFIG/swaync/config.json'
+alias editSwayControlCenter='$EDITOR $CONFIG/swaync/modules/control-center.css'
+alias editSwayNotifications='$EDITOR $CONFIG/swaync/modules/notifications.css'
 
-alias editRofi='micro $CONFIG/rofi/theme.rasi'
+alias editRofi='$EDITOR $CONFIG/rofi/theme.rasi'
 
-alias editThemeSwitcher='micro $CONFIG/themes/themeMenu.sh'
-alias editWallpaperSelector='micro $CONFIG/bin/wallpaperSelector.sh'
+alias editThemeSwitcher='$EDITOR $CONFIG/themes/themeMenu.sh'
+alias editWallpaperSelector='$EDITOR $CONFIG/bin/wallpaperSelector.sh'
 
 # Quality of Life
 alias clr='clear'

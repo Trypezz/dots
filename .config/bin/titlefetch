@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
 # Env laden
-if [[ -f "$HOME/.config/env" ]]; then
-  source "$HOME/.config/env"
+if [[ -f "$HOME/.config/zsh/env.sh" ]]; then
+  source "$HOME/.config/zsh/env.sh"
 fi
 
 # ---- Configuration ----

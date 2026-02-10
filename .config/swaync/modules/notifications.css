@@ -1,9 +1,9 @@
 @define-color text            #ffffff;
-@define-color background-alt  @bg4;
+@define-color background-alt  @bg1;
 @define-color selected        @primaryColor;
 @define-color hover           alpha(@selected, .4);
 @define-color urgent          @red;
-@define-color background	  alpha(@bg0, .9);
+@define-color background	  alpha(@bg0, .8);
 
 * {
 
@@ -88,7 +88,7 @@
   margin: 6px;
   padding: 2px;
   border-radius: 6px;
-  background-color: transparent;
+  background-color: @background;
   border: 1px solid transparent;
 }
 

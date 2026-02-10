@@ -1,7 +1,7 @@
 #!/bin/bash
 
 get_current_theme() {
-  local env_file="$HOME/.config/env"
+  local env_file="$HOME/.config/zsh/env.sh"
   [[ -f "$env_file" ]] || return 1
 
   # liest export SYSTEM_THEME=xyz oder SYSTEM_THEME=xyz
@@ -21,7 +21,7 @@ apply_theme() {
 
   local current
   current="$(get_current_theme || true)"
-  
+
   if [[ -n "$current" && "$current" == "$requested" ]]; then
     echo "Theme '$requested' is already active. Nothing to do."
     notify-send -a transient "Theme already active." "Theme: $requested"
@@ -77,7 +77,7 @@ apply_theme() {
     fi
   done
 
-  if (( missing )); then
+  if ((missing)); then
     echo "Aborting: preflight integrity failed." >&2
     return 1
   fi
@@ -124,12 +124,12 @@ apply_theme() {
   tmpenv="$(mktemp)" || return 1
 
   # remove old SYSTEM_THEME lines
-  grep -vE "^(export[[:space:]]+)?${key}=" "$env_file" > "$tmpenv" || true
+  grep -vE "^(export[[:space:]]+)?${key}=" "$env_file" >"$tmpenv" || true
 
   {
     printf 'export %s=%q\n' "$key" "$val"
     cat "$tmpenv"
-  } > "$env_file"
+  } >"$env_file"
   rm -f -- "$tmpenv"
 
   killall -9 waybar

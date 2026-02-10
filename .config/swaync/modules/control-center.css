@@ -1,10 +1,3 @@
-@define-color text            #ffffff;
-@define-color background-alt  @bg0;
-@define-color selected        @primaryColor;
-@define-color hover           alpha(@selected, .4);
-@define-color urgent          @red;
-@define-color background	  alpha(@bg0, .8);
-
 * {
   color:            @text;
 
@@ -54,7 +47,7 @@
 }
 
 .control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
-  background: alpha(@selected, .6);
+  background: alpha(@selected, .8);
   color: @text;
   border-radius: 12px;
   margin: 6px;
@@ -137,6 +130,7 @@ progressbar {
 
 .widget-title button {
   background: @background-alt;
+  border: 1px solid @selected;
   border-radius: 6px;
   padding: 4px 16px;
 }
@@ -151,7 +145,7 @@ progressbar {
 
   /* Do not disturb */
 .widget-dnd {
-  margin: 6px;
+  margin: 15px;
   font-size: 1.2rem;
 }
 
@@ -159,6 +153,7 @@ progressbar {
   background: @background-alt;
   font-size: initial;
   border-radius: 8px;
+  border: 1px solid @selected;
   box-shadow: none;
   padding: 2px;
 }
@@ -186,6 +181,7 @@ progressbar {
   padding: 6px 2px;
   margin: 6px;
   border-radius: 12px;
+  border: 1px solid @selected;
   background: @background-alt;
 }
 
@@ -205,16 +201,17 @@ progressbar {
 .widget-mpris {
     background: @background-alt;
     border-radius: 16px;
+    border: 1px solid @selected;
     color: @text;
-    margin:  20px 6px;
+    margin: 25px 6px;
 }
 
   /* NOTE: Background need *opacity 1* otherwise will turn into the album art blurred  */
 .widget-mpris-player {
-    background-color: @background;
+    background-color: transparent;
     border-radius: 22px;
-    padding: 6px 14px;
-    margin: 6px;
+    padding: 0px;
+    margin: 0px;
 }
 
 .widget-mpris > box > button {

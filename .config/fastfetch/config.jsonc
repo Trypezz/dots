@@ -1,117 +1,117 @@
 // Inspired by Catnap
 {
-    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-    "logo": {
-        "type": "kitty-direct",
-        "source": "$HOME/.config/fastfetch/images/ArchLogo.png",
-        "width": 50,
-        "height": 20,
-        "padding": {
-          "top": 1,
-          "right": 5,
-          "left": 0
-        }
-      },
-    "display": {
-        "separator": " "
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "kitty-direct",
+    "source": "$HOME/.config/fastfetch/images/ArchLogo.png",
+    "width": 50,
+    "height": 20,
+    "padding": {
+      "top": 1,
+      "right": 5,
+      "left": 0
+    }
+  },
+  "display": {
+    "separator": " "
+  },
+  "modules": [
+    {
+      "key": "╭──────────────╮",
+      "type": "custom"
     },
-    "modules": [
-        {
-            "key": "╭──────────────╮",
-            "type": "custom"
-        },
-        {
-            "key": "│ {#34} User    {#keys}   │",
-            "type": "title",
-            "format": "{#31}{user-name}"
-        },
-        {
-            "key": "│ {#34}󰇅 Hostname   {#keys}│",
-            "type": "title",
-        },
-        {
-            "key": "│ {#34}󰅐 Uptime  {#keys}   │",
-            "type": "uptime"
-        },
-        {
-        	"type": "command",
-        	"keyIcon": "",
-        	"key": "│ {#34}{icon} OS Age  {#keys}   │",
-        	"text": "birth=$(stat -c %W /); [ \"$birth\" -le 0 ] && birth=$(stat -c %Y /); now=$(date +%s); days=$(( (now - birth) / 86400 )); echo \"$(date -d @\"$birth\" +\"%d.%m.%Y\") [$days Days]\""
-        },
-        {
-            "key": "│ {#34}{icon} Distro  {#keys}   │",
-            "type": "os"
-        },
-        {
-            "key": "│ {#34} Kernel  {#keys}   │",
-            "type": "kernel"
-        },
-        {
-            "key": "├──────────────┤",
-            "type": "custom"
-        },
-        {
-            "key": "│ {#32} Terminal   {#keys}│",
-            "type": "terminal"
-        },
-        {
-            "key": "│ {#32} Shell   {#keys}   │",
-            "type": "shell"
-        },
-        {
-        	"key": "│ {#32} Session   {#keys} │",
-            "type": "wm"	
-        },
-        {
-            "key": "├──────────────┤",
-            "type": "custom"
-        },
-        {
-	        "key": "│ {#35} Display  {#keys}  │",
-            "type": "display",
-            "compactType": "original-with-refresh-rate"	
-        },
-        {
-            "key": "│ {#35}󰍛 CPU     {#keys}   │",
-            "type": "cpu",
-            "showPeCoreCount": true
-        },
-        {
-        	"key": "│ {#35}󰍛 GPU     {#keys}   │",
-            "type": "gpu"
-        },
-        {
-        	"key": "│ {#35}󰍛 G-Driver   {#keys}│",
-            "type": "gpu",
-            "format": "{driver}"
-        },
-        {
-            "key": "│ {#35}󰉉 Main-Disk  {#keys}│",
-            "type": "disk",
-            "folders": "/"
-        },
-        {
-            "key": "│ {#35}󰉉 Games-Disk {#keys}│",
-            "type": "disk",
-            "folders": "/mnt/games"
-        },
-        {
-            "key": "│ {#35} Memory  {#keys}   │",
-            "type": "memory"
-        },
-        {
-            "key": "├──────────────┤",
-            "type": "custom"
-        },
-        {
-            "key": "│ {#39} Colors  {#keys}   │",
-            "type": "colors",
-            "symbol": "circle"
-        },
-        {
-            "key": "╰──────────────╯",
-            "type": "custom"
-        }
-    ]
+    {
+      "key": "│ {#34} User    {#keys}   │",
+      "type": "title",
+      "format": "{#31}{user-name}"
+    },
+    {
+      "key": "│ {#34}󰇅 Hostname   {#keys}│",
+      "type": "title"
+    },
+    {
+      "key": "│ {#34}󰅐 Uptime  {#keys}   │",
+      "type": "uptime"
+    },
+    {
+      "type": "command",
+      "keyIcon": "",
+      "key": "│ {#34}{icon} OS Age  {#keys}   │",
+      "text": "birth=$(stat -c %W /); [ \"$birth\" -le 0 ] && birth=$(stat -c %Y /); now=$(date +%s); days=$(( (now - birth) / 86400 )); echo \"$(date -d @\"$birth\" +\"%d.%m.%Y\") [$days Days]\""
+    },
+    {
+      "key": "│ {#34}{icon} Distro  {#keys}   │",
+      "type": "os"
+    },
+    {
+      "key": "│ {#34} Kernel  {#keys}   │",
+      "type": "kernel"
+    },
+    {
+      "key": "├──────────────┤",
+      "type": "custom"
+    },
+    {
+      "key": "│ {#32} Terminal   {#keys}│",
+      "type": "terminal"
+    },
+    {
+      "key": "│ {#32} Shell   {#keys}   │",
+      "type": "shell"
+    },
+    {
+      "key": "│ {#32} Session   {#keys} │",
+      "type": "wm"
+    },
+    {
+      "key": "├──────────────┤",
+      "type": "custom"
+    },
+    {
+      "key": "│ {#35} Display  {#keys}  │",
+      "type": "display",
+      "compactType": "original-with-refresh-rate"
+    },
+    {
+      "key": "│ {#35}󰍛 CPU     {#keys}   │",
+      "type": "cpu",
+      "showPeCoreCount": true
+    },
+    {
+      "key": "│ {#35}󰍛 GPU     {#keys}   │",
+      "type": "gpu"
+    },
+    {
+      "key": "│ {#35}󰍛 G-Driver   {#keys}│",
+      "type": "gpu",
+      "format": "{driver}"
+    },
+    {
+      "key": "│ {#35}󰉉 Main-Disk  {#keys}│",
+      "type": "disk",
+      "folders": "/"
+    },
+    {
+      "key": "│ {#35}󰉉 Games-Disk {#keys}│",
+      "type": "disk",
+      "folders": "/mnt/games"
+    },
+    {
+      "key": "│ {#35} Memory  {#keys}   │",
+      "type": "memory"
+    },
+    {
+      "key": "├──────────────┤",
+      "type": "custom"
+    },
+    {
+      "key": "│ {#39} Colors  {#keys}   │",
+      "type": "colors",
+      "symbol": "circle"
+    },
+    {
+      "key": "╰──────────────╯",
+      "type": "custom"
+    }
+  ]
 }
