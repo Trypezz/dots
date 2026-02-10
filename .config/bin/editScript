@@ -38,4 +38,4 @@ if [[ ! -e "$target" ]]; then
   exit 1
 fi
 
-exec micro "$target"
+exec $EDITOR "$target"
