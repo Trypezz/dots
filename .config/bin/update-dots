@@ -16,7 +16,7 @@ ITEMS=(
   ".config/hypr"
   ".config/kitty"
   ".config/micro/settings.json"
-  ".config/micro/systax/hyprlang.yaml"
+  ".config/micro/syntax/hyprlang.yaml"
   ".config/nvim/lua"
   ".config/nvim/init.lua"
   ".config/rofi"

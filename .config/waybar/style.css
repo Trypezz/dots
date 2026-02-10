@@ -52,7 +52,7 @@ tooltip label {
 	color: @bg0;
 	min-width: 50px;
 	transition: all 0.3s ease-in-out;
-	font-size: 13;
+	font-size: 13px;
 }
 
 #workspaces button:hover {
@@ -89,7 +89,7 @@ tooltip label {
 }
 
 #custom-nowplaying {
-	font-size: 16;
+	font-size: 16px;
 }
 
 #custom-notification {
