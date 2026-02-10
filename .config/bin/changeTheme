@@ -4,14 +4,14 @@ get_current_theme() {
   local env_file="$HOME/.config/zsh/env.sh"
   [[ -f "$env_file" ]] || return 1
 
-  # liest export SYSTEM_THEME=xyz oder SYSTEM_THEME=xyz
+  # read SYSTEM_THEME from env file
   sed -nE 's/^(export[[:space:]]+)?SYSTEM_THEME=//p' "$env_file" | head -n1
 }
 
 apply_theme() {
   local requested="$1"
   local themes_dir="$HOME/.config/themes"
-  local env_file="$HOME/.config/env"
+  local env_file="$HOME/.config/zsh/env.sh"
 
   # ---- basic checks ----
   if [[ -z "$requested" ]]; then
