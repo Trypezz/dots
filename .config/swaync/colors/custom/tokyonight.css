@@ -1,4 +1,4 @@
-@define-color bg0      #11121a;
+@define-color bg0      #15161e;
 @define-color bg1      #16161e;
 @define-color bg2      #1f2335;
 @define-color bg3      #292e42;
@@ -12,8 +12,10 @@
 @define-color blue     #7aa2f7;
 @define-color purple   #bb9af7;
 
-@define-color primaryColor #572694;
-@define-color secondaryColor @blue;
+@define-color primaryColor   #572694;
+@define-color secondaryColor #00ffd2;
+@define-color fontcolor #00ffd2;
+@define-color wfontcolor @fontcolor;
 
 @define-color fg       #c0caf5;
 

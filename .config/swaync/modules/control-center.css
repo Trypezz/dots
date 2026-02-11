@@ -1,3 +1,5 @@
+@define-color playerText @fontcolor;
+
 * {
   color:            @text;
 
@@ -18,7 +20,7 @@
 .control-center {
   background: @background;
   border-radius: 24px;
-  border: 1px solid @selected;
+  border: 2px solid @selected;
   box-shadow: 0 0 10px 0 rgba(0,0,0,.6);
   margin: 18px;
   padding: 12px;
@@ -93,7 +95,6 @@ progressbar {
 
 .notification-group {
   margin: 2px 8px 2px 8px;
-
 }
 .notification-group-headers {
   font-weight: bold;
@@ -199,46 +200,50 @@ progressbar {
 
   /* Music player */
 .widget-mpris {
-    background: @background-alt;
-    border-radius: 16px;
-    border: 1px solid @selected;
-    color: @text;
-    margin: 25px 6px;
+    color: @playerText;
+    margin: 0 0 50px 0;
 }
 
   /* NOTE: Background need *opacity 1* otherwise will turn into the album art blurred  */
 .widget-mpris-player {
-    background-color: transparent;
     border-radius: 22px;
-    padding: 0px;
-    margin: 0px;
+    padding: 0 2px;
+    margin: 15px;
 }
 
 .widget-mpris > box > button {
-  color: @text;
-  border-radius: 20px;
+  color: @playerText;
 }
  
 .widget-mpris button {
-  color: alpha(@text, .6);
+  color: alpha(@playerText, .6);
+  margin: 10px 5px;
+  padding-top: 10px;
 }
 
 .widget-mpris button:hover {
-  color: @text;
+  color: @playerText;
 }
 
 .widget-mpris-album-art {
+  margin: 0;
   border-radius: 16px;
+  border: 2px solid @selected;
 }
  
 .widget-mpris-title {
     font-weight: 700;
-    font-size: 1rem;
-}
+    font-size: 1.5rem;
+} 
  
 .widget-mpris-subtitle {
     font-weight: 500;
-    font-size: 0.8rem;
+    font-size: 1rem;
+}
+
+picture.mpris-background {
+  background-color: alpha(@playerText, .1);
+  opacity: 0;
 }
 
 /* Volume */

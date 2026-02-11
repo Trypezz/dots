@@ -63,7 +63,7 @@ color_name_to_ansi8() {
     cyan)    echo 6 ;;
     white)   echo 7 ;;
     basic)   echo 6 ;;
-    pastell)   echo 169 ;;
+    pastel-anime)   echo 169 ;;
     forest) echo 120 ;;
     ocean) echo 6 ;;
     tokyonight) echo 105 ;;
