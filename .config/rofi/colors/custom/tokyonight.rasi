@@ -1,0 +1,10 @@
+* {
+    background:     #16161edd;
+    background-alt: #1f2335dd;
+    foreground:     #c0caf5aa;
+    primary:        #572694ff;
+    fontcolor:      #00ffd2ff;
+    active:         #c6a0f6ff;
+    urgent:         #f7768eff;
+    font:           "JetBrainsMono Nerd Font 14";
+}

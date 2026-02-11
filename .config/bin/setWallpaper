@@ -29,14 +29,26 @@ mkdir -p "$THUMB_DIR"
 # ---- args ----
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --sound) sound="sound"; shift ;;
-    --mute)  sound="mute"; shift ;;
-    --stop)  stop=true; shift ;;
-    -h|--help)
-      echo "Usage: setWallpaper [--sound|--mute|--stop] <file>"
-      exit 0
-      ;;
-    *) file="$1"; shift ;;
+  --sound)
+    sound="sound"
+    shift
+    ;;
+  --mute)
+    sound="mute"
+    shift
+    ;;
+  --stop)
+    stop=true
+    shift
+    ;;
+  -h | --help)
+    echo "Usage: setWallpaper [--sound|--mute|--stop] <file>"
+    exit 0
+    ;;
+  *)
+    file="$1"
+    shift
+    ;;
   esac
 done
 
@@ -44,8 +56,8 @@ done
 is_video() {
   local f="${1,,}"
   case "$f" in
-    *.mp4|*.mkv|*.webm|*.mov|*.avi|*.m4v|*.gif) return 0 ;;
-    *) return 1 ;;
+  *.mp4 | *.mkv | *.webm | *.mov | *.avi | *.m4v | *.gif) return 0 ;;
+  *) return 1 ;;
   esac
 }
 
@@ -74,8 +86,8 @@ video_thumb() {
 is_image() {
   local f="${1,,}"
   case "$f" in
-    *.png|*.jpg|*.jpeg|*.webp|*.bmp|*.tiff) return 0 ;;
-    *) return 1 ;;
+  *.png | *.jpg | *.jpeg | *.webp | *.bmp | *.tiff) return 0 ;;
+  *) return 1 ;;
   esac
 }
 
@@ -85,7 +97,6 @@ pretty_name() {
   n="$(basename -- "$p")"
   printf '%s' "$n"
 }
-
 
 restore_last_image() {
   local img=""
@@ -122,41 +133,72 @@ if $stop; then
 fi
 
 # ---- validate file for normal mode ----
-[[ -n "${file:-}" ]] || { echo "Missing <file>. Try: setWallpaper --help"; exit 1; }
-[[ -f "$file" ]] || { echo "File not found: $file"; exit 1; }
+[[ -n "${file:-}" ]] || {
+  echo "Missing <file>. Try: setWallpaper --help"
+  exit 1
+}
+[[ -f "$file" ]] || {
+  echo "File not found: $file"
+  exit 1
+}
 
 # stop old live wallpaper if running (switching modes)
 pkill -x mpvpaper 2>/dev/null || true
 
 if is_video "$file"; then
-	thumb=""
-	# get all monitor names (Hyprland)
-	mapfile -t outputs < <(hyprctl monitors -j | jq -r '.[].name')
+  thumb=""
+  # get all monitor names (Hyprland)
 
-	if [[ "${#outputs[@]}" -eq 0 ]]; then
-	  echo "No monitors found via hyprctl."
-	  exit 2
-	fi
+  echo "Check monitors"
+  mapfile -t outputs < <(hyprctl monitors -j | jq -r '.[].name')
 
-	for out in "${outputs[@]}"; do
-	  if [[ "$sound" == "sound" ]]; then
-	    mpvpaper -o "loop-file=inf" "$out" "$file" >/dev/null 2>&1 &
-	  else
-	    mpvpaper -o "loop-file=inf --no-audio" "$out" "$file" >/dev/null 2>&1 &
-	  fi
-	done
+  if [[ "${#outputs[@]}" -eq 0 ]]; then
+    echo "No monitors found via hyprctl."
+    exit 2
+  fi
 
-	name="$(pretty_name "$file")"
+  for mon in "${outputs[@]}"; do
+    echo "$mon"
+  done
 
-	thumb="$(video_thumb "$file" 2>/dev/null || true)"
-	
-	if [[ -n "$thumb" && -f "$thumb" ]]; then
-	  notify-send -a transient -i "$thumb" "Live Wallpaper changed" "$name (${sound})"
-	else
-	  notify-send -a transient "Live Wallpaper changed" "$name (${sound})"
-	fi
-	
-	exit 0
+  # pick the monitor that should output the sound
+  # - focused monitor if available
+  # - otherwise first monitor
+  sound_out=""
+  echo "Check what monitor should have sound!"
+  if [[ "$sound" == "sound" ]]; then
+    sound_out="$(hyprctl monitors -j | jq -r '.[] | select(.focused==true) | .name' | head -n1)"
+    [[ -n "$sound_out" ]] || sound_out="${outputs[0]}"
+  fi
+
+  echo "$sound_out" "has Sound!"
+  echo "Applying Live Wallpapers"
+
+  for out in "${outputs[@]}"; do
+    if [[ "$sound" == "sound" && "$out" == "$sound_out" ]]; then
+      echo "$out"
+      mpvpaper -o "loop-file=inf" "$out" "$file" >/dev/null 2>&1 &
+      echo "Now has sound!"
+    else
+      echo "$out"
+      mpvpaper -o "loop-file=inf --no-audio" "$out" "$file" >/dev/null 2>&1 &
+      echo "Has no sound!"
+    fi
+  done
+
+  echo "DONE!"
+
+  name="$(pretty_name "$file")"
+
+  thumb="$(video_thumb "$file" 2>/dev/null || true)"
+
+  if [[ -n "$thumb" && -f "$thumb" ]]; then
+    notify-send -a transient -i "$thumb" "Live Wallpaper changed" "$name (${sound})"
+  else
+    notify-send -a transient "Live Wallpaper changed" "$name (${sound})"
+  fi
+
+  exit 0
 fi
 
 if is_image "$file"; then
@@ -171,11 +213,10 @@ if is_image "$file"; then
 
   swww img "$file" --transition-fps 60 --transition-type top
   mkdir -p "$(dirname "$STATE_FILE")"
-  printf '%s' "$file" > "$STATE_FILE"
+  printf '%s' "$file" >"$STATE_FILE"
   notify-send -a transient -i "$file" "Wallpaper changed" "$name"
   exit 0
 fi
 
 echo "Unknown file type: $file"
 exit 3
-

@@ -11,8 +11,11 @@
 @define-color aqua   #56b6c2;
 @define-color blue	 #61afef;
 @define-color purple #c678dd;
+
 @define-color primaryColor @blue;
-@define-color secondaryColor @purple;
+@define-color secondaryColor @aqua;
+@define-color fontcolor @primaryColor;
+@define-color wfontcolor #000000;
 
 @define-color fg 	 #abb2bf;
 

@@ -13,7 +13,7 @@ FIGLET_FONT="small_slant"
 # Defaults (can be overridden by CLI)
 USE_LOLCAT=1          # default: on
 LOLCAT_SEED=""        # empty = default/random
-TITLE_COLOR=${SYSTEM_THEME:-}        # empty = no fixed color
+TITLE_COLOR=${SYSTEM_THEME:-basic}        # empty = no fixed color
 TITLE_OVERRIDE=""     # empty = use fastfetch OS name
 FORCE_LOLCAT=0        # if 1, lolcat wins even if --color is set
 
@@ -63,8 +63,14 @@ color_name_to_ansi8() {
     cyan)    echo 6 ;;
     white)   echo 7 ;;
     basic)   echo 6 ;;
-    pink)   echo 169 ;;
-    *)       echo "" ;;
+    pastell)   echo 169 ;;
+    forest) echo 120 ;;
+    ocean) echo 6 ;;
+    tokyonight) echo 105 ;;
+    pink) echo 125 ;;
+    purple) echo 128 ;;
+    ember) echo 130 ;;
+    *)       echo 6 ;;
   esac
 }
 

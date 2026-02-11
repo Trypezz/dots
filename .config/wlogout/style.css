@@ -1,3 +1,5 @@
+@import "colors/colors.css";
+
 * {
   background-image: none;
   transition: 0;
@@ -8,9 +10,9 @@ window {
 }
 button {
     color: #ffffff;
-    background-color: rgba(30, 30, 46, 0.8);
+    background-color: @bg0;
     border-radius: 4rem;
-    border-color: #89b4fa;
+    border-color: @primaryColor;
     margin: 0.8rem;
     background-repeat: no-repeat;
     background-position: center;
@@ -21,7 +23,8 @@ button {
 }
 
 button:focus, button:active, button:hover {
-    background-color: #89b4fa;
+    background-color: @primaryColor;
+    color: @fontcolor;
     outline-style: none;
 }
 

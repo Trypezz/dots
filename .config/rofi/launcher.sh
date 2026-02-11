@@ -1,9 +1,10 @@
 #!/bin/bash
 
 dir="$HOME/.config/rofi/"
-theme='theme'
+mode="$1"
+menu="$2"
 
 ## Run
 rofi \
-    -show drun \
-    -theme ${dir}/${theme}.rasi
+  -${mode} \
+  -theme ${dir}/${menu}.rasi

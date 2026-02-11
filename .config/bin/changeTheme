@@ -46,6 +46,7 @@ apply_theme() {
     "$themes_dir/$requested/rofi/colors.rasi::$HOME/.config/rofi/colors/colors.rasi"
     "$themes_dir/$requested/waybar/colors.css::$HOME/.config/waybar/colors/colors.css"
     "$themes_dir/$requested/swaync/colors.css::$HOME/.config/swaync/colors/colors.css"
+    "$themes_dir/$requested/wlogout/colors.css::$HOME/.config/wlogout/colors/colors.css"
   )
 
   # ---- preflight integrity ----

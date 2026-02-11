@@ -42,14 +42,14 @@ tooltip label {
 	padding: 0px 6px;
 	margin: 0px 3px;
 	border-radius: 50px;
-	color: @bg4;
+	color: @secondaryColor;
 	background-color: @bg1;
 	transition: all 0.3s ease-in-out; 
 }
 
 #workspaces button.active {
 	background-color: @primaryColor;
-	color: @bg0;
+	color: @wfontcolor;
 	min-width: 50px;
 	transition: all 0.3s ease-in-out;
 	font-size: 13px;
@@ -85,7 +85,7 @@ tooltip label {
 }
 
 #clock {
-	color: @primaryColor;
+	color: @fontcolor;
 }
 
 #custom-nowplaying {

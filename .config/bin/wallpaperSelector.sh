@@ -2,15 +2,18 @@
 
 set -euo pipefail
 
-rofi_theme="$HOME/.config/rofi/wallpaper-grid.rasi"
+rofi="$HOME/.config/rofi/launcher.sh"
+mode="dmenu"
+menu="menus/dialog"
+rofi_theme="$HOME/.config/rofi/menus/wallpaper-grid.rasi"
 
 # Directories to scan (edit as needed)
 WALL_DIRS=(
-  "$HOME/Pictures/Wallpaper/NIER"
-  "$HOME/Videos"
+  "$HOME/Pictures/Wallpaper/"
+  "$HOME/Videos/LiveWallpapers/"
 )
 
-SET_WALLPAPER="$HOME/dots/.config/bin/setWallpaper"
+SET_WALLPAPER="$HOME/.config/bin/setWallpaper"
 
 # Thumbnail cache (matches setWallpaper)
 THUMB_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_thumbs"
@@ -19,8 +22,8 @@ mkdir -p "$THUMB_DIR"
 is_video() {
   local f="${1,,}"
   case "$f" in
-    *.mp4|*.mkv|*.webm|*.mov|*.avi|*.m4v|*.gif) return 0 ;;
-    *) return 1 ;;
+  *.mp4 | *.mkv | *.webm | *.mov | *.avi | *.m4v | *.gif) return 0 ;;
+  *) return 1 ;;
   esac
 }
 
@@ -53,7 +56,7 @@ for dir in "${WALL_DIRS[@]}"; do
     find "$dir" -type f \( \
       -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.bmp' -o -iname '*.tiff' -o \
       -iname '*.mp4' -o -iname '*.mkv' -o -iname '*.webm' -o -iname '*.mov' -o -iname '*.avi' -o -iname '*.m4v' -o -iname '*.gif' \
-    \) -print0
+      \) -print0
   )
 done
 
@@ -85,9 +88,24 @@ idx="$(
 
 sel="${files[$idx]}"
 
+# sel ist der gewählte Pfad
+sound_arg="--mute"
+
+if is_video "$sel"; then
+  choice="$(
+    printf "No\nYes\n" | rofi -dmenu -p "Play sound?" -mesg "Video detected" -selected-row 0 -theme ${menu}
+  )" || exit 0
+
+  if [[ "$choice" == "Yes" ]]; then
+    sound_arg="--sound"
+  fi
+fi
+
 if [[ ! -x "$SET_WALLPAPER" ]]; then
   notify-send -a transient "Wallpaper" "setWallpaper not found or not executable"
   exit 2
 fi
 
-"$SET_WALLPAPER" "$sel"
+echo "$SET_WALLPAPER" "$sel" "$sound_arg"
+
+"$SET_WALLPAPER" "$sel" "$sound_arg"
