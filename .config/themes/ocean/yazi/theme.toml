@@ -1,0 +1,132 @@
+# Auto-generated Yazi theme for: ocean
+# Source palette: ~/.config/waybar/colors/custom/ocean.css
+
+[app]
+overall = { bg = "#0e141b" }
+
+[mgr]
+cwd            = { fg = "#00bcd4", bold = true }
+find_keyword   = { fg = "#f4a261", bold = true }
+find_position  = { fg = "#7b8c9b" }
+symlink_target = { fg = "#4fc3f7", italic = true }
+
+marker_copied   = { fg = "#00bcd4", bg = "#172230" }
+marker_cut      = { fg = "#ff6b6b", bg = "#172230" }
+marker_marked   = { fg = "#7c4dff", bg = "#172230" }
+marker_selected = { fg = "#4fc3f7", bg = "#172230" }
+
+count_copied   = { fg = "#00bcd4", bg = "#172230" }
+count_cut      = { fg = "#ff6b6b", bg = "#172230" }
+count_selected = { fg = "#4fc3f7", bg = "#172230" }
+
+border_symbol = "|"
+border_style  = { fg = "#2a3f54" }
+
+[indicator]
+parent  = { fg = "#7b8c9b", bg = "#172230" }
+current = { fg = "#00bcd4", bg = "#172230", bold = true }
+preview = { fg = "#4fc3f7", bg = "#172230" }
+padding = { open = " ", close = " " }
+
+[tabs]
+active    = { fg = "#0e141b", bg = "#4fc3f7", bold = true }
+inactive  = { fg = "#7b8c9b", bg = "#172230" }
+sep_inner = { open = "[", close = "]" }
+sep_outer = { open = " ", close = " " }
+
+[mode]
+normal_main = { fg = "#0e141b", bg = "#00bcd4", bold = true }
+normal_alt  = { fg = "#00bcd4", bg = "#172230" }
+
+select_main = { fg = "#0e141b", bg = "#7c4dff", bold = true }
+select_alt  = { fg = "#7c4dff", bg = "#172230" }
+
+unset_main = { fg = "#0e141b", bg = "#ff6b6b", bold = true }
+unset_alt  = { fg = "#ff6b6b", bg = "#172230" }
+
+[status]
+overall   = { fg = "#d7e2ec", bg = "#172230" }
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+perm_type  = { fg = "#4fc3f7" }
+perm_read  = { fg = "#2a9d8f" }
+perm_write = { fg = "#e9c46a" }
+perm_exec  = { fg = "#ff6b6b" }
+perm_sep   = { fg = "#5b6b7a" }
+
+progress_label  = { fg = "#00bcd4", bold = true }
+progress_normal = { fg = "#00bcd4", bg = "#2a3f54" }
+progress_error  = { fg = "#ff6b6b", bg = "#2a3f54" }
+
+[which]
+cols = 2
+mask            = { fg = "#5b6b7a", bg = "#172230" }
+cand            = { fg = "#00bcd4", bold = true }
+rest            = { fg = "#d7e2ec" }
+desc            = { fg = "#7b8c9b" }
+separator       = " -> "
+separator_style = { fg = "#2a3f54" }
+
+[confirm]
+border = { fg = "#2a3f54" }
+title  = { fg = "#00bcd4", bold = true }
+body   = { fg = "#d7e2ec" }
+list   = { fg = "#7b8c9b" }
+btn_yes    = { fg = "#0e141b", bg = "#2a9d8f", bold = true }
+btn_no     = { fg = "#0e141b", bg = "#ff6b6b", bold = true }
+btn_labels = ["Yes", "No"]
+
+[spot]
+border   = { fg = "#2a3f54" }
+title    = { fg = "#00bcd4", bold = true }
+tbl_col  = { fg = "#4fc3f7", bold = true }
+tbl_cell = { fg = "#d7e2ec" }
+
+[notify]
+title_info  = { fg = "#00bcd4" }
+title_warn  = { fg = "#e9c46a" }
+title_error = { fg = "#ff6b6b" }
+
+[pick]
+border   = { fg = "#2a3f54" }
+active   = { fg = "#00bcd4", bg = "#172230", bold = true }
+inactive = { fg = "#7b8c9b" }
+
+[input]
+border   = { fg = "#2a3f54" }
+title    = { fg = "#00bcd4", bold = true }
+value    = { fg = "#d7e2ec" }
+selected = { fg = "#0e141b", bg = "#4fc3f7" }
+
+[cmp]
+border       = { fg = "#2a3f54" }
+active       = { fg = "#00bcd4", bg = "#172230", bold = true }
+inactive     = { fg = "#7b8c9b" }
+icon_file    = "F"
+icon_folder  = "D"
+icon_command = "C"
+
+[tasks]
+border  = { fg = "#2a3f54" }
+title   = { fg = "#00bcd4", bold = true }
+hovered = { fg = "#00bcd4", bg = "#172230", bold = true }
+
+[help]
+on      = { fg = "#00bcd4", bold = true }
+run     = { fg = "#2a9d8f" }
+desc    = { fg = "#7b8c9b" }
+hovered = { fg = "#00bcd4", bg = "#172230", bold = true }
+footer  = { fg = "#5b6b7a" }
+icon_info  = "i"
+icon_warn  = "!"
+icon_error = "x"
+
+[filetype]
+rules = [
+  { mime = "image/*", fg = "#e9c46a" },
+  { mime = "{audio,video}/*", fg = "#7c4dff" },
+  { mime = "inode/empty", fg = "#00bcd4" },
+  { url = "*", is = "orphan", fg = "#ff6b6b" },
+  { url = "*/", fg = "#4fc3f7" }
+]

@@ -1,2 +1,2 @@
-export SYSTEM_THEME=tokyonight
+export SYSTEM_THEME=basic
 export EDITOR=nvim

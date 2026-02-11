@@ -1,0 +1,132 @@
+# Auto-generated Yazi theme for: tokyonight
+# Source palette: ~/.config/waybar/colors/custom/tokyonight.css
+
+[app]
+overall = { bg = "#15161e" }
+
+[mgr]
+cwd            = { fg = "#7dcfff", bold = true }
+find_keyword   = { fg = "#ff9e64", bold = true }
+find_position  = { fg = "#7a82aa" }
+symlink_target = { fg = "#7aa2f7", italic = true }
+
+marker_copied   = { fg = "#7dcfff", bg = "#1f2335" }
+marker_cut      = { fg = "#f7768e", bg = "#1f2335" }
+marker_marked   = { fg = "#bb9af7", bg = "#1f2335" }
+marker_selected = { fg = "#7aa2f7", bg = "#1f2335" }
+
+count_copied   = { fg = "#7dcfff", bg = "#1f2335" }
+count_cut      = { fg = "#f7768e", bg = "#1f2335" }
+count_selected = { fg = "#7aa2f7", bg = "#1f2335" }
+
+border_symbol = "|"
+border_style  = { fg = "#3b4261" }
+
+[indicator]
+parent  = { fg = "#7a82aa", bg = "#1f2335" }
+current = { fg = "#7dcfff", bg = "#1f2335", bold = true }
+preview = { fg = "#7aa2f7", bg = "#1f2335" }
+padding = { open = " ", close = " " }
+
+[tabs]
+active    = { fg = "#15161e", bg = "#7aa2f7", bold = true }
+inactive  = { fg = "#7a82aa", bg = "#1f2335" }
+sep_inner = { open = "[", close = "]" }
+sep_outer = { open = " ", close = " " }
+
+[mode]
+normal_main = { fg = "#15161e", bg = "#7dcfff", bold = true }
+normal_alt  = { fg = "#7dcfff", bg = "#1f2335" }
+
+select_main = { fg = "#15161e", bg = "#bb9af7", bold = true }
+select_alt  = { fg = "#bb9af7", bg = "#1f2335" }
+
+unset_main = { fg = "#15161e", bg = "#f7768e", bold = true }
+unset_alt  = { fg = "#f7768e", bg = "#1f2335" }
+
+[status]
+overall   = { fg = "#c0caf5", bg = "#1f2335" }
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+perm_type  = { fg = "#7aa2f7" }
+perm_read  = { fg = "#9ece6a" }
+perm_write = { fg = "#e0af68" }
+perm_exec  = { fg = "#f7768e" }
+perm_sep   = { fg = "#565f89" }
+
+progress_label  = { fg = "#7dcfff", bold = true }
+progress_normal = { fg = "#7dcfff", bg = "#3b4261" }
+progress_error  = { fg = "#f7768e", bg = "#3b4261" }
+
+[which]
+cols = 2
+mask            = { fg = "#565f89", bg = "#1f2335" }
+cand            = { fg = "#7dcfff", bold = true }
+rest            = { fg = "#c0caf5" }
+desc            = { fg = "#7a82aa" }
+separator       = " -> "
+separator_style = { fg = "#3b4261" }
+
+[confirm]
+border = { fg = "#3b4261" }
+title  = { fg = "#7dcfff", bold = true }
+body   = { fg = "#c0caf5" }
+list   = { fg = "#7a82aa" }
+btn_yes    = { fg = "#15161e", bg = "#9ece6a", bold = true }
+btn_no     = { fg = "#15161e", bg = "#f7768e", bold = true }
+btn_labels = ["Yes", "No"]
+
+[spot]
+border   = { fg = "#3b4261" }
+title    = { fg = "#7dcfff", bold = true }
+tbl_col  = { fg = "#7aa2f7", bold = true }
+tbl_cell = { fg = "#c0caf5" }
+
+[notify]
+title_info  = { fg = "#7dcfff" }
+title_warn  = { fg = "#e0af68" }
+title_error = { fg = "#f7768e" }
+
+[pick]
+border   = { fg = "#3b4261" }
+active   = { fg = "#7dcfff", bg = "#1f2335", bold = true }
+inactive = { fg = "#7a82aa" }
+
+[input]
+border   = { fg = "#3b4261" }
+title    = { fg = "#7dcfff", bold = true }
+value    = { fg = "#c0caf5" }
+selected = { fg = "#15161e", bg = "#7aa2f7" }
+
+[cmp]
+border       = { fg = "#3b4261" }
+active       = { fg = "#7dcfff", bg = "#1f2335", bold = true }
+inactive     = { fg = "#7a82aa" }
+icon_file    = "F"
+icon_folder  = "D"
+icon_command = "C"
+
+[tasks]
+border  = { fg = "#3b4261" }
+title   = { fg = "#7dcfff", bold = true }
+hovered = { fg = "#7dcfff", bg = "#1f2335", bold = true }
+
+[help]
+on      = { fg = "#7dcfff", bold = true }
+run     = { fg = "#9ece6a" }
+desc    = { fg = "#7a82aa" }
+hovered = { fg = "#7dcfff", bg = "#1f2335", bold = true }
+footer  = { fg = "#565f89" }
+icon_info  = "i"
+icon_warn  = "!"
+icon_error = "x"
+
+[filetype]
+rules = [
+  { mime = "image/*", fg = "#e0af68" },
+  { mime = "{audio,video}/*", fg = "#bb9af7" },
+  { mime = "inode/empty", fg = "#7dcfff" },
+  { url = "*", is = "orphan", fg = "#f7768e" },
+  { url = "*/", fg = "#7aa2f7" }
+]

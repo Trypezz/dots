@@ -47,6 +47,7 @@ apply_theme() {
     "$themes_dir/$requested/waybar/colors.css::$HOME/.config/waybar/colors/colors.css"
     "$themes_dir/$requested/swaync/colors.css::$HOME/.config/swaync/colors/colors.css"
     "$themes_dir/$requested/wlogout/colors.css::$HOME/.config/wlogout/colors/colors.css"
+    "$themes_dir/$requested/yazi/theme.toml::$HOME/.config/yazi/theme.toml"
   )
 
   # ---- preflight integrity ----
