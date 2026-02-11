@@ -74,7 +74,7 @@ entry {
     background-color:            @background;
     text-color:                  inherit;
     cursor:                      text;
-    placeholder:                 "Search...";
+    placeholder:                 "Select Theme...";
     placeholder-color:           inherit;
 }
 
