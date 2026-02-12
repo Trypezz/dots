@@ -1,2 +1,2 @@
-export SYSTEM_THEME=basic
+export SYSTEM_THEME=forest
 export EDITOR=nvim
