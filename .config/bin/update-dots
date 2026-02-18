@@ -2,7 +2,7 @@
 
 # configs and dotfile repo should have the same layout!
 
-DOTS_DIR="$PWD/dots" # Set to current dotfiles repo
+DOTS_DIR="$HOME/dots" # Set to current dotfiles repo
 HOME_DIR="$HOME/"
 
 # Items to move to repo
@@ -53,4 +53,4 @@ done
 echo ""
 echo "Files are updated!"
 echo "Run 'git status' inside your repo to see changes."
-notify-send -a transient "Updated Dotfiles!" "Your configuration has been updated!"
+notify-send -a transient "Config Updated" "Run 'git status' inside $DOTS_DIR to see the changes."
