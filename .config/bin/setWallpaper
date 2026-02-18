@@ -56,7 +56,7 @@ done
 is_video() {
   local f="${1,,}"
   case "$f" in
-  *.mp4 | *.mkv | *.webm | *.mov | *.avi | *.m4v | *.gif) return 0 ;;
+  *.mp4 | *.mkv | *.webm | *.mov | *.avi | *.m4v) return 0 ;;
   *) return 1 ;;
   esac
 }
@@ -86,7 +86,7 @@ video_thumb() {
 is_image() {
   local f="${1,,}"
   case "$f" in
-  *.png | *.jpg | *.jpeg | *.webp | *.bmp | *.tiff) return 0 ;;
+  *.png | *.jpg | *.jpeg | *.webp | *.bmp | *.tiff | *.gif) return 0 ;;
   *) return 1 ;;
   esac
 }

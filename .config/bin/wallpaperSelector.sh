@@ -22,7 +22,7 @@ mkdir -p "$THUMB_DIR"
 is_video() {
   local f="${1,,}"
   case "$f" in
-  *.mp4 | *.mkv | *.webm | *.mov | *.avi | *.m4v | *.gif) return 0 ;;
+  *.mp4 | *.mkv | *.webm | *.mov | *.avi | *.m4v) return 0 ;;
   *) return 1 ;;
   esac
 }
