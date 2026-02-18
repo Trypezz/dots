@@ -145,10 +145,10 @@ apply_theme() {
   swaync &
   hyprctl reload
 
-  swww img "$wallpaper" --transition-fps 60 --transition-type top
+  swww img "$wallpaper" --transition-fps 60 --transition-type grow
 
   mkdir -p "$(dirname "$STATE_FILE")"
-  printf '%s' "$file" >"$STATE_FILE"
+  printf '%s' "$wallpaper" >"$STATE_FILE"
 
   echo "Theme applied successfully: $requested"
   notify-send -a transient "Theme applied successfully!" "Theme: $requested"
