@@ -1,5 +1,7 @@
 #!/bin/bash
 
+STATE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_last_image"
+
 get_current_theme() {
   local env_file="$HOME/.config/zsh/env.sh"
   [[ -f "$env_file" ]] || return 1
@@ -12,6 +14,8 @@ apply_theme() {
   local requested="$1"
   local themes_dir="$HOME/.config/themes"
   local env_file="$HOME/.config/zsh/env.sh"
+  local wallpaper_dir="$HOME/.config/themes/$requested/wallpaper"
+  local wallpaper=$(find "$wallpaper_dir" -type f | head -n1)
 
   # ---- basic checks ----
   if [[ -z "$requested" ]]; then
@@ -140,6 +144,11 @@ apply_theme() {
   waybar &
   swaync &
   hyprctl reload
+
+  swww img "$wallpaper" --transition-fps 60 --transition-type top
+
+  mkdir -p "$(dirname "$STATE_FILE")"
+  printf '%s' "$file" >"$STATE_FILE"
 
   echo "Theme applied successfully: $requested"
   notify-send -a transient "Theme applied successfully!" "Theme: $requested"

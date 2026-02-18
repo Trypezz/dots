@@ -13,7 +13,7 @@
 @define-color purple   #d4b5ff;
 
 @define-color primaryColor #ff9fd1;
-@define-color secondaryColor #9bbcff;
+@define-color secondaryColor @primaryColor;
 @define-color fontcolor  @primaryColor;
 @define-color wfontcolor #000000;
 
