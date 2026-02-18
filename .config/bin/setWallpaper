@@ -123,6 +123,8 @@ restore_last_image() {
 
 # ---- stop mode ----
 if $stop; then
+  pgrep -x mpvpaper >/dev/null || exit 0
+
   # stop old live wallpaper if running
   pkill -x mpvpaper 2>/dev/null || true
 
@@ -193,9 +195,9 @@ if is_video "$file"; then
   thumb="$(video_thumb "$file" 2>/dev/null || true)"
 
   if [[ -n "$thumb" && -f "$thumb" ]]; then
-    notify-send -a transient -i "$thumb" "Live Wallpaper changed" "$name (${sound})"
+    notify-send -a transient -i "$thumb" "Live Wallpaper started" "$name (${sound})"
   else
-    notify-send -a transient "Live Wallpaper changed" "$name (${sound})"
+    notify-send -a transient "Live Wallpaper started" "$name (${sound})"
   fi
 
   exit 0

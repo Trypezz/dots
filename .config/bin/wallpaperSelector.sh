@@ -81,12 +81,26 @@ idx="$(
     else
       printf '%s\n' "$name"
     fi
-  done | rofi -dmenu -i -p "" -show-icons -format i -theme "$rofi_theme"
+  done | rofi -dmenu -i -p "" -show-icons -format s -theme "$rofi_theme"
 )"
 
 [[ -n "${idx:-}" ]] || exit 0
 
-sel="${files[$idx]}"
+if [[ "${idx,,}" == "stop" ]]; then
+  "$SET_WALLPAPER" "--stop"
+  exit 0
+fi
+
+sel=""
+
+for f in "${files[@]}"; do
+  if [[ "$(basename -- "$f")" == "$idx" ]]; then
+    sel="$f"
+    break
+  fi
+done
+
+[[ -n "$sel" ]] || exit 0
 
 # sel ist der gewählte Pfad
 sound_arg="--mute"
