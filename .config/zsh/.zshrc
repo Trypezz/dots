@@ -4,10 +4,10 @@
 if [[ -o interactive \
    && -n "$KITTY_WINDOW_ID" \
    && -z "$__KITTY_FASTFETCH_SHOWN" \
-   && -x "$HOME/.config/bin/titlefetch" ]]; then
+   && -x "$HOME/.config/bin/titlefetch.sh" ]]; then
 
   export __KITTY_FASTFETCH_SHOWN=1
-  "$HOME/.config/bin/titlefetch"
+  "$HOME/.config/bin/titlefetch.sh"
 
 fi
 
@@ -53,19 +53,9 @@ source "/usr/share/nvm/init-nvm.sh"
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
-# Special completion treatment for own scripts
-autoload -Uz compinit
-compinit
-
-eval "$($HOME/.config/bin/editScript --completion-zsh)"
-
 source "$HOME/.config/zsh/aliases.zsh"
 
 if [[ -f "$HOME/.config/zsh/env.sh" ]]; then
     source "$HOME/.config/zsh/env.sh"
 fi
-switchTheme() {
-	command changeTheme "$@"
-	source "$HOME/.config/zsh/env.sh"
-}
 

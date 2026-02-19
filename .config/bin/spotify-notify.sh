@@ -1,21 +1,21 @@
 #!/bin/bash
 
-SONGMETA="$HOME/.config/bin/songmeta"
-COVER="$HOME/.config/bin/songcover"
+SONGMETA="$HOME/.config/bin/songmeta.sh"
+COVER="$HOME/.config/bin/songcover.sh"
 
 PLAYER="spotify"
 last_track=""
 
 # Only follow Spotify metadata updates
-playerctl -p "$PLAYER" --follow metadata --format '{{artist}}|||{{title}}' 2>/dev/null \
-| while IFS='|||' read -r artist title; do
+playerctl -p "$PLAYER" --follow metadata --format '{{artist}}|||{{title}}' 2>/dev/null |
+  while IFS='|||' read -r artist title; do
     [[ -z "$artist" && -z "$title" ]] && continue
 
     track="$artist - $title"
     [[ "$track" == "$last_track" ]] && continue
     last_track="$track"
 
-	# Fetch infos from songmeta script
+    # Fetch infos from songmeta script
     artist="$("$SONGMETA" artist "$PLAYER")"
     title="$("$SONGMETA" title "$PLAYER")"
     album="$("$SONGMETA" album "$PLAYER")"
@@ -27,8 +27,8 @@ playerctl -p "$PLAYER" --follow metadata --format '{{artist}}|||{{title}}' 2>/de
     [[ -n "$album" ]] && body="$body"$'\n'"$album"
 
     if [[ -n "$cover_path" && -f "$cover_path" ]]; then
-        notify-send -a transient -i "$cover_path" "$title" "$body"
+      notify-send -a transient -i "$cover_path" "$title" "$body"
     else
-        notify-send -a transient "$title" "$body"
+      notify-send -a transient "$title" "$body"
     fi
-done
+  done

@@ -1,5 +1,4 @@
 #!/bin/bash
 
-
 cd $HOME/.config
 nvim .

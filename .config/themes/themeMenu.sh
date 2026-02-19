@@ -5,7 +5,7 @@ themes_dir="$HOME/.config/themes"
 rofi="$HOME/.config/rofi/launcher.sh"
 mode="dmenu"
 menu="menus/theme-menu"
-change_theme="$HOME/.config/bin/changeTheme"
+change_theme="$HOME/.config/bin/changeTheme.sh"
 
 if [[ ! -d "$themes_dir" ]]; then
   echo "Themes directory not found: $themes_dir" >&2
