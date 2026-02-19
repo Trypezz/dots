@@ -22,7 +22,9 @@
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl next",
     "on-click-middle": "playerctl previous",
-    "tooltip-format": "Left: Play/Pause\nRight: Next\nMiddle: Previous"
+    "tooltip-format": "Left: Play/Pause\nRight: Next\nMiddle: Previous",
+    "min-length": 20,
+    "max-length": 20
   },
   "tray": {
     "icon-size": 21,

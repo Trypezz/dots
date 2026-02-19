@@ -19,6 +19,7 @@ ITEMS=(
   ".config/nvim/init.lua"
   ".config/rofi"
   ".config/swaync"
+  ".config/systemd/user/spotify-notify.service"
   ".config/waybar"
   ".config/wlogout"
   ".config/xsettingsd"

@@ -1,0 +1,15 @@
+[Unit]
+Description=Spotify Notification Listener
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.config/bin/spotify-notify
+Restart=on-failure
+RestartSec=2
+
+Environment=PATH=%h/.config/bin:/usr/local/bin:/usr/bin
+
+[Install]
+WantedBy=default.target
+

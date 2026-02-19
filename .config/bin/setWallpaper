@@ -204,6 +204,11 @@ if is_video "$file"; then
 fi
 
 if is_image "$file"; then
+
+  if ! pgrep -x swww; then
+    swww-daemon &
+  fi
+
   name="$(pretty_name "$file")"
   last=""
   [[ -f "$STATE_FILE" ]] && last="$(<"$STATE_FILE")"
