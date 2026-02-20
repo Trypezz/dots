@@ -2,13 +2,8 @@
 
 STATE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_last_image"
 
-get_current_theme() {
-  local env_file="$HOME/.config/zsh/env.sh"
-  [[ -f "$env_file" ]] || return 1
-
-  # liest export SYSTEM_THEME=xyz oder SYSTEM_THEME=xyz
-  sed -nE 's/^(export[[:space:]]+)?SYSTEM_THEME=//p' "$env_file" | head -n1
-}
+GET_SYSTEM_THEME="$HOME/.config/bin/helper/getSystemTheme.sh"
+RELOAD_DESKTOP="$HOME/.config/bin/helper/reloadDesktop.sh"
 
 apply_theme() {
   local requested="$1"
@@ -24,7 +19,7 @@ apply_theme() {
   fi
 
   local current
-  current="$(get_current_theme || true)"
+  current="$(${GET_SYSTEM_THEME} || true)"
 
   if [[ -n "$current" && "$current" == "$requested" ]]; then
     echo "Theme '$requested' is already active. Nothing to do."
@@ -43,7 +38,6 @@ apply_theme() {
   fi
 
   # ---- mapping: source -> destination ----
-  # Adjust dest paths to your actual setup (I inferred from your tree screenshots).
   # These are the "selector" files that contain @import/source custom/<theme>...
   local -a MAP=(
     "$themes_dir/$requested/hypr/colors.conf::$HOME/.config/hypr/colors/colors.conf"
@@ -138,12 +132,7 @@ apply_theme() {
   } >"$env_file"
   rm -f -- "$tmpenv"
 
-  killall -9 waybar
-  killall -9 swaync
-
-  waybar &
-  swaync &
-  hyprctl reload
+  ${RELOAD_DESKTOP}
 
   swww img "$wallpaper" --transition-fps 60 --transition-type grow
 

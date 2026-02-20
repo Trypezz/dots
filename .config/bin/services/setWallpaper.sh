@@ -19,13 +19,6 @@ stop=false
 # where to remember the last static wallpaper
 STATE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_last_image"
 
-# fallback if no last image is known (optional)
-DEFAULT_WALLPAPER="$HOME/Pictures/wall.png"
-
-# For Video-Thumbnail
-THUMB_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_thumbs"
-mkdir -p "$THUMB_DIR"
-
 # ---- args ----
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -53,73 +46,15 @@ while [[ $# -gt 0 ]]; do
 done
 
 # ---- helpers ----
-is_video() {
-  local f="${1,,}"
-  case "$f" in
-  *.mp4 | *.mkv | *.webm | *.mov | *.avi | *.m4v) return 0 ;;
-  *) return 1 ;;
-  esac
-}
+IS_VIDEO="$HOME/.config/bin/helper/isVideo.sh"
 
-video_thumb() {
-  local vid="$1"
-  # stable name for each file (even if same filename in different directories)
-  local key
-  key="$(printf '%s' "$vid" | sha256sum | awk '{print $1}')"
-  local out="$THUMB_DIR/$key.jpg"
+IS_IMAGE="$HOME/.config/bin/helper/isImage.sh"
 
-  # only create if not exists or video is new
-  if [[ ! -f "$out" || "$vid" -nt "$out" ]]; then
-    if command -v ffmpegthumbnailer >/dev/null 2>&1; then
-      ffmpegthumbnailer -i "$vid" -o "$out" -s 512 -q 8 >/dev/null 2>&1 || return 1
-    elif command -v ffmpeg >/dev/null 2>&1; then
-      # Get frame in first second
-      ffmpeg -hide_banner -loglevel error -y -ss 1 -i "$vid" -frames:v 1 -vf "scale=512:-1" "$out" || return 1
-    else
-      return 1
-    fi
-  fi
+PRETTY_NAME="$HOME/.config/bin/helper/getPrettyName.sh"
 
-  printf '%s' "$out"
-}
+VIDEO_THUMB="$HOME/.config/bin/helper/getVidThumbnail.sh"
 
-is_image() {
-  local f="${1,,}"
-  case "$f" in
-  *.png | *.jpg | *.jpeg | *.webp | *.bmp | *.tiff | *.gif) return 0 ;;
-  *) return 1 ;;
-  esac
-}
-
-pretty_name() {
-  local p="$1"
-  local n
-  n="$(basename -- "$p")"
-  printf '%s' "$n"
-}
-
-restore_last_image() {
-  local img=""
-
-  if [[ -f "$STATE_FILE" ]]; then
-    img="$(<"$STATE_FILE")"
-  fi
-
-  # If cache empty or file missing -> fallback to default
-  if [[ -z "${img:-}" || ! -f "$img" ]]; then
-    if [[ -f "$DEFAULT_WALLPAPER" ]]; then
-      img="$DEFAULT_WALLPAPER"
-    else
-      return 1
-    fi
-  fi
-
-  name="$(pretty_name "$img")"
-
-  swww img "$img" --transition-fps 60 --transition-type top
-  notify-send -a transient -i "$img" "Live Wallpaper stopped" "Restored: "$name""
-  return 0
-}
+RESTORE_WALLPAPER="$HOME/.config/bin/helper/restoreLastWallpaper.sh"
 
 # ---- stop mode ----
 if $stop; then
@@ -128,7 +63,7 @@ if $stop; then
   # stop old live wallpaper if running
   pkill -x mpvpaper 2>/dev/null || true
 
-  if ! restore_last_image; then
+  if ! ${RESTORE_WALLPAPER}; then
     notify-send -a transient "Live Wallpaper stopped" "No static wallpaper found to restore"
   fi
   exit 0
@@ -147,7 +82,7 @@ fi
 # stop old live wallpaper if running (switching modes)
 pkill -x mpvpaper 2>/dev/null || true
 
-if is_video "$file"; then
+if ${IS_VIDEO} "$file"; then
   thumb=""
   # get all monitor names (Hyprland)
 
@@ -190,9 +125,9 @@ if is_video "$file"; then
 
   echo "DONE!"
 
-  name="$(pretty_name "$file")"
+  name="$(${PRETTY_NAME} "$file")"
 
-  thumb="$(video_thumb "$file" 2>/dev/null || true)"
+  thumb="$(${VIDEO_THUMB} "$file" 2>/dev/null || true)"
 
   if [[ -n "$thumb" && -f "$thumb" ]]; then
     notify-send -a transient -i "$thumb" "Live Wallpaper started" "$name (${sound})"
@@ -203,13 +138,13 @@ if is_video "$file"; then
   exit 0
 fi
 
-if is_image "$file"; then
+if ${IS_IMAGE} "$file"; then
 
   if ! pgrep -x swww; then
     swww-daemon &
   fi
 
-  name="$(pretty_name "$file")"
+  name="$(${PRETTY_NAME} "$file")"
   last=""
   [[ -f "$STATE_FILE" ]] && last="$(<"$STATE_FILE")"
 
@@ -222,6 +157,7 @@ if is_image "$file"; then
   mkdir -p "$(dirname "$STATE_FILE")"
   printf '%s' "$file" >"$STATE_FILE"
   notify-send -a transient -i "$file" "Wallpaper changed" "$name"
+  echo "$STATE_FILE"
   exit 0
 fi
 

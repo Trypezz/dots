@@ -8,4 +8,3 @@ killall -9 swaync
 waybar &
 swaync &
 hyprctl reload
-notify-send -a transient "Desktop Reloaded!"

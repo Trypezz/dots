@@ -28,6 +28,7 @@ path_add=(
     "$HOME/.config/bin/services"
     "$HOME/.config/bin/UI"
     "$HOME/.config/bin/utils"
+    "$HOME/.config/bin/helper"
 )
 
 for dir in "${path_add[@]}"; do
