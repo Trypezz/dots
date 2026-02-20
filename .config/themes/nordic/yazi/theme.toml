@@ -1,0 +1,49 @@
+# Source palette: ~/.config/waybar/colors/custom/nordic.css
+
+[app]
+overall = { bg = "#2e3440" }
+
+[mgr]
+cwd            = { fg = "#81a1c1", bold = true }
+find_keyword   = { fg = "#d08770", bold = true }
+find_position  = { fg = "#8b9bb4" }
+symlink_target = { fg = "#8fbcbb", italic = true }
+
+marker_copied   = { fg = "#8fbcbb", bg = "#434c5e" }
+marker_cut      = { fg = "#bf616a", bg = "#434c5e" }
+marker_marked   = { fg = "#b48ead", bg = "#434c5e" }
+marker_selected = { fg = "#81a1c1", bg = "#434c5e" }
+
+count_copied   = { fg = "#8fbcbb", bg = "#434c5e" }
+count_cut      = { fg = "#bf616a", bg = "#434c5e" }
+count_selected = { fg = "#81a1c1", bg = "#434c5e" }
+
+border_symbol = "|"
+border_style  = { fg = "#616e88" }
+
+[mode]
+normal_main = { fg = "#2e3440", bg = "#8fbcbb", bold = true }
+normal_alt  = { fg = "#8fbcbb", bg = "#434c5e" }
+
+select_main = { fg = "#2e3440", bg = "#b48ead", bold = true }
+select_alt  = { fg = "#b48ead", bg = "#434c5e" }
+
+unset_main = { fg = "#2e3440", bg = "#bf616a", bold = true }
+unset_alt  = { fg = "#bf616a", bg = "#434c5e" }
+
+[status]
+overall   = { fg = "#e5e9f0", bg = "#434c5e" }
+perm_read  = { fg = "#a3be8c" }
+perm_write = { fg = "#ebcb8b" }
+perm_exec  = { fg = "#bf616a" }
+perm_sep   = { fg = "#6f7e97" }
+
+[filetype]
+rules = [
+  { mime = "image/*", fg = "#ebcb8b" },
+  { mime = "{audio,video}/*", fg = "#b48ead" },
+  { mime = "inode/empty", fg = "#8fbcbb" },
+  { url = "*", is = "orphan", fg = "#bf616a" },
+  { url = "*/", fg = "#81a1c1" }
+]
+
