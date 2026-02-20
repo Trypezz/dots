@@ -1,6 +1,5 @@
-# Auto-generated Yazi theme for: forest
 # Source palette: ~/.config/waybar/colors/custom/forest.css
-
+#
 [app]
 overall = { bg = "#101612" }
 
