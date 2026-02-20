@@ -13,7 +13,7 @@ WALL_DIRS=(
   "$HOME/Videos/LiveWallpapers/"
 )
 
-SET_WALLPAPER="$HOME/.config/bin/setWallpaper.sh"
+SET_WALLPAPER="$HOME/.config/bin/services/setWallpaper.sh"
 
 # Thumbnail cache (matches setWallpaper)
 THUMB_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_thumbs"

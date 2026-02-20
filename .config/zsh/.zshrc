@@ -4,10 +4,10 @@
 if [[ -o interactive \
    && -n "$KITTY_WINDOW_ID" \
    && -z "$__KITTY_FASTFETCH_SHOWN" \
-   && -x "$HOME/.config/bin/titlefetch.sh" ]]; then
+   && -x "$HOME/.config/bin/utils/titlefetch.sh" ]]; then
 
   export __KITTY_FASTFETCH_SHOWN=1
-  "$HOME/.config/bin/titlefetch.sh"
+  "$HOME/.config/bin/utils/titlefetch.sh"
 
 fi
 
@@ -18,8 +18,23 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$HOME/.config/bin:$HOME/.cargo/bin:$PATH
+# PATHS
+path_add=(
+    "$HOME/bin"
+    "$HOME/.local/bin"
+    "/usr/local/bin"
+    "$HOME/.cargo/bin"
+    "$HOME/.config/bin"
+    "$HOME/.config/bin/services"
+    "$HOME/.config/bin/UI"
+    "$HOME/.config/bin/utils"
+)
+
+for dir in "${path_add[@]}"; do
+    PATH="$PATH:$dir"
+done
+
+export PATH
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"

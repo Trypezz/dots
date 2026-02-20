@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SONGMETA="$HOME/.config/bin/songmeta.sh"
-COVER="$HOME/.config/bin/songcover.sh"
+SONGMETA="$HOME/.config/bin/utils/songmeta.sh"
+COVER="$HOME/.config/bin/utils/songcover.sh"
 
 PLAYER="spotify"
 last_track=""

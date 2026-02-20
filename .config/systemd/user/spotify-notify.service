@@ -4,11 +4,11 @@ After=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=%h/.config/bin/spotify-notify.sh
+ExecStart=%h/.config/bin/services/spotify-notify.sh
 Restart=on-failure
 RestartSec=2
 
-Environment=PATH=%h/.config/bin:/usr/local/bin:/usr/bin
+Environment=PATH=%h/.config/bin/services:/usr/local/bin:/usr/bin
 
 [Install]
 WantedBy=default.target
