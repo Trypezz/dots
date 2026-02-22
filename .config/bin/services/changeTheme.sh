@@ -38,7 +38,7 @@ apply_theme() {
   fi
 
   # ---- mapping: source -> destination ----
-  # These are the "selector" files that contain @import/source custom/<theme>...
+  # These are the "selector" files that contain the themes
   local -a MAP=(
     "$themes_dir/$requested/hypr/colors.conf::$HOME/.config/hypr/colors/colors.conf"
     "$themes_dir/$requested/rofi/colors.rasi::$HOME/.config/rofi/colors/colors.rasi"
@@ -46,6 +46,7 @@ apply_theme() {
     "$themes_dir/$requested/swaync/colors.css::$HOME/.config/swaync/colors/colors.css"
     "$themes_dir/$requested/wlogout/colors.css::$HOME/.config/wlogout/colors/colors.css"
     "$themes_dir/$requested/yazi/theme.toml::$HOME/.config/yazi/theme.toml"
+    "$themes_dir/$requested/clock-rs/conf.toml::$HOME/.config/clock-rs/conf.toml"
   )
 
   # ---- preflight integrity ----

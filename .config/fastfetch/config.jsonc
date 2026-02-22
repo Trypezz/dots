@@ -26,6 +26,10 @@
       "format": "{#31}{user-name}"
     },
     {
+      "key": "├──────────────┤",
+      "type": "custom"
+    },
+    {
       "key": "│ {#34}󰇅 Hostname   {#keys}│",
       "type": "title"
     },

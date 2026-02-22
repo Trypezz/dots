@@ -20,10 +20,10 @@ fi
 
 # PATHS
 path_add=(
-    "$HOME/bin"
     "$HOME/.local/bin"
     "/usr/local/bin"
     "$HOME/.cargo/bin"
+    # Custom Scripts
     "$HOME/.config/bin"
     "$HOME/.config/bin/services"
     "$HOME/.config/bin/UI"
