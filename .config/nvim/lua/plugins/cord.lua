@@ -13,7 +13,6 @@ return {
         file_browser = "Browsing files",
         plugin_manager = "Managing plugins",
         workspace = "Workspace: ${workspace}",
-        idle = "Idling in NeoVim",
       },
 
       show_file = true,

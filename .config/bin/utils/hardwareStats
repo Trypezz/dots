@@ -52,8 +52,7 @@ case $GPU_TEMP in
 esac
 
 DISK1=$(df -h ~/ | awk 'NR==2 {print $4}')
-DISK2=$(df -h / | awk 'NR==2 {print $4}')
-DISK3=$(df -h /mnt/games | awk 'NR==2 {print $4}')
+DISK2=$(df -h /mnt/games | awk 'NR==2 {print $4}')
 
 [[ -n $(amixer get Capture | awk '/\[on\]/') ]] && MIC="on" || MIC="off"
 
@@ -68,8 +67,7 @@ CPU temp: $CPU_TEMP°C
 Memory use: ${MEM_USE}GB
 
 Home remaining: $DISK1
-Root remaining: $DISK2
-Gaming remaining: $DISK3
+Gaming remaining: $DISK2
 
 Last update: $UPDATE
 Kernel: $KERNEL" |

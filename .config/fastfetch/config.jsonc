@@ -105,6 +105,10 @@
       "type": "memory"
     },
     {
+      "key": "│ {#35}󰓡 Swap  {#keys}     │",
+      "type": "swap"
+    },
+    {
       "key": "├──────────────┤",
       "type": "custom"
     },

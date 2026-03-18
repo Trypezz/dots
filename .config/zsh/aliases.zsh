@@ -26,6 +26,7 @@ alias install='yay -S --noconfirm'
 alias uninstall='yay -Rns --noconfirm'
 
 alias systemUpdate='arch-update'
+alias showSwap='swapon --show'
 
 # DEV Stuff
 alias devC='cd DEV/C'
