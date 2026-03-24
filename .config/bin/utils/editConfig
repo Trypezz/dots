@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec kitty sh -c "cd ~/.config && nvim ."
+exec kitty --title "EditConfig" sh -c "cd ~/.config && nvim ."
