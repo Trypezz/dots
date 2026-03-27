@@ -18,6 +18,7 @@ stop=false
 
 # where to remember the last static wallpaper
 STATE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_last_image"
+WALLPAPER_ENGINE="awww"
 
 # ---- args ----
 while [[ $# -gt 0 ]]; do
@@ -140,10 +141,6 @@ fi
 
 if ${IS_IMAGE} "$file"; then
 
-  if ! pgrep -x swww; then
-    swww-daemon &
-  fi
-
   name="$(${PRETTY_NAME} "$file")"
   last=""
   [[ -f "$STATE_FILE" ]] && last="$(<"$STATE_FILE")"
@@ -153,7 +150,7 @@ if ${IS_IMAGE} "$file"; then
     exit 0
   fi
 
-  swww img "$file" --transition-fps 60 --transition-type top
+  ${WALLPAPER_ENGINE} img "$file" --transition-fps 60 --transition-type top
   mkdir -p "$(dirname "$STATE_FILE")"
   printf '%s' "$file" >"$STATE_FILE"
   notify-send -a transient -i "$file" "Wallpaper changed" "$name"

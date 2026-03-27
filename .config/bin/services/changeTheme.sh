@@ -4,6 +4,7 @@ STATE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_last_image"
 
 GET_SYSTEM_THEME="$HOME/.config/bin/helper/getSystemTheme.sh"
 RELOAD_DESKTOP="$HOME/.config/bin/helper/reloadDesktop.sh"
+WALLPAPER_ENGINE="awww"
 
 apply_theme() {
   local requested="$1"
@@ -135,7 +136,7 @@ apply_theme() {
 
   ${RELOAD_DESKTOP}
 
-  swww img "$wallpaper" --transition-fps 60 --transition-type grow
+  ${WALLPAPER_ENGINE} img "$wallpaper" --transition-fps 60 --transition-type grow
 
   mkdir -p "$(dirname "$STATE_FILE")"
   printf '%s' "$wallpaper" >"$STATE_FILE"
