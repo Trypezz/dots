@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 
-PLAYER="${1:-spotify}"
+PLAYER="${1:-auto}"
 VISIBLE_MIN=15
 
 # Defaults
@@ -15,6 +15,26 @@ PAUSE_UNTIL_FILE="$HOME/.cache/nowplaying_pause_until"
 mkdir -p "$HOME/.cache"
 [[ -f "$SCROLL_FP_FILE" ]] || echo "0" >"$SCROLL_FP_FILE"
 [[ -f "$PAUSE_UNTIL_FILE" ]] || echo "0" >"$PAUSE_UNTIL_FILE"
+
+ALLOWED_PLAYERS=("kew" "spotify")
+
+is_allowed() {
+  local p="$1"
+  for allowed in "${ALLOWED_PLAYERS[@]}"; do
+    [[ "${p,,}" == *"${allowed,,}"* ]] && return 0
+  done
+  return 1
+}
+
+get_active_player() {
+  for p in $(playerctl -l 2>/dev/null); do
+    is_allowed "$p" || continue
+    if playerctl -p "$p" status 2>/dev/null | grep -q "Playing"; then
+      echo "$p"
+      return
+    fi
+  done
+}
 
 now_ms() { date +%s%3N; }
 
@@ -40,15 +60,29 @@ step_fp="$(awk -v s="$STEP" -v sc="$SCALE" 'BEGIN{
 ((step_fp <= 0)) && step_fp=1
 
 while true; do
-  if ! playerctl -p "$PLAYER" status >/dev/null 2>&1; then
+  if [[ "$PLAYER" == "auto" ]]; then
+    active="$(get_active_player)"
+    [[ -z "$active" ]] && {
+      sleep 0.5
+      continue
+    }
+  else
+    active="$PLAYER"
+    is_allowed "$active" || {
+      sleep 0.5
+      continue
+    }
+  fi
+
+  if ! playerctl -p "$active" status >/dev/null 2>&1; then
     rm -f "$SCROLL_FP_FILE" "$MEDIA_FILE" "$PAUSE_UNTIL_FILE"
     sleep 0.5
     continue
   fi
 
-  player_status="$(playerctl -p "$PLAYER" status 2>/dev/null || true)"
-  artist="$(playerctl -p "$PLAYER" metadata xesam:artist 2>/dev/null || true)"
-  title="$(playerctl -p "$PLAYER" metadata xesam:title 2>/dev/null || true)"
+  player_status="$(playerctl -p "$active" status 2>/dev/null || true)"
+  artist="$(playerctl -p "$active" metadata xesam:artist 2>/dev/null || true)"
+  title="$(playerctl -p "$active" metadata xesam:title 2>/dev/null || true)"
 
   if [[ -z "${artist}${title}" ]]; then
     emit_json "" "$player_status"
