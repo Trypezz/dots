@@ -6,3 +6,4 @@
 .config/waybar/colors/colors.css
 .config/wlogout/colors/colors.css
 .config/yazi/theme.toml
+.config/zsh/env.sh
