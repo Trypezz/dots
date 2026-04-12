@@ -1,0 +1,60 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "Usage: addnasuser <username>"
+  exit 1
+fi
+
+USERNAME=$1
+SAVES_DIR="/mnt/trypezz-nas/retro/saves/$USERNAME"
+STATES_DIR="/mnt/trypezz-nas/retro/states/$USERNAME"
+SMB_CONF="/etc/samba/smb.conf"
+
+# Check if user exists
+if id "$USERNAME" &>/dev/null; then
+  echo "Error: User '$USERNAME' already exists!"
+  exit 1
+fi
+
+echo "→ Add linux user..."
+sudo useradd -M -s /sbin/nologin "$USERNAME"
+sudo usermod -aG nas-users "$USERNAME"
+
+echo "→ Set Samba password..."
+sudo smbpasswd -a "$USERNAME"
+
+echo "→ Add folders..."
+sudo mkdir -p "$SAVES_DIR"
+sudo mkdir -p "$STATES_DIR"
+
+echo "→ Set permissions..."
+sudo chown trypezz:"$USERNAME" "$SAVES_DIR"
+sudo chown trypezz:"$USERNAME" "$STATES_DIR"
+sudo chmod 770 "$SAVES_DIR"
+sudo chmod 770 "$STATES_DIR"
+
+echo "→ Add user to Samba config..."
+sudo tee -a "$SMB_CONF" >/dev/null <<EOF
+
+[saves-$USERNAME]
+   comment = Saves $USERNAME
+   path = $SAVES_DIR
+   valid users = $USERNAME
+   read only = no
+   browseable = yes
+
+[states-$USERNAME]
+   comment = States $USERNAME
+   path = $STATES_DIR
+   valid users = $USERNAME
+   read only = no
+   browseable = yes
+EOF
+
+echo "→ Restart Samba..."
+sudo systemctl restart smb nmb
+
+echo ""
+echo "✓ User '$USERNAME' successfully added!"
+echo "✓ Saves:  $SAVES_DIR"
+echo "✓ States: $STATES_DIR"

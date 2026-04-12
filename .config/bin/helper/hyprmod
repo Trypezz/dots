@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd hyprmod
+uv run hyprmod

@@ -9,8 +9,8 @@ rofi_theme="$HOME/.config/rofi/menus/wallpaper-grid.rasi"
 
 # Directories to scan (edit as needed)
 WALL_DIRS=(
-  "$HOME/Pictures/Wallpaper/"
-  "$HOME/Videos/LiveWallpapers/"
+  "/mnt/trypezz-nas/files/pictures/Wallpaper/"
+  "/mnt/trypezz-nas/files/videos/LiveWallpapers/"
 )
 
 SET_WALLPAPER="$HOME/.config/bin/services/setWallpaper.sh"

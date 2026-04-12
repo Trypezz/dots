@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "Usage: addnasdir <directory> [admin-only]"
+  exit 1
+fi
+
+DIR=$1
+MODE=$2
+
+if [ ! -d "$DIR" ]; then
+  echo "Fehler: Verzeichnis '$DIR' existiert nicht!"
+  exit 1
+fi
+
+if [ "$MODE" = "admin-only" ]; then
+  sudo chown trypezz:nas-admin "$DIR"
+  sudo chmod 770 "$DIR"
+  echo "✓ '$DIR' → nur Admin (lesen + schreiben)"
+else
+  sudo chown trypezz:nas-users "$DIR"
+  sudo chmod 750 "$DIR"
+  echo "✓ '$DIR' → Admin schreibt, User lesen"
+fi

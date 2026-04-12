@@ -1,6 +1,7 @@
 # --- Login/Start Info ---
 # Fastfetch Fancy Header
 # Only on new Kitty Windows
+
 if [[ -o interactive \
    && -n "$KITTY_WINDOW_ID" \
    && -z "$__KITTY_FASTFETCH_SHOWN" \
@@ -29,6 +30,7 @@ path_add=(
     "$HOME/.config/bin/UI"
     "$HOME/.config/bin/utils"
     "$HOME/.config/bin/helper"
+    "$HOME/.config/bin/helper/nas"
 )
 
 for dir in "${path_add[@]}"; do

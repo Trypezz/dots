@@ -1,0 +1,69 @@
+#!/bin/bash
+
+if [ -z "$1" ] || [ -z "$2" ]; then
+  echo "Usage: renamenasuser <old-name> <new-name>"
+  exit 1
+fi
+
+OLD=$1
+NEW=$2
+SAVES_OLD="/mnt/trypezz-nas/retro/saves/$OLD"
+SAVES_NEW="/mnt/trypezz-nas/retro/saves/$NEW"
+STATES_OLD="/mnt/trypezz-nas/retro/states/$OLD"
+STATES_NEW="/mnt/trypezz-nas/retro/states/$NEW"
+SMB_CONF="/etc/samba/smb.conf"
+
+# Check if old user exists
+if ! id "$OLD" &>/dev/null; then
+  echo "Error: User '$OLD' does not exist!"
+  exit 1
+fi
+
+# Check if new name already exists
+if id "$NEW" &>/dev/null; then
+  echo "Error: User with name '$NEW' already exists!"
+  exit 1
+fi
+
+# Safety check
+read -p "Rename User '$OLD' to '$NEW'? Saves are beeing kept. [y/N] " CONFIRM
+if [ "$CONFIRM" != "y" ]; then
+  echo "Abort."
+  exit 0
+fi
+
+echo "→ Rename Linux User..."
+sudo usermod -l "$NEW" "$OLD"
+sudo groupmod -n "$NEW" "$OLD"
+
+echo "→ Chenage Samba Password..."
+sudo smbpasswd -x "$OLD" 2>/dev/null
+sudo smbpasswd -a "$NEW"
+
+echo "→ Rename directories..."
+sudo mv "$SAVES_OLD" "$SAVES_NEW"
+sudo mv "$STATES_OLD" "$STATES_NEW"
+
+echo "→ Modify permissions..."
+sudo chown trypezz:"$NEW" "$SAVES_NEW"
+sudo chown trypezz:"$NEW" "$STATES_NEW"
+sudo chmod 770 "$SAVES_NEW"
+sudo chmod 770 "$STATES_NEW"
+
+echo "→ Modify Samba Config..."
+sudo sed -i "s/\[saves-$OLD\]/[saves-$NEW]/g" "$SMB_CONF"
+sudo sed -i "s/\[states-$OLD\]/[states-$NEW]/g" "$SMB_CONF"
+sudo sed -i "s|path = $SAVES_OLD|path = $SAVES_NEW|g" "$SMB_CONF"
+sudo sed -i "s|path = $STATES_OLD|path = $STATES_NEW|g" "$SMB_CONF"
+sudo sed -i "s/valid users = $OLD/valid users = $NEW/g" "$SMB_CONF"
+sudo sed -i "s/comment = Saves $OLD/comment = Saves $NEW/g" "$SMB_CONF"
+sudo sed -i "s/comment = States $OLD/comment = States $NEW/g" "$SMB_CONF"
+
+echo "→ Restart Samba..."
+sudo systemctl restart smb nmb
+
+echo ""
+echo "✓ Renaming User '$OLD' to '$NEW' was successful!"
+echo "✓ Saves und States got transfered!"
+echo ""
+echo "Warning: '$NEW' has to login with the new password!"

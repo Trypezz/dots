@@ -1,0 +1,44 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: removenasuser <username>"
+    exit 1
+fi
+
+USERNAME=$1
+SAVES_DIR="/mnt/trypezz-nas/retro/saves/$USERNAME"
+STATES_DIR="/mnt/trypezz-nas/retro/states/$USERNAME"
+SMB_CONF="/etc/samba/smb.conf"
+
+# Check if User exists
+if ! id "$USERNAME" &>/dev/null; then
+    echo "Error: User '$USERNAME' does not exists!"
+    exit 1
+fi
+
+# Safety-Trigger
+read -p "⚠ Delete User '$USERNAME' and all Saves/States from user? [y/N] " CONFIRM
+if [ "$CONFIRM" != "y" ]; then
+    echo "Abort."
+    exit 0
+fi
+
+echo "→ Remove user from Samba config..."
+sudo sed -i "/^\[saves-$USERNAME\]/,/^$/d" "$SMB_CONF"
+sudo sed -i "/^\[states-$USERNAME\]/,/^$/d" "$SMB_CONF"
+
+echo "→ Delete Samba user..."
+sudo smbpasswd -x "$USERNAME"
+
+echo "→ Delete Linux user..."
+sudo userdel "$USERNAME"
+
+echo "→ Delete directories..."
+sudo rm -rf "$SAVES_DIR"
+sudo rm -rf "$STATES_DIR"
+
+echo "→ Restart Samba..."
+sudo systemctl restart smb nmb
+
+echo ""
+echo "✓ User '$USERNAME' deleted successfully!"
