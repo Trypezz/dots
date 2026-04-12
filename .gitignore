@@ -1,1 +1,8 @@
-.config/bin/test.sh
+~/.config/bin/test.sh
+~/.config/clock-rs/conf.toml
+~/.config/hypr/colors/colors.conf
+~/.config/rofi/colors/colors.rasi
+~/.config/swaync/colors/colors.css
+~/.config/waybar/colors/colors.css
+~/.config/wlogout/colors/colors.css
+~/.config/yazi/theme.toml

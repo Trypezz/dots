@@ -9,16 +9,16 @@ DIR=$1
 MODE=$2
 
 if [ ! -d "$DIR" ]; then
-  echo "Fehler: Verzeichnis '$DIR' existiert nicht!"
+  echo "Error: Directory '$DIR' does not exist!"
   exit 1
 fi
 
 if [ "$MODE" = "admin-only" ]; then
   sudo chown trypezz:nas-admin "$DIR"
   sudo chmod 770 "$DIR"
-  echo "✓ '$DIR' → nur Admin (lesen + schreiben)"
+  echo "✓ '$DIR' → Admin-only (read + write)"
 else
   sudo chown trypezz:nas-users "$DIR"
   sudo chmod 750 "$DIR"
-  echo "✓ '$DIR' → Admin schreibt, User lesen"
+  echo "✓ '$DIR' → Admin read + write, User read-only"
 fi
