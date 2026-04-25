@@ -153,6 +153,7 @@ if ${IS_IMAGE} "$file"; then
   ${WALLPAPER_ENGINE} img "$file" --transition-fps 60 --transition-type top
   mkdir -p "$(dirname "$STATE_FILE")"
   printf '%s' "$file" >"$STATE_FILE"
+  ln -sf "$file" "${STATE_FILE}_symlink"
   notify-send -a transient -i "$file" "Wallpaper changed" "$name"
   echo "$STATE_FILE"
   exit 0
