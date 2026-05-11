@@ -36,10 +36,13 @@ hl.bind("SUPER + SHIFT + T", hl.dsp.exec_cmd(Apps.terminal .. " --title 'EMERGEN
 hl.bind("SUPER + K", hl.dsp.window.close())
 hl.bind("SUPER + SHIFT + K", hl.dsp.exec_cmd("hyprctl kill"))
 hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind("SUPER + J", hl.dsp.layout("togglesplit"))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen())
 hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("wlogout"))
 hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
+
+if hl.get_config("general.layout") == "dwindle" then
+	hl.bind("SUPER + J", hl.dsp.layout("togglesplit")) -- dwindle only
+end
 
 -- Focus
 hl.bind("SUPER + left", hl.dsp.focus({ direction = "left" }))

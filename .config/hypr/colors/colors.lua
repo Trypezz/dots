@@ -1,1 +1,1 @@
-require("colors.custom.tokyonight")
+require("colors.custom.forest")
