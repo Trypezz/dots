@@ -3,7 +3,7 @@
 is_image() {
   local f="${1,,}"
   case "$f" in
-  *.png | *.jpg | *.jpeg | *.webp | *.bmp | *.tiff | *.gif) return 0 ;;
+  *.png | *.jpg | *.jpeg | *.webp | *.bmp | *.tiff) return 0 ;;
   *) return 1 ;;
   esac
 }

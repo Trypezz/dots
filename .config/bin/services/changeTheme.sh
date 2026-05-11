@@ -4,7 +4,7 @@ STATE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_last_image"
 
 GET_SYSTEM_THEME="$HOME/.config/bin/helper/getSystemTheme.sh"
 RELOAD_DESKTOP="$HOME/.config/bin/helper/reloadDesktop.sh"
-WALLPAPER_ENGINE="awww"
+WALLPAPER_ENGINE="$HOME/.config/bin/services/setWallpaper.sh"
 
 apply_theme() {
   local requested="$1"
@@ -41,7 +41,7 @@ apply_theme() {
   # ---- mapping: source -> destination ----
   # These are the "selector" files that contain the themes
   local -a MAP=(
-    "$themes_dir/$requested/hypr/colors.conf::$HOME/.config/hypr/colors/colors.conf"
+    "$themes_dir/$requested/hypr/colors.lua::$HOME/.config/hypr/colors/colors.lua"
     "$themes_dir/$requested/rofi/colors.rasi::$HOME/.config/rofi/colors/colors.rasi"
     "$themes_dir/$requested/waybar/colors.css::$HOME/.config/waybar/colors/colors.css"
     "$themes_dir/$requested/swaync/colors.css::$HOME/.config/swaync/colors/colors.css"
@@ -136,7 +136,7 @@ apply_theme() {
 
   ${RELOAD_DESKTOP}
 
-  ${WALLPAPER_ENGINE} img "$wallpaper" --transition-fps 60 --transition-type grow
+  ${WALLPAPER_ENGINE} "$wallpaper" "--mute"
 
   mkdir -p "$(dirname "$STATE_FILE")"
   printf '%s' "$wallpaper" >"$STATE_FILE"

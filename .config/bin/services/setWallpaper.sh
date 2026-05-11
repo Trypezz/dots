@@ -154,6 +154,7 @@ if ${IS_IMAGE} "$file"; then
   mkdir -p "$(dirname "$STATE_FILE")"
   printf '%s' "$file" >"$STATE_FILE"
   ln -sf "$file" "${STATE_FILE}_symlink"
+  cp "$file" "/usr/share/sddm/themes/pixie/assets/current_bg.png"
   notify-send -a transient -i "$file" "Wallpaper changed" "$name"
   echo "$STATE_FILE"
   exit 0

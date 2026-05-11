@@ -1,0 +1,26 @@
+-- Theme: Default
+
+Theme = {
+	primaryColor = "rgba(61afefff)",
+	primaryColorSolid = "rgba(ff9fd1ff)",
+	secondaryColor = "rgba(000000ff)",
+
+	gapsIn = 5,
+	gapsOut = 10,
+	borderSize = 2,
+	borderRadius = 25,
+	borderRadiusPower = 10,
+
+	activeTransparency = 1.0,
+	inactiveTransparency = 0.92,
+	fullscreenTransparency = 1.0,
+
+	shadowRange = 25,
+	shadowPower = 2,
+	shadowColor = "rgba(12121299)",
+
+	blurSize = 1,
+	blurPasses = 3,
+
+	borderAnimation = "borderangle, 1, 10, softSnap",
+}

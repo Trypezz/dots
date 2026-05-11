@@ -1,0 +1,26 @@
+-- Theme: Pink
+
+Theme = {
+	primaryColor = "rgba(ff5fd7ff)",
+	primaryColorSolid = "rgba(ff5fd7ff)",
+	secondaryColor = "rgba(2b173aff)",
+
+	gapsIn = 5,
+	gapsOut = 10,
+	borderSize = 2,
+	borderRadius = 14,
+	borderRadiusPower = 10,
+
+	activeTransparency = 1.0,
+	inactiveTransparency = 0.92,
+	fullscreenTransparency = 1.0,
+
+	shadowRange = 25,
+	shadowPower = 3,
+	shadowColor = "rgba(00000066)",
+
+	blurSize = 1,
+	blurPasses = 2,
+
+	borderAnimation = "borderangle, 1, 1, softSnap",
+}

@@ -34,7 +34,7 @@ fi
 
 # Memory and CPU usage
 MEM_USE=$(free -m | awk '/^Mem/ {printf "%.1f", ($3)/1024}')
-CPU_USE=$(iostat -c | awk '/avg-cpu:/{getline; print "User CPU: "$1"%\nSystem CPU: "$3"%"}')
+CPU_USE=$(iostat -c | awk '/avg-cpu:/{getline; print "System CPU: "$3"%\n\t      User usage: "$1"%"}')
 
 # Show warning icon if CPU or GPU temp are high
 case $CPU_TEMP in
@@ -53,22 +53,24 @@ esac
 
 DISK1=$(df -h ~/ | awk 'NR==2 {print $4}')
 DISK2=$(df -h /mnt/games | awk 'NR==2 {print $4}')
+DISK3=$(df -h /mnt/trypezz-nas | awk 'NR==2 {print $4}')
 
 [[ -n $(amixer get Capture | awk '/\[on\]/') ]] && MIC="on" || MIC="off"
 
 UPDATE=$(stat -c %y /var/lib/pacman/local | awk '{print $1}')
 KERNEL=$(uname -r)
 
-echo -e "Stats $CPU_USE
+echo -e "$CPU_ICON  CPU: $CPU_USE
+\t      CPU temperature: $CPU_TEMP°C
 
-GPU temp: $GPU_TEMP°C
-CPU temp: $CPU_TEMP°C
+$GPU_ICON  GPU: GPU temperature: $GPU_TEMP°C
 
-Memory use: ${MEM_USE}GB
+MEMORY: In use: ${MEM_USE}GB
 
-Home remaining: $DISK1
-Gaming remaining: $DISK2
+DISK: Home remaining:    $DISK1
+DISK: Gaming remaining: $DISK2
+DISK: NAS remaining:        $DISK3
 
-Last update: $UPDATE
-Kernel: $KERNEL" |
+UPDATE: Last: $UPDATE
+KERNEL: $KERNEL" |
   bat -l cpuinfo --style=grid
