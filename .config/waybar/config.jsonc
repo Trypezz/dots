@@ -1,32 +1,26 @@
 // -*- mode: jsonc -*-
-
 {
   "layer": "top",
   "position": "top",
   "margin-top": 15,
-  
   "modules-left": [
-  	"custom/arch",
-  	"clock",
-  	"custom/nowplaying",
-  	"hyprland/workspaces"
+    "custom/arch",
+    "clock",
+    "custom/nowplaying",
+    "hyprland/workspaces#rw"
   ],
-  
   "modules-center": [
-  	"hyprland/window"
+    "hyprland/window"
   ],
-  
   "modules-right": [
-  	"pulseaudio", 
-  	"tray", 
-  	"network", 
-  	"battery",
-  	"custom/notification"
+    "pulseaudio",
+    "tray",
+    "network",
+    "battery",
+    "custom/notification"
   ],
-
   //Include Modules
-
   "include": [
-  	"$HOME/.config/waybar/modules.json"
+    "$HOME/.config/waybar/modules.json"
   ]
 }

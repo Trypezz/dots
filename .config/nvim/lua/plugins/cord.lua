@@ -7,6 +7,10 @@ return {
       auto_update = true,
       variables = true,
 
+      idle = {
+        enabled = false,
+      },
+
       text = {
         viewing = "Viewing ${filename}",
         editing = "Editing ${filename}",

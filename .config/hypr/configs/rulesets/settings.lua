@@ -22,13 +22,6 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	match = {
-		class = "com.github.hyprmod",
-	},
-	tag = "+settings",
-})
-
-hl.window_rule({
 	name = "settings",
 	match = {
 		tag = "settings",

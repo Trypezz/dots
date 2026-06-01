@@ -1,6 +1,6 @@
 -- Env Variables Config
 
-hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_THEME", "Oxygen White")
 hl.env("HYPRCURSOR_SIZE", "24")
 
 -- NVIDIA

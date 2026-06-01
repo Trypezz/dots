@@ -1,5 +1,11 @@
 -- Keybinds Config
 
+-- Shutdown
+hl.bind(
+	"SUPER + SHIFT + ESCAPE",
+	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
+)
+
 -- App Starts
 hl.bind("SUPER + Q", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Kitty Terminal'"))
 hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd(Apps.filemanager))
@@ -11,7 +17,6 @@ hl.bind("SUPER + M", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Music Player' k
 hl.bind("SUPER + CTRL + M", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Visualizer' cava"))
 hl.bind("SUPER + S", hl.dsp.exec_cmd(Apps.steam))
 hl.bind("SUPER + D", hl.dsp.exec_cmd(Apps.discord))
-hl.bind("SUPER + I", hl.dsp.exec_cmd(Apps.settings))
 hl.bind("SUPER + SHIFT + U", hl.dsp.exec_cmd(Apps.terminal .. " --title 'System Update' arch-update"))
 
 -- Window Overview

@@ -20,7 +20,6 @@ Apps = {
 	discord = "discord",
 	steam = "steam",
 	music = "spotify --password-store=basic",
-	settings = config .. "/bin/helper/hyprmod",
 	editor = "nvim",
 
 	-- UI Scripts

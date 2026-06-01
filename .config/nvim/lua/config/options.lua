@@ -4,3 +4,4 @@
 
 vim.opt.swapfile = false
 vim.lsp.enable("roslyn_ls")
+vim.env.VCPKG_ROOT = vim.fn.expand("~/.local/share/vcpkg")

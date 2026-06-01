@@ -32,3 +32,5 @@ alias showSwap='swapon --show'
 alias devC='cd DEV/C'
 alias devCS='cd DEV/CSharp'
 alias devJava='cd DEV/Java'
+alias devCpp='cd DEV/cpp'
+

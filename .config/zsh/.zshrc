@@ -44,6 +44,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load
 ZSH_THEME="powerlevel10k/powerlevel10k"
+export VCPKG_ROOT=$HOME/.local/share/vcpkg
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
