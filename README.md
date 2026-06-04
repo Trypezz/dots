@@ -1,5 +1,8 @@
-## 📷 Screenshots
-<img src="https://visitor-badge.laobi.icu/badge?page_id=Trypezz.dots&"  />
+<div align="center">
+  <h1><strong> 📷 Screenshots </strong>
+    <img align="right" src="https://visitor-badge.laobi.icu/badge?page_id=Trypezz.dots&"  />
+  </h1>
+</div>
 
 
 ### Lockscreen  
