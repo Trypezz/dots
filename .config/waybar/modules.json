@@ -33,7 +33,6 @@
   "tray": {
     "icon-size": 21,
     "spacing": 16,
-    "orientation": "horizontal",
     "tooltip": true
   },
   "pulseaudio": {

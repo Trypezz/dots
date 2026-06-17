@@ -1,7 +1,6 @@
 -- Env Variables Config
-
-hl.env("HYPRCURSOR_THEME", "Oxygen White")
-hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("XCURSOR_THEME", "Oxygen White")
+hl.env("XCURSOR_SIZE", "24")
 
 -- NVIDIA
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
@@ -17,8 +16,8 @@ hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 
 -- QT
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
-hl.env("QT_QPA_PLATFORM", "wayland;xcb")
-hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
+hl.env("QT_QPA_PLATFORM", "wayland;qt6ct")
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 
 -- Web Apps
 hl.env("MOZ_ENABLE_WAYLAND", "1")

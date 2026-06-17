@@ -64,7 +64,7 @@ tooltip label {
 }
 
 #workspaces button.urgent {
-	background-color: @red;
+	background-color: @green;
 	color: @bg0;
 	border-radius: 16px;
 	min-width: 50px;

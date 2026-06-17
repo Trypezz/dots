@@ -1,35 +1,32 @@
 -- Keybinds Config
 
 -- Shutdown
-hl.bind(
-	"SUPER + SHIFT + ESCAPE",
-	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
-)
+hl.bind("SUPER + SHIFT + ESCAPE", hl.dsp.exec_cmd(Service.hyprshutdown))
 
 -- App Starts
 hl.bind("SUPER + Q", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Kitty Terminal'"))
 hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd(Apps.filemanager))
-hl.bind("SUPER + E", hl.dsp.exec_cmd(Apps.terminal .. " --title 'File Explorer' yazi"))
-hl.bind("SUPER + R", hl.dsp.exec_cmd(Apps.appmenu))
+hl.bind("SUPER + E", hl.dsp.exec_cmd(Apps.terminal .. " --title 'File Explorer' " .. Apps.filemanager_cli))
+hl.bind("SUPER + R", hl.dsp.exec_cmd(Menu.runner))
 hl.bind("SUPER + Z", hl.dsp.exec_cmd(Apps.browser))
-hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd(Apps.music))
-hl.bind("SUPER + M", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Music Player' kew"))
-hl.bind("SUPER + CTRL + M", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Visualizer' cava"))
+hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd(Apps.spotify))
+hl.bind("SUPER + M", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Music Player' " .. Apps.localMusic))
+hl.bind("SUPER + CTRL + M", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Visualizer' " .. Apps.soundVusualizer))
 hl.bind("SUPER + S", hl.dsp.exec_cmd(Apps.steam))
 hl.bind("SUPER + D", hl.dsp.exec_cmd(Apps.discord))
-hl.bind("SUPER + SHIFT + U", hl.dsp.exec_cmd(Apps.terminal .. " --title 'System Update' arch-update"))
+hl.bind("SUPER + SHIFT + U", hl.dsp.exec_cmd(Apps.terminal .. " --title 'System Update' " .. Service.systemUpdate))
 
 -- Window Overview
-hl.bind("SUPER + TAB", hl.dsp.exec_cmd("qs ipc -c overview call overview toggle"))
+hl.bind("SUPER + TAB", hl.dsp.exec_cmd(Service.toggleOverview))
 
 -- Notifications
-hl.bind("SUPER + SHIFT + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
-hl.bind("SUPER + CTRL + N", hl.dsp.exec_cmd("swaync-client -d -sw"))
+hl.bind("SUPER + SHIFT + N", hl.dsp.exec_cmd(Apps.notificationClient .. " -t -sw"))
+hl.bind("SUPER + CTRL + N", hl.dsp.exec_cmd(Apps.notificationClient .. " -d -sw"))
 
 -- Misc
-hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Time & Date' clock-rs"))
-hl.bind("SUPER + SHIFT + R", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/bin/helper/reloadDesktop.sh"))
-hl.bind("SUPER + SPACE", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/bin/utils/editConfig"))
+hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Time & Date' " .. Apps.cli_clock))
+hl.bind("SUPER + SHIFT + R", hl.dsp.exec_cmd(os.getenv("HOME") .. Service.reloadDesktop))
+hl.bind("SUPER + SPACE", hl.dsp.exec_cmd(os.getenv("HOME") .. Service.editConfig))
 
 -- Notes
 hl.bind("SUPER + N", hl.dsp.exec_cmd(Apps.terminal .. " --class notes -e " .. Apps.editor))
@@ -39,11 +36,11 @@ hl.bind("SUPER + SHIFT + T", hl.dsp.exec_cmd(Apps.terminal .. " --title 'EMERGEN
 
 -- Basic Window Management
 hl.bind("SUPER + K", hl.dsp.window.close())
-hl.bind("SUPER + SHIFT + K", hl.dsp.exec_cmd("hyprctl kill"))
+hl.bind("SUPER + SHIFT + K", hl.dsp.exec_cmd(Service.forceKill))
 hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen())
-hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("wlogout"))
-hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd(Apps.logout))
+hl.bind("SUPER + L", hl.dsp.exec_cmd(Apps.screenLock))
 
 if hl.get_config("general.layout") == "dwindle" then
 	hl.bind("SUPER + J", hl.dsp.layout("togglesplit")) -- dwindle only
@@ -62,12 +59,11 @@ hl.bind("SUPER + SHIFT + up", hl.dsp.window.swap({ direction = "up" }))
 hl.bind("SUPER + SHIFT + down", hl.dsp.window.swap({ direction = "down" }))
 
 -- Screenshots
-hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot -m output --raw | satty --filename -"))
-hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m region --raw | satty --filename -"))
+hl.bind("PRINT", hl.dsp.exec_cmd(Apps.takeScreenshot))
 
 -- Themes
-hl.bind("SUPER + SHIFT + RETURN", hl.dsp.exec_cmd(Apps.themeSwitcher))
-hl.bind("SUPER + SHIFT + BACKSPACE", hl.dsp.exec_cmd(Apps.wallpaperSelector))
+hl.bind("SUPER + SHIFT + RETURN", hl.dsp.exec_cmd(Menu.themeSwitcher))
+hl.bind("SUPER + SHIFT + BACKSPACE", hl.dsp.exec_cmd(Menu.wallpaperSelector))
 
 -- Media Keys
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"))
@@ -89,3 +85,5 @@ for i = 1, 10 do
 	hl.bind("SUPER" .. " + " .. key, hl.dsp.focus({ workspace = i }))
 	hl.bind("SUPER" .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
+
+hl.bind("SUPER + SHIFT + D", hl.dsp.focus({ workspace = 10 }))

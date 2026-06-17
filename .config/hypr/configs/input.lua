@@ -11,5 +11,7 @@ hl.config({
 	},
 	cursor = {
 		hide_on_key_press = true,
+		sync_gsettings_theme = true,
+		enable_hyprcursor = true,
 	},
 })

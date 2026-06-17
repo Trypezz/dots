@@ -5,9 +5,11 @@ hl.config({
 		gaps_in = Theme.gapsIn,
 		gaps_out = Theme.gapsOut,
 		border_size = Theme.borderSize,
-		["col.active_border"] = Theme.primaryColor,
-		["col.inactive_border"] = Theme.secondaryColor,
-		layout = "master",
+		col = {
+			active_border = { colors = { Theme.primaryColor, Theme.primaryColorSolid }, angle = 45 },
+			inactive_border = Theme.secondaryColor,
+		},
+		layout = "dwindle",
 		resize_on_border = false,
 		allow_tearing = false,
 		snap = {
