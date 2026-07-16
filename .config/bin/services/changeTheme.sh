@@ -141,6 +141,8 @@ apply_theme() {
   mkdir -p "$(dirname "$STATE_FILE")"
   printf '%s' "$wallpaper" >"$STATE_FILE"
 
+  getPrimaryColor "$requested"
+
   echo "Theme applied successfully: $requested"
   notify-send -a transient "Theme applied successfully!" "Theme: $requested"
 }

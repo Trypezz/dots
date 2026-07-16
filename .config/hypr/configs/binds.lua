@@ -15,6 +15,7 @@ hl.bind("SUPER + CTRL + M", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Visualiz
 hl.bind("SUPER + S", hl.dsp.exec_cmd(Apps.steam))
 hl.bind("SUPER + D", hl.dsp.exec_cmd(Apps.discord))
 hl.bind("SUPER + SHIFT + U", hl.dsp.exec_cmd(Apps.terminal .. " --title 'System Update' " .. Service.systemUpdate))
+hl.bind("SUPER + CTRL + U", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Malware Check' " .. Service.malwareCheck))
 
 -- Window Overview
 hl.bind("SUPER + TAB", hl.dsp.exec_cmd(Service.toggleOverview))
@@ -59,6 +60,7 @@ hl.bind("SUPER + SHIFT + up", hl.dsp.window.swap({ direction = "up" }))
 hl.bind("SUPER + SHIFT + down", hl.dsp.window.swap({ direction = "down" }))
 
 -- Screenshots
+hl.bind("SUPER + PRINT", hl.dsp.exec_cmd("hyprshot -m output -o ~/Pictures/pic.png"), { locked = true }) -- Just for Lockscreen screenshots
 hl.bind("PRINT", hl.dsp.exec_cmd(Apps.takeScreenshot))
 
 -- Themes

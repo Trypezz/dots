@@ -1,2 +1,2 @@
-export SYSTEM_THEME=forest
+export SYSTEM_THEME=persona3
 export EDITOR=nvim

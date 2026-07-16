@@ -150,7 +150,7 @@ if ${IS_IMAGE} "$file"; then
     exit 0
   fi
 
-  ${WALLPAPER_ENGINE} img "$file" --transition-fps 60 --transition-type top
+  ${WALLPAPER_ENGINE} img "$file" --transition-fps 140 --transition-type top
   mkdir -p "$(dirname "$STATE_FILE")"
   printf '%s' "$file" >"$STATE_FILE"
   ln -sf "$file" "${STATE_FILE}_symlink"

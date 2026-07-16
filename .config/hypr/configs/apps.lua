@@ -29,6 +29,8 @@ Service = {
 	spotifyNotifications = "systemctl --user start spotify-notify.service",
 	archUpdate = "sleep 3 && arch-update --tray",
 
+	malwareCheck = "./.config/bin/services/malwareCheck.sh",
+
 	notificationCenter = "swaync",
 	bar = "waybar",
 	wallpaperEngine = "awww-daemon",

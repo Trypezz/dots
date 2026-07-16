@@ -29,13 +29,11 @@ alias uninstallIgnDep='yay -Rdd'
 alias systemUpdate='arch-update'
 alias showSwap='swapon --show'
 
-# Due to current AUR state
-alias malwareCheck='bash <(curl -s https://cscs.pastes.sh/raw/aurvulntest20260611.sh) && echo "Affected Packages Found:"; comm -12 <(pacman -Qq | sort) <(curl -s https://cscs.pastes.sh/raw/aurvulnlist20260611.txt | sort) | { read -r l && printf '%s\n' "$l" || echo "None. No known compromised packages are installed."; }'
-
-
 # DEV Stuff
 alias devC='cd DEV/C'
+alias devPy='cd DEV/Python'
 alias devCS='cd DEV/CSharp'
 alias devJava='cd DEV/Java'
 alias devCpp='cd DEV/cpp'
+alias devRust='cd DEV/Rust'
 
