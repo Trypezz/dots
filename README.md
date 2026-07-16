@@ -1,3 +1,11 @@
+My beloved Arch + Hyprland Dotfiles :)
+Every config and bash script I wrote myself so do not expect professional scripts xD
+
+Take a loock and feel free to use what you like :)
+
+Side-Note: Everything you see in the Screenshots below changes according to the choosen theme. I just don't show it in the gif down below due to filesizes...
+
+
 <div align="center">
   <h1><strong> 📷 Screenshots </strong>
     <img align="right" src="https://visitor-badge.laobi.icu/badge?page_id=Trypezz.dots&"  />
