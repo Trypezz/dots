@@ -23,7 +23,7 @@
 ### Theme-Switcher
 
 ![Theme-Switcher](screenshots/Theme-Switcher.png)
-![Theme-SwitcherAnim](screenshots/switchAnim.gif)
+![Theme-SwitcherAnim](screenshots/switchAnim.mp4)
 
 ### Wallpaper-Switcher
 
