@@ -6,7 +6,7 @@ hl.config({
 		gaps_out = Theme.gapsOut,
 		border_size = Theme.borderSize,
 		col = {
-			active_border = { colors = { Theme.primaryColor, Theme.primaryColorSolid }, angle = 45 },
+			active_border = { colors = { Theme.primaryColor, Theme.primaryColorSolid }, angle = -180 },
 			inactive_border = Theme.secondaryColor,
 		},
 		layout = "dwindle",

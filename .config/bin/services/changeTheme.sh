@@ -5,6 +5,7 @@ STATE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/setWallpaper_last_image"
 GET_SYSTEM_THEME="$HOME/.config/bin/helper/getSystemTheme.sh"
 RELOAD_DESKTOP="$HOME/.config/bin/helper/reloadDesktop.sh"
 WALLPAPER_ENGINE="$HOME/.config/bin/services/setWallpaper.sh"
+HYPRLOCK_COLOR="$HOME/.config/bin/helper/getPrimaryColor.sh"
 
 apply_theme() {
   local requested="$1"
@@ -138,10 +139,10 @@ apply_theme() {
 
   ${WALLPAPER_ENGINE} "$wallpaper" "--mute"
 
+  ${HYPRLOCK_COLOR} "$val"
+
   mkdir -p "$(dirname "$STATE_FILE")"
   printf '%s' "$wallpaper" >"$STATE_FILE"
-
-  getPrimaryColor "$requested"
 
   echo "Theme applied successfully: $requested"
   notify-send -a transient "Theme applied successfully!" "Theme: $requested"
