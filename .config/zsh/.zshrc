@@ -30,7 +30,7 @@ path_add=(
     "$HOME/.config/bin/UI"
     "$HOME/.config/bin/utils"
     "$HOME/.config/bin/helper"
-    "$HOME/.config/bin/helper/nas"
+    "$HOME/Documents/scripts"
 )
 
 for dir in "${path_add[@]}"; do

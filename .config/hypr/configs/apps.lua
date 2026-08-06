@@ -5,6 +5,7 @@ local config = HOME .. "/.config"
 
 Apps = {
 	terminal = "kitty",
+	startTerminal = "kitty --title 'Terminal' --class 'startTerm'",
 	filemanager = "nautilus",
 	filemanager_cli = "yazi",
 	browser = "zen-browser",
@@ -39,9 +40,6 @@ Service = {
 	reloadDesktop = "/.config/bin/helper/reloadDesktop.sh",
 
 	systemUpdate = "arch-update",
-
-	startOverview = "qs -c overview",
-	toggleOverview = "qs ipc -c overview call overview toggle",
 
 	forceKill = "hyprctl kill",
 	hyprshutdown = "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'",

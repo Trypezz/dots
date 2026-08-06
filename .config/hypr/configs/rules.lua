@@ -2,7 +2,7 @@
 
 -- Start Terminal
 hl.window_rule({
-	name = "start-terminal",
+	name = "Start-Terminal",
 	match = {
 		class = "startTerm",
 	},

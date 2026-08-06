@@ -4,6 +4,17 @@
   "logo": {
     "type": "kitty-direct",
     "source": "$HOME/.config/fastfetch/images/ArchLogo.png",
+    "color": {
+      "1": "#F5E0DC",
+      "2": "#F2CDCD",
+      "3": "#F5C2E7",
+      "4": "#FAB387",
+      "5": "#F9E2AF",
+      "6": "#A6E3A1",
+      "7": "#94E2D5",
+      "8": "#89DCEB",
+      "9": "#74C7EC"
+    },
     "width": 50,
     "height": 20,
     "padding": {
@@ -85,6 +96,10 @@
       "key": "│ {#35}󰍛 CPU     {#keys}     │",
       "type": "cpu",
       "showPeCoreCount": true
+    },
+    {
+      "key": "│{#35} 󰚗 Mainboard{#keys}    │",
+      "type": "board"
     },
     {
       "key": "│ {#35}󰍛 GPU     {#keys}     │",
