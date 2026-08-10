@@ -25,6 +25,6 @@ hl.window_rule({
 	keep_aspect_ratio = true,
 	float = true,
 	pin = true,
-	size = "(monitor_w*0.45) (monitor_h*0.45)",
-	move = "(monitor_w*0.525) (monitor_h*0.055)",
+	move = "(monitor_w-window_w-monitor_w*0.13) (monitor_h-window_h-monitor_h*0.39)",
+	size = "(monitor_w*0.5) (monitor_h*0.5)",
 })

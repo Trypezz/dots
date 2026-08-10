@@ -22,9 +22,8 @@ alias dots='cd dots/.config'
 
 alias getPID='pgrep -af '
 
-alias install='yay -S'
-alias uninstall='yay -Rns'
-alias uninstallIgnDep='yay -Rdd'
+alias install='sudo pacman -S'
+alias uninstall='sudo pacman -Rnd'
 
 alias systemUpdate='arch-update'
 alias showSwap='swapon --show'

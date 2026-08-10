@@ -52,7 +52,7 @@
       "type": "command",
       "keyIcon": "",
       "key": "│ {#34}{icon} OS Age  {#keys}     │",
-      "text": "birth=$(stat -c %W /); [ \"$birth\" -le 0 ] && birth=$(stat -c %Y /); now=$(date +%s); days=$(( (now - birth) / 86400 )); echo \"$(date -d @\"$birth\" +\"%d.%m.%Y\") [$days Days]\""
+      "text": "~/.config/bin/utils/sysage.sh"
     },
     {
       "key": "│ {#34}{icon} Distro  {#keys}     │",

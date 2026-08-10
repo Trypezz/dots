@@ -2,11 +2,12 @@
 
 SONGMETA="$HOME/.config/bin/utils/songmeta.sh"
 COVER="$HOME/.config/bin/utils/songcover.sh"
+GET_PLAYER="$HOME/.config/bin/utils/getCurrentPlayer.sh"
 
-PLAYER="spotify"
+PLAYER="$("$GET_PLAYER")"
 last_track=""
 
-# Only follow Spotify metadata updates
+# Only follow player metadata updates
 playerctl -p "$PLAYER" --follow metadata --format '{{artist}}|||{{title}}' 2>/dev/null |
   while IFS='|||' read -r artist title; do
     [[ -z "$artist" && -z "$title" ]] && continue

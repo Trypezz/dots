@@ -1,10 +1,10 @@
 [Unit]
-Description=Spotify Notification Listener
+Description=Music Notification Listener
 After=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=%h/.config/bin/services/spotify-notify.sh
+ExecStart=%h/.config/bin/services/music-notifyer.sh
 Restart=on-failure
 RestartSec=2
 
