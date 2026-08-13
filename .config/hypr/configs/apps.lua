@@ -27,7 +27,7 @@ Service = {
 	portal = "systemctl --user start xdg-desktop-portal-hyprland",
 	sessionTarget = "systemctl --user start hyprland-session.target",
 
-	musicNotifications = "systemctl --user start music-notifyer.service",
+	musicNotifications = "systemctl --user start music-notifier.service",
 	archUpdate = "sleep 3 && arch-update --tray",
 
 	malwareCheck = "./.config/bin/services/malwareCheck.sh",

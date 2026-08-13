@@ -3,7 +3,7 @@
 COVER_TMP="/tmp/songcover.jpg"
 PLAYER="$("$GET_PLAYER")"
 
-# If playerctl is missing or Spotify is not available -> remove cover and exit
+# If playerctl is missing or player is not available -> remove cover and exit
 if ! command -v playerctl &>/dev/null || ! playerctl -p "$PLAYER" status &>/dev/null; then
   rm -f "$COVER_TMP"
   exit 0

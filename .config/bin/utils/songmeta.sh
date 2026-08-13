@@ -12,6 +12,10 @@ GET_PLAYER="$HOME/.config/bin/utils/getCurrentPlayer.sh"
 mode="$1"
 PLAYER="$("$GET_PLAYER")"
 
+if [[ ! "$PLAYER" =~ ^(kew|spotify)(\.|$) ]]; then
+  exit 0
+fi
+
 # If playerctl is missing or Player is not available -> nothing to show
 if ! command -v playerctl &>/dev/null || ! playerctl -p "$PLAYER" status &>/dev/null; then
   exit 0

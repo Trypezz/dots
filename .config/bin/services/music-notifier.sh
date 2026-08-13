@@ -4,25 +4,31 @@ SONGMETA="$HOME/.config/bin/utils/songmeta.sh"
 COVER="$HOME/.config/bin/utils/songcover.sh"
 GET_PLAYER="$HOME/.config/bin/utils/getCurrentPlayer.sh"
 
-PLAYER="$("$GET_PLAYER")"
 last_track=""
 
-# Only follow player metadata updates
-playerctl -p "$PLAYER" --follow metadata --format '{{artist}}|||{{title}}' 2>/dev/null |
-  while IFS='|||' read -r artist title; do
+# Listening to events of playerctl
+playerctl --follow metadata --format '{{playerName}}|||{{artist}}|||{{title}}' 2>/dev/null |
+  while IFS='|||' read -r player artist title; do
+
+    # Skipping empty events
     [[ -z "$artist" && -z "$title" ]] && continue
+
+    # Only continue if players are kew or spotify
+    if [[ ! "$player" =~ ^(kew|spotify)(\.|$) ]]; then
+      continue
+    fi
 
     track="$artist - $title"
     [[ "$track" == "$last_track" ]] && continue
     last_track="$track"
 
-    # Fetch infos from songmeta script
-    artist="$("$SONGMETA" artist "$PLAYER")"
-    title="$("$SONGMETA" title "$PLAYER")"
-    album="$("$SONGMETA" album "$PLAYER")"
+    # Gathering metadata
+    artist="$("$SONGMETA" artist "$player")"
+    title="$("$SONGMETA" title "$player")"
+    album="$("$SONGMETA" album "$player")"
 
-    # Fetch coverart from songcover script
-    cover_path="$("$COVER" "$PLAYER")"
+    # Getting cover
+    cover_path="$("$COVER" "$player")"
 
     body="$artist"
     [[ -n "$album" ]] && body="$body"$'\n'"$album"
@@ -32,4 +38,5 @@ playerctl -p "$PLAYER" --follow metadata --format '{{artist}}|||{{title}}' 2>/de
     else
       notify-send -a transient "$title" "$body"
     fi
+
   done

@@ -24,9 +24,3 @@ hl.permission({
 	type = "screencopy",
 	mode = "allow",
 })
-
-hl.permission({
-	binary = "/usr/(bin|local/bin)/quickshell",
-	type = "screencopy",
-	mode = "allow",
-})
