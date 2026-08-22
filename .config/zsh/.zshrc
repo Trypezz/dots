@@ -1,15 +1,32 @@
 # --- Login/Start Info ---
 # Fastfetch Fancy Header
-# Only on new Kitty Windows
+# Only one terminal with fastfetch, others empty
 
 if [[ -o interactive \
    && -n "$KITTY_WINDOW_ID" \
-   && -z "$__KITTY_FASTFETCH_SHOWN" \
    && -x "$HOME/.config/bin/utils/titlefetch.sh" ]]; then
 
-  export __KITTY_FASTFETCH_SHOWN=1
-  "$HOME/.config/bin/utils/titlefetch.sh"
+  # Shared Marker-Directory (XDG_RUNTIME_DIR is ideal, points at /tmp)
+  local marker_dir="${XDG_RUNTIME_DIR:-/tmp}/kitty_fastfetch_shown"
+  mkdir -p "$marker_dir"
 
+  # clean up old/dead markers (Check if process does not exist anymore)
+  for f in "$marker_dir"/*(N); do
+    [[ -f "$f" ]] || continue
+    local pid=${f:t}
+    if ! kill -0 "$pid" 2>/dev/null; then
+      rm -f "$f"
+    fi
+  done
+
+  # Check if there is a marker left
+  if [[ -z "$(print -l "$marker_dir"/*(N))" ]]; then
+    # If no terminal created a marker -> open fastfetch, create marker
+    touch "$marker_dir/$$"
+    # Remove marker after this terminal was exited
+    trap 'rm -f "'"$marker_dir"'/$$"' EXIT
+    "$HOME/.config/bin/utils/titlefetch.sh"
+  fi
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.

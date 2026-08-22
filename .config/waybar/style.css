@@ -1,110 +1,119 @@
 @import "colors/colors.css";
 
 * {
-	border: none;
-	border-radius: 0px;
-	
-	font-family: "JetBrainsMono Nerd Font Propo", "Noto Sans", sans-serif;
-	font-size: 15px;
+  border: none;
+  border-radius: 0px;
 
-	min-height: 0;
+  font-family: "JetBrainsMono Nerd Font Propo", "Noto Sans", sans-serif;
+  font-size: 15px;
 
-	padding: 0;
-	margin: 0;
+  min-height: 0;
+
+  padding: 0;
+  margin: 0;
 }
 
 window#waybar {
-	background: transparent;
+  background: transparent;
 }
 
 tooltip {
-	background: @bg0;
-	border: 1px solid @bg3;
-	border-radius: 12px;
+  background: @bg0;
+  border: 1px solid @bg3;
+  border-radius: 12px;
 }
 
 tooltip label {
-	color: @fg;
-	padding: 6px;
+  color: @fg;
+  padding: 6px;
 }
 
-#workspaces, #window {
-	background-color: @bg0;
-	padding: 5px 3px;
-	margin: 0 0 0 12px;
-	border-radius: 18px;
-	border: 1px solid @bg1;
-	color: @fg;
+#workspaces,
+#window {
+  background-color: @bg0;
+  padding: 5px 3px;
+  margin: 0 0 0 12px;
+  border-radius: 18px;
+  border: 1px solid @bg1;
+  color: @fg;
 }
 
 #workspaces button {
-	padding: 0px 6px;
-	margin: 0px 3px;
-	border-radius: 50px;
-	color: @secondaryColor;
-	background-color: @bg1;
-	transition: all 0.3s ease-in-out; 
+  padding: 0px 6px;
+  margin: 0px 3px;
+  border-radius: 50px;
+  color: @secondaryColor;
+  background-color: @bg1;
+  transition: all 0.3s ease-in-out;
 }
 
 #workspaces button.active {
-	background-color: @primaryColor;
-	color: @wfontcolor;
-	min-width: 50px;
-	transition: all 0.3s ease-in-out;
-	font-size: 13px;
+  background-color: @primaryColor;
+  color: @wfontcolor;
+  min-width: 50px;
+  transition: all 0.3s ease-in-out;
+  font-size: 13px;
 }
 
 #workspaces button:hover {
-	background-color: @secondaryColor;
-	color: @bg0;
-	border-radius: 16px;
-	min-width: 50px;
-	background-size: 400% 400%;
+  background-color: @secondaryColor;
+  color: @bg0;
+  border-radius: 16px;
+  min-width: 50px;
+  background-size: 400% 400%;
 }
 
 #workspaces button.urgent {
-	background-color: @green;
-	color: @bg0;
-	border-radius: 16px;
-	min-width: 50px;
-	background-size: 400% 400%;
-	transition: all 0.3s ease-in-out;
+  background-color: @green;
+  color: @bg0;
+  border-radius: 16px;
+  min-width: 50px;
+  background-size: 400% 400%;
+  transition: all 0.3s ease-in-out;
 }
 
-#battery, #pulseaudio, #network, #clock, #custom-notification, #tray, #custom-arch, #window, #custom-nowplaying {
-	background-color: @bg0;
-	padding: 0 15px 0 15px;
-	margin: 0 0 0 12px;
-	border-radius: 50px;
-	border: 1px solid @bg1;
+#battery,
+#pulseaudio,
+#network,
+#clock,
+#custom-notification,
+#tray,
+#custom-arch,
+#window,
+#custom-nowplaying {
+  background-color: @bg0;
+  padding: 0 15px 0 15px;
+  margin: 0 0 0 12px;
+  border-radius: 50px;
+  border: 1px solid @bg1;
 }
 
 #custom-arch {
-	color: @primaryColor;
+  color: @primaryColor;
 }
 
 #clock {
-	color: @fontcolor;
+  color: @fontcolor;
 }
 
 #custom-nowplaying {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 #custom-notification {
-	color: @fg;
-	margin: 0 12px 0 12px;
+  color: @fg;
+  margin: 0 12px 0 12px;
 }
 
 #pulseaudio {
-	color: @yellow;
+  color: @yellow;
 }
 
 #network {
-	color: @purple;
+  color: @purple;
 }
 
 #battery {
-	color: @green;
-	min-width: 75px
+  color: @green;
+  min-width: 75px
 }
