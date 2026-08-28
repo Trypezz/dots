@@ -41,6 +41,7 @@ path_add=(
     "$HOME/.local/bin"
     "/usr/local/bin"
     "$HOME/.cargo/bin"
+    "$HOME/go/bin"
     # Custom Scripts
     "$HOME/.config/bin"
     "$HOME/.config/bin/services"

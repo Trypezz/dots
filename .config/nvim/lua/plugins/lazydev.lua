@@ -4,11 +4,9 @@ return {
     ft = "lua",
     opts = {
       library = {
-        { path = "~/.config/hypr/stubs/", words = { "hl%." } },
-
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-
-        { path = "/usr/share/hypr/stubs/", words = { "hl%." } },
+        -- Hyprland config Lua API stubs
+        { path = vim.fn.expand("~/.config/hypr/stubs/"), words = { "hl%." } },
       },
     },
   },

@@ -35,4 +35,5 @@ alias devCS='cd DEV/CSharp'
 alias devJava='cd DEV/Java'
 alias devCpp='cd DEV/cpp'
 alias devRust='cd DEV/Rust'
+alias devGo='cd DEV/Go'
 

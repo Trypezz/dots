@@ -1,8 +1,5 @@
 # Source palette: Persona 3 inspired (deep navy + signature blue/cyan accents)
 
-[app]
-overall = { bg = "#0a0a1e" }
-
 [mgr]
 cwd            = { fg = "#42a5f5", bold = true }
 find_keyword   = { fg = "#ff7043", bold = true }
