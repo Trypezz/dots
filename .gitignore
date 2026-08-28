@@ -1,6 +1,7 @@
 .config/bin/test.sh
 .config/clock-rs/conf.toml
 .config/hypr/colors/colors.conf
+.config/nvim/lazy*
 .config/rofi/colors/colors.rasi
 .config/swaync/colors/colors.css
 .config/waybar/colors/colors.css
