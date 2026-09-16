@@ -9,7 +9,6 @@ alias editOsFetch='$EDITOR $CONFIG/fastfetch/config.jsonc'
 
 # Quality of Life
 alias clr='clear'
-alias ls='exa -l'
 alias tree='tree -a'
 alias reloadShell='clr && source $CONFIG/zsh/.zshrc'
 alias refreshShell='clr && source $CONFIG/zsh/.zshrc && titlefetch.sh'

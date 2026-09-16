@@ -13,138 +13,147 @@
       "6": "#A6E3A1",
       "7": "#94E2D5",
       "8": "#89DCEB",
-      "9": "#74C7EC"
+      "9": "#74C7EC",
     },
     "width": 50,
     "height": 20,
     "padding": {
       "top": 2,
       "right": 5,
-      "left": 0
-    }
+      "left": 0,
+    },
   },
   "display": {
-    "separator": " "
+    "separator": " ",
   },
   "modules": [
     {
       "key": "╭────────────────╮",
-      "type": "custom"
+      "type": "custom",
     },
     {
       "key": "│ {#34} User    {#keys}     │",
       "type": "title",
-      "format": "{#31}{user-name}"
+      "format": "{#31}{user-name}",
     },
     {
       "key": "├────────────────┤",
-      "type": "custom"
+      "type": "custom",
     },
     {
       "key": "│ {#34}󰇅 Hostname   {#keys}  │",
-      "type": "title"
+      "type": "title",
     },
     {
       "key": "│ {#34}󰅐 Uptime  {#keys}     │",
-      "type": "uptime"
+      "type": "uptime",
     },
     {
       "type": "command",
       "keyIcon": "",
       "key": "│ {#34}{icon} OS Age  {#keys}     │",
-      "text": "~/.config/bin/utils/sysage.sh"
+      "text": "~/.config/bin/utils/sysage.sh",
     },
     {
       "key": "│ {#34}{icon} Distro  {#keys}     │",
-      "type": "os"
+      "type": "os",
     },
     {
       "key": "│ {#34} Kernel  {#keys}     │",
-      "type": "kernel"
+      "type": "kernel",
     },
     {
       "key": "├────────────────┤",
-      "type": "custom"
+      "type": "custom",
     },
     {
       "key": "│ {#32} Terminal   {#keys}  │",
-      "type": "terminal"
+      "type": "terminal",
     },
     {
       "key": "│ {#32} Shell   {#keys}     │",
-      "type": "shell"
+      "type": "shell",
     },
     {
       "key": "│ {#32} Session   {#keys}   │",
-      "type": "wm"
+      "type": "wm",
     },
     {
       "key": "│ {#32} System Theme {#keys}│",
       "type": "command",
-      "text": "~/.config/bin/helper/getSystemTheme.sh"
+      "text": "~/.config/bin/helper/getSystemTheme.sh",
     },
     {
       "key": "├────────────────┤",
-      "type": "custom"
+      "type": "custom",
     },
     {
       "key": "│ {#35} Display  {#keys}    │",
       "type": "display",
-      "compactType": "original-with-refresh-rate"
+      "compactType": "original-with-refresh-rate",
     },
     {
       "key": "│ {#35}󰍛 CPU     {#keys}     │",
       "type": "cpu",
-      "showPeCoreCount": true
+      "showPeCoreCount": true,
     },
     {
       "key": "│{#35} 󰚗 Mainboard{#keys}    │",
-      "type": "board"
+      "type": "board",
     },
     {
       "key": "│ {#35}󰍛 GPU     {#keys}     │",
-      "type": "gpu"
+      "type": "gpu",
     },
     {
       "key": "│ {#35}󰍛 G-Driver   {#keys}  │",
       "type": "gpu",
-      "format": "{driver}"
+      "format": "{driver}",
+    },
+    {
+      "key": "│ {#35} Memory  {#keys}     │",
+      "type": "memory",
+    },
+    {
+      "key": "│ {#35}󰓡 Swap  {#keys}       │",
+      "type": "swap",
+    },
+    {
+      "key": "├────────────────┤",
+      "type": "custom",
     },
     {
       "key": "│ {#35}󰉉 Main-Disk  {#keys}  │",
       "type": "disk",
-      "folders": "/"
+      "folders": "/home",
     },
     {
       "key": "│ {#35}󰉉 Games-Disk {#keys}  │",
       "type": "disk",
-      "folders": "/mnt/games"
+      "folders": "/mnt/games",
+    },
+    {
+      "key": "│ {#35}󰉉 Games-Disk 2 {#keys}│",
+      "type": "disk",
+      "folders": "/mnt/games2",
     },
     {
       "key": "│ {#35}󰉉 NAS        {#keys}  │",
       "type": "disk",
-      "folders": "/mnt/trypezz-nas"
-    },
-    {
-      "key": "│ {#35} Memory  {#keys}     │",
-      "type": "memory"
-    },
-    {
-      "key": "│ {#35}󰓡 Swap  {#keys}       │",
-      "type": "swap"
+      "folders": "/mnt/trypezz-nas",
     },
     {
       "key": "├────────────────┤",
-      "type": "custom"
+      "type": "custom",
     },
     {
       "key": "│ {#39} Colors  {#keys}     │",
       "type": "colors",
-      "symbol": "circle"
+      "symbol": "circle",
     },
     {
       "key": "╰────────────────╯",
-      "type": "custom"
-    }
-  ]
+      "type": "custom",
+    },
+  ],
 }

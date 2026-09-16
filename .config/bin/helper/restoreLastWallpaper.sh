@@ -27,7 +27,7 @@ restore_last_image() {
 
   name="$(${PRETTY_NAME} "$img")"
 
-  swww img "$img" --transition-fps 60 --transition-type top
+  awww img "$img" --transition-fps 60 --transition-type top
   notify-send -a transient -i "$img" "Live Wallpaper stopped" "Restored: "$name""
   echo "$STATE_FILE"
   return 0

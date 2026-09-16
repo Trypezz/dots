@@ -10,6 +10,9 @@ return {
       ensure_installed = {
         "roslyn",
         "csharpier",
+        "jdtls",
+        "vtsls",
+        "rust-analyzer",
       },
     },
   },

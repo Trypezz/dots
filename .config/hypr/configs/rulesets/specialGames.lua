@@ -43,29 +43,6 @@ hl.window_rule({
 	workspace = "1",
 })
 
--- WeMod
-hl.window_rule({
-	match = {
-		class = "steam_app_%d+",
-		title = "WeMod",
-	},
-	tag = "-game",
-})
-
-hl.window_rule({
-	name = "wemod",
-	match = {
-		class = "steam_app_%d+",
-		title = "WeMod",
-	},
-	float = true,
-	center = true,
-	fullscreen = false,
-	size = "(monitor_w*0.75) (monitor_h*0.75)",
-	tag = "-game",
-	workspace = "5 silent",
-})
-
 -- Heroic (float except Mainwindow)
 hl.window_rule({
 	match = {

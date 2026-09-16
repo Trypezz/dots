@@ -10,7 +10,7 @@ hl.bind("SUPER + E", hl.dsp.exec_cmd(Apps.terminal .. " --title 'File Explorer' 
 hl.bind("SUPER + R", hl.dsp.exec_cmd(Menu.runner))
 hl.bind("SUPER + Z", hl.dsp.exec_cmd(Apps.browser))
 hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd(Apps.spotify))
-hl.bind("SUPER + M", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Music Player' " .. Apps.localMusic))
+hl.bind("SUPER + M", hl.dsp.exec_cmd(Apps.terminal .. " --class kew --title 'Music Player' " .. Apps.localMusic))
 hl.bind("SUPER + CTRL + M", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Visualizer' " .. Apps.soundVusualizer))
 hl.bind("SUPER + S", hl.dsp.exec_cmd(Apps.steam))
 hl.bind("SUPER + D", hl.dsp.exec_cmd(Apps.discord))

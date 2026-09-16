@@ -39,11 +39,7 @@
     "format": " {icon}  {volume}% ",
     "format-muted": " {icon} {format_source} ",
     "format-icons": {
-      "default": [
-        "",
-        "",
-        ""
-      ]
+      "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
   },
@@ -61,13 +57,7 @@
       "critical": 15
     },
     "format": "{capacity}% {icon}",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
+    "format-icons": ["", "", "", "", ""],
     "max-length": 25
   },
   "custom/notification": {

@@ -53,7 +53,8 @@ esac
 
 DISK1=$(df -h ~/ | awk 'NR==2 {print $4}')
 DISK2=$(df -h /mnt/games | awk 'NR==2 {print $4}')
-DISK3=$(df -h /mnt/trypezz-nas | awk 'NR==2 {print $4}')
+DISK3=$(df -h /mnt/games2 | awk 'NR==2 {print $4}')
+DISK4=$(df -h /mnt/trypezz-nas | awk 'NR==2 {print $4}')
 
 [[ -n $(amixer get Capture | awk '/\[on\]/') ]] && MIC="on" || MIC="off"
 
@@ -67,9 +68,10 @@ GPU: GPU temperature: $GPU_TEMP°C
 
 MEMORY: In use: ${MEM_USE}GB
 
-DISK: Home remaining:    $DISK1
-DISK: Gaming remaining: $DISK2
-DISK: NAS remaining:        $DISK3
+DISK: Home remaining:       $DISK1
+DISK: Gaming remaining:    $DISK2
+DISK: Gaming2 remaining:  $DISK3
+DISK: NAS remaining:           $DISK4
 
 UPDATE: Last: $UPDATE
 KERNEL: $KERNEL" |

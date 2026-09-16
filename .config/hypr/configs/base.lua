@@ -10,6 +10,9 @@ hl.config({
 	master = {
 		new_status = "master",
 	},
+	opengl = {
+		nvidia_anti_flicker = true,
+	},
 })
 
 -- Basic Window Rules

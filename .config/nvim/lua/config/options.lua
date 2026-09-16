@@ -11,3 +11,9 @@ vim.env.VCPKG_ROOT = vim.fn.expand("~/.local/share/vcpkg")
 if not vim.env.DOTNET_ROOT and vim.fn.isdirectory("/usr/share/dotnet") == 1 then
   vim.env.DOTNET_ROOT = "/usr/share/dotnet"
 end
+
+-- Gopls: Needed for Golang (Go)
+vim.lsp.enable("gopls")
+
+-- Java
+vim.lsp.enable("jdtls")
