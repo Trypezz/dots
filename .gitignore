@@ -7,4 +7,5 @@
 .config/waybar/colors/colors.css
 .config/wlogout/colors/colors.css
 .config/yazi/theme.toml
+.config/nvim/lua/plugins/example.lua
 .config/zsh/env.sh
