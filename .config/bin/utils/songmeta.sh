@@ -12,7 +12,7 @@ GET_PLAYER="$HOME/.config/bin/utils/getCurrentPlayer.sh"
 mode="$1"
 PLAYER="$("$GET_PLAYER")"
 
-if [[ ! "$PLAYER" =~ ^(kew|spotify)(\.|$) ]]; then
+if [[ ! "$PLAYER" =~ ^(kew|spotify|spotifast)(\.|$) ]]; then
   exit 0
 fi
 

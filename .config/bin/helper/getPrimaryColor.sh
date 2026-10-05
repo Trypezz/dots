@@ -23,3 +23,9 @@ if [ ${#HEX} -eq 7 ]; then
 fi
 
 RGBA="rgba(${HEX:1})"
+
+mkdir -p "$(dirname "$OUTPUT_FILE")"
+
+cat >"$OUTPUT_FILE" <<EOF
+\$primaryColor = $RGBA
+EOF

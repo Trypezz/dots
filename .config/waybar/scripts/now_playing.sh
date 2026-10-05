@@ -16,7 +16,7 @@ mkdir -p "$HOME/.cache"
 [[ -f "$SCROLL_FP_FILE" ]] || echo "0" >"$SCROLL_FP_FILE"
 [[ -f "$PAUSE_UNTIL_FILE" ]] || echo "0" >"$PAUSE_UNTIL_FILE"
 
-ALLOWED_PLAYERS=("kew" "spotify")
+ALLOWED_PLAYERS=("kew" "spotify" "spotifast")
 
 is_allowed() {
   local p="$1"

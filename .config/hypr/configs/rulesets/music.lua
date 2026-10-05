@@ -15,6 +15,13 @@ hl.window_rule({
 })
 
 hl.window_rule({
+	match = {
+		class = "spotifast",
+	},
+	tag = "+music",
+})
+
+hl.window_rule({
 	name = "music",
 	match = {
 		tag = "music",

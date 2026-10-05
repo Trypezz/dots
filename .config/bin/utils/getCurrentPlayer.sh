@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo $(playerctl -l | grep -E 'kew|spotify')
+echo $(playerctl -l | grep -E 'kew|spotify|spotifast')

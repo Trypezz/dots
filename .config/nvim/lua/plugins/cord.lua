@@ -6,7 +6,7 @@ return {
       enabled = true,
       editor = {
         client = "neovim",
-        tooltip = "Neovim",
+        tooltip = "The Superior Text Editor",
       },
       display = {
         theme = "default",
@@ -80,14 +80,22 @@ return {
 
       function file_line(opts, action)
         local name = opts.filename or "a file"
-        local line = action .. ": " .. name
+        local line = action .. ":  " .. name
         local folder = parent_folder()
         local project = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
         if folder and folder ~= "" and folder ~= project then
           if folder == "plugins" then
-            line = line .. " · Managing Plugins"
+            line = "Managing Plugins · " .. line
+          elseif folder == "E0" then
+            line = "Working on the German Translation · Translating SEBEC-Route"
+          elseif folder == "E1" then
+            line = "Working on the German Translation · Translating Snow Queen Events"
+          elseif folder:match("^E%d+$") then
+            line = "Working on the German Translation for Revelations:Persona"
+          elseif folder == "eboot" then
+            line = "Working on the German Translation · " .. line
           else
-            line = line .. " · Working on " .. folder
+            line = "Working on " .. folder .. " · " .. line
           end
         end
         return line

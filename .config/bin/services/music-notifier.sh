@@ -14,7 +14,7 @@ playerctl --follow metadata --format '{{playerName}}|||{{artist}}|||{{title}}' 2
     [[ -z "$artist" && -z "$title" ]] && continue
 
     # Only continue if players are kew or spotify
-    if [[ ! "$player" =~ ^(kew|spotify)(\.|$) ]]; then
+    if [[ ! "$player" =~ ^(kew|spotify|spotifast)(\.|$) ]]; then
       continue
     fi
 

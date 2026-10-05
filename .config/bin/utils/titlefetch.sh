@@ -66,10 +66,12 @@ color_name_to_ansi8() {
     pastel-anime)   echo 169 ;;
     forest) echo 120 ;;
     ocean) echo 6 ;;
-    tokyonight) echo 105 ;;
     pink) echo 125 ;;
     purple) echo 128 ;;
-    ember) echo 130 ;;
+    persona1) echo 105 ;;
+    persona2) echo 130 ;;
+    persona3) echo 6 ;;
+    persona4) echo 3 ;;
     *)       echo 6 ;;
   esac
 }
