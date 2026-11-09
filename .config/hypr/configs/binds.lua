@@ -12,10 +12,12 @@ hl.bind("SUPER + Z", hl.dsp.exec_cmd(Apps.browser))
 hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd(Apps.spotify))
 hl.bind("SUPER + M", hl.dsp.exec_cmd(Apps.terminal .. " --class kew --title 'Music Player' " .. Apps.localMusic))
 hl.bind("SUPER + CTRL + M", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Visualizer' " .. Apps.soundVusualizer))
+hl.bind("CTRL + SHIFT + ESCAPE", hl.dsp.exec_cmd(Apps.terminal .. " --title 'System Monitor' " .. Apps.systemMonitor))
 hl.bind("SUPER + S", hl.dsp.exec_cmd(Apps.steam))
 hl.bind("SUPER + D", hl.dsp.exec_cmd(Apps.discord))
 hl.bind("SUPER + SHIFT + U", hl.dsp.exec_cmd(Apps.terminal .. " --title 'System Update' " .. Service.systemUpdate))
 hl.bind("SUPER + CTRL + U", hl.dsp.exec_cmd(Apps.terminal .. " --title 'Malware Check' " .. Service.malwareCheck))
+hl.bind("SUPER + I", hl.dsp.exec_cmd(Apps.settings))
 
 -- Notifications
 hl.bind("SUPER + SHIFT + N", hl.dsp.exec_cmd(Apps.notificationClient .. " -t -sw"))
@@ -69,20 +71,28 @@ hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"))
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"))
+
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"))
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"))
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"))
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
+
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
 
 -- Mouse Window Management
 hl.bind("SUPER" .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER" .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Workspaces 1-10
-for i = 1, 10 do
-	local key = i % 10 -- 10 maps to key 0
-	hl.bind("SUPER" .. " + " .. key, hl.dsp.focus({ workspace = i }))
+for i = 1, 10, 1 do
+	local key = i % 10
+
+	hl.bind("SUPER" .. " + " .. key, function()
+		setWorkspaceSlideStyle(i)
+		hl.dispatch(hl.dsp.focus({ workspace = i }))
+	end)
+
 	hl.bind("SUPER" .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
-
 hl.bind("SUPER + SHIFT + D", hl.dsp.focus({ workspace = 10 }))

@@ -1,7 +1,8 @@
 
 [miscellaneous]
 
-path=/mnt/trypezz-nas/files/media/music
+#path=/mnt/trypezz-nas/files/media/music
+path=/mnt/trypezz-nas/files/media/Audiobooks
 allowNotifications=0
 discordRPCEnabled=1
 hideLogo=0

@@ -1,2 +1,2 @@
-export SYSTEM_THEME=persona3
+export SYSTEM_THEME=Metaphor:ReFantazio
 export EDITOR=nvim

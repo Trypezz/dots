@@ -36,3 +36,4 @@ alias devCpp='cd DEV/cpp'
 alias devRust='cd DEV/Rust'
 alias devGo='cd DEV/Go'
 
+alias P1DE='cd DEV/other/Revelations-Persona-DE'

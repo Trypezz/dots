@@ -9,7 +9,7 @@ hl.curve("smoothIn", { type = "bezier", points = { { 0.34, 1.56 }, { 0.64, 1 } }
 hl.curve("snapOut", { type = "bezier", points = { { 0.15, 1.15 }, { 0.3, 1 } } })
 hl.curve("snapIn", { type = "bezier", points = { { 0.7, 0 }, { 0.85, -0.15 } } })
 
---hl.curve("shake", { type = "spring", mass = 1.2, stiffness = 240, dampening = 21.927481994 })
+hl.curve("wobble", { type = "spring", mass = 1, stiffness = 500, damping = 15 })
 
 -- Animations
 -- Windows
@@ -19,8 +19,8 @@ hl.animation({ leaf = "windowsOut", enabled = true, speed = curveSpeed, bezier =
 hl.animation({ leaf = "windowsMove", enabled = true, speed = curveSpeed, bezier = "smoothOut" })
 
 -- Layers
-hl.animation({ leaf = "layersIn", enabled = true, speed = curveSpeed, bezier = "smoothIn" })
-hl.animation({ leaf = "layersOut", enabled = true, speed = curveSpeed, bezier = "smoothOut" })
+hl.animation({ leaf = "layersIn", enabled = true, speed = curveSpeed, spring = "wobble" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = curveSpeed, spring = "wobble" })
 
 -- Fades
 hl.animation({ leaf = "fade", enabled = true, speed = curveSpeed, bezier = "smoothIn" })
@@ -32,7 +32,24 @@ hl.animation({ leaf = "fadeDim", enabled = true, speed = curveSpeed, bezier = "s
 hl.animation({ leaf = "fadeDpms", enabled = true, speed = curveSpeed, bezier = "smoothIn" })
 
 -- Workspaces
-hl.animation({ leaf = "workspaces", enabled = true, speed = curveSpeed, bezier = "smoothOut", style = "slidefade 99%" })
+--hl.animation({ leaf = "workspaces", enabled = true, speed = curveSpeed, spring = "wobble" })
+
+function setWorkspaceSlideStyle(target)
+	local current = hl.get_active_workspace()
+	local currentId = (current and current.id) or tonumber(current and current.name) or 0
+	local targetId = tonumber(target) or target
+
+	local style = (targetId > currentId) and "slide top 100%" or "slide bottom 100%"
+
+	hl.animation({
+		leaf = "workspaces",
+		enabled = true,
+		speed = curveSpeed,
+		spring = "wobble",
+		style = style,
+	})
+end
+
 hl.animation({
 	leaf = "specialWorkspace",
 	enabled = true,

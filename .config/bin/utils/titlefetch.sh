@@ -63,15 +63,16 @@ color_name_to_ansi8() {
     cyan)    echo 6 ;;
     white)   echo 7 ;;
     basic)   echo 6 ;;
-    pastel-anime)   echo 169 ;;
+    pastel)   echo 169 ;;
     forest) echo 120 ;;
     ocean) echo 6 ;;
     pink) echo 125 ;;
     purple) echo 128 ;;
-    persona1) echo 105 ;;
-    persona2) echo 130 ;;
-    persona3) echo 6 ;;
-    persona4) echo 3 ;;
+    metaphor:refantazio) echo 6 ;;
+    persona-1-origins) echo 105 ;;
+    persona-2-duality) echo 130 ;;
+    persona-3-reload) echo 6 ;;
+    persona-4-revival) echo 3 ;;
     *)       echo 6 ;;
   esac
 }
@@ -131,7 +132,7 @@ fi
 if [[ -n "${TITLE_OVERRIDE}" ]]; then
   TITLE="${TITLE_OVERRIDE}"
 else
-  TITLE="$(fastfetch -s os --format json | jq -r '.[0].result.name')"
+  TITLE="$(fastfetch -s os --format json | jq -r '.[0].result.prettyName')"
 fi
 
 # ---- Render Figlet ----

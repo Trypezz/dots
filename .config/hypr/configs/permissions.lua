@@ -16,19 +16,19 @@ hl.permission({
 })
 
 hl.permission({
-	binary = "/usr/(bin|local/bin)/hyprlock",
+	binary = "/usr/bin/grim",
 	type = "screencopy",
 	mode = "allow",
 })
 
 hl.permission({
-	binary = "/usr/(lib|libexec|lib64)/grim",
+	binary = "/usr/bin/hyprpicker",
 	type = "screencopy",
 	mode = "allow",
 })
 
 hl.permission({
-	binary = "/usr/(bin|local/bin)/hyprshot",
+	binary = "/usr/bin/hyprlock",
 	type = "screencopy",
 	mode = "allow",
 })

@@ -12,6 +12,7 @@ Apps = {
 	discord = "discord",
 	steam = "steam",
 	--spotify = "spotify --password-store=basic",
+	systemMonitor = "btop",
 	spotify = "spotifast",
 	localMusic = "kew",
 	soundVusualizer = "cava",
@@ -21,6 +22,7 @@ Apps = {
 	logout = "wlogout",
 	screenLock = "hyprlock",
 	takeScreenshot = "hyprshot -m output --raw | satty --filename -",
+	settings = "pavucontrol",
 }
 
 Service = {

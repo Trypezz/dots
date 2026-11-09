@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+
+import struct
+import vdf
+import sys
+from pathlib import Path
+
+def find_shortcut_files() -> list[Path]:
+    candidates = [
+        Path.home() / ".local/share/Steam/userdata",
+        Path.home() / ".steam/steam/userdata",
+        Path.home() / ".steam/debian-installation/userdata",
+    ]
+
+    files = []
+    for base in candidates:
+        if base.is_dir():
+            files.extend(base.glob("*/config/shortcuts.vdf"))
+    return files
+
+def main() -> None:
+    files = find_shortcut_files()
+
+    if not files:
+        print("No shortcuts.vdf found")
+        print("Checked Paths:")
+        for p in [
+            Path.home() / ".local/share/Steam/userdata",
+            Path.home() / ".steam/steam/userdata",
+        ]:
+            print(f"  {p}")
+        sys.exit(1)
+
+    for f in files:
+        print(f"=== {f} ===")
+        try:
+            data = vdf.binary_loads(f.read_bytes())
+        except Exception as e:
+            print(f"  Error while reading: {e}", file=sys.stderr)
+            continue
+
+        shortcuts = data.get("shortcuts", {})
+        if not shortcuts:
+            print("  (No shortcuts found)")
+            continue
+
+        for s in shortcuts.values():
+            appid = s.get("appid", 0)
+            # appid could be saved as a signed int
+            appid_u = appid & 0xFFFFFFFF
+            long_id = (appid_u << 32) | 0x02000000
+
+            name = s.get("AppName") or s.get("appname") or "<unknown>"
+            exe  = s.get("Exe") or s.get("exe") or ""
+
+            print(f"{name}")
+            print(f"  exe: {exe}")
+            print(f"  steam://rungameid/{long_id}")
+            print()
+
+if __name__ == "__main__":
+    main()

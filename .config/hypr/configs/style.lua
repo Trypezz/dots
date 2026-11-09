@@ -22,6 +22,14 @@ hl.config({
 		active_opacity = Theme.activeTransparency,
 		inactive_opacity = Theme.inactiveTransparency,
 		fullscreen_opacity = Theme.fullscreenTransparency,
+		wobble = {
+			enabled = true,
+			mesh = 32,
+			stiffness = 500,
+			damping = 15,
+			mass = 1,
+			intensity = 2,
+		},
 		shadow = {
 			enabled = true,
 			range = Theme.shadowRange,
@@ -34,6 +42,7 @@ hl.config({
 			passes = Theme.blurPasses,
 			new_optimizations = true,
 			xray = false,
+			--variant = "drops",
 		},
 	},
 	misc = {

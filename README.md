@@ -5,7 +5,6 @@ Take a look and feel free to use what you like :)
 
 Side-Note: Everything you see in the Screenshots below changes according to the choosen theme. I just don't show it in the gif down below due to filesizes...
 
-
 <div align="center">
   <h1><strong> 📷 Screenshots </strong>
     <img align="right" src="https://visitor-badge.laobi.icu/badge?page_id=Trypezz.dots&"  />
@@ -14,13 +13,17 @@ Side-Note: Everything you see in the Screenshots below changes according to the 
 
 ### SDDM
 
-![SDDM](screenshots/SDDM.png)
+<div align="center">
+  <img src="screenshots/SDDM1.png" alt="SDDM1" width="100%"/>
+  &nbsp;&nbsp;
+  <img src="screenshots/SDDM2.png" alt="SDDM2" width="100%"/>
+</div>
 
-### Lockscreen  
+### Lockscreen
 
 ![Lockscreen](screenshots/Lockscreen.png)
 
-### Desktop  
+### Desktop
 
 ![Desktop](screenshots/Desktop.png)
 
