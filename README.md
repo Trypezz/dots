@@ -3,7 +3,7 @@ Every config and bash script I wrote myself so do not expect professional things
 
 Take a look and feel free to use what you like :)
 
-Side-Note: Everything you see in the Screenshots below changes according to the choosen theme. I just don't show it in the gif down below due to filesizes...
+Side Note: If you want to use this repo as a base for your configs, please consider that you need to rewrite some things so it works on your system.
 
 <div align="center">
   <h1><strong> 📷 Screenshots </strong>
