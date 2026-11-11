@@ -8,7 +8,7 @@ fi
 # ---- Configuration ----
 LOGO_W=25
 LOGO_GAP=1
-FIGLET_FONT="small_slant"
+FIGLET_FONT="smslant"
 
 # Defaults (can be overridden by CLI)
 USE_LOLCAT=1          # default: on
@@ -115,7 +115,7 @@ done
 # ---- Check dependencies ----
 need fastfetch
 need jq
-need pyfiglet
+need figlet
 need tput
 need awk
 need sed
@@ -136,7 +136,7 @@ else
 fi
 
 # ---- Render Figlet ----
-FIGLET="$(pyfiglet -s -f "${FIGLET_FONT}" "${TITLE}")"
+FIGLET="$(figlet -f "${FIGLET_FONT}" "${TITLE}")"
 
 LOGO_AREA=$((LOGO_W + LOGO_GAP))
 FIGLET_W="$(printf '%s\n' "${FIGLET}" | awk '{print length}' | sort -nr | head -n1)"
